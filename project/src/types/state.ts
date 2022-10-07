@@ -1,10 +1,12 @@
 import { store } from '../store';
 import { MessageType } from './message';
-import { ProductType } from './product';
+import { ProductType, PromoType } from './product';
 
 export type ProductProcess = {
-  isDataLoaded: boolean;
+  isProductDataLoaded: boolean;
+  isPromoDataLoaded: boolean;
   products: ProductType[];
+  promo: PromoType;
 }
 
 export type UiProcess = {

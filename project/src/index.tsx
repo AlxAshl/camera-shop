@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './components/app/app';
 import { store } from './store';
-import { fetchProductAction } from './store/api-actions';
+import { fetchProductAction, fetchPromoAction } from './store/api-actions';
 
 
 const root = ReactDOM.createRoot(
@@ -11,6 +11,7 @@ const root = ReactDOM.createRoot(
 );
 
 store.dispatch(fetchProductAction());
+store.dispatch(fetchPromoAction());
 
 root.render(
   <React.StrictMode>

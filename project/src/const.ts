@@ -11,7 +11,8 @@ export enum NameSpace {
 }
 
 export enum APIRoute {
-  Products = '/came1ras',
+  Products = '/cameras',
+  Promo = '/promo'
 }
 
 export const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy';

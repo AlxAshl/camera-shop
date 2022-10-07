@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { ProductType } from '../../types/product';
 
 type ProductCardProps = {
@@ -7,6 +8,18 @@ type ProductCardProps = {
 
 function ProductCard({product}: ProductCardProps): JSX.Element {
   const {rating, reviewCount, name, price, id} = product;
+  const starsRating = [];
+
+  for (let i = 1; i < 6; i++) {
+    starsRating.push(
+      <svg key = {`${product.id}-${i}`} width="17" height="16" aria-hidden="false">
+        <use xlinkHref={rating >= i
+          ? '#icon-full-star'
+          : '#icon-star'}
+        >
+        </use>
+      </svg>);
+  }
 
   return (
     <div className="product-card">
@@ -18,41 +31,7 @@ function ProductCard({product}: ProductCardProps): JSX.Element {
       </div>
       <div className="product-card__info">
         <div className="rate product-card__rate">
-          <svg width="17" height="16" aria-hidden="false">
-            <use xlinkHref={rating >= 1
-              ? '#icon-full-star'
-              : '#icon-star'}
-            >
-            </use>
-          </svg>
-          <svg width="17" height="16" aria-hidden="true">
-            <use xlinkHref={rating >= 2
-              ? '#icon-full-star'
-              : '#icon-star'}
-            >
-            </use>
-          </svg>
-          <svg width="17" height="16" aria-hidden="true">
-            <use xlinkHref={rating >= 3
-              ? '#icon-full-star'
-              : '#icon-star'}
-            >
-            </use>
-          </svg>
-          <svg width="17" height="16" aria-hidden="true">
-            <use xlinkHref={rating >= 4
-              ? '#icon-full-star'
-              : '#icon-star'}
-            >
-            </use>
-          </svg>
-          <svg width="17" height="16" aria-hidden="true">
-            <use xlinkHref={rating >= 5
-              ? '#icon-full-star'
-              : '#icon-star'}
-            >
-            </use>
-          </svg>
+          {starsRating}
           <p className="visually-hidden">Рейтинг: {rating}</p>
           <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
         </div>
@@ -63,7 +42,7 @@ function ProductCard({product}: ProductCardProps): JSX.Element {
       <div className="product-card__buttons">
         <button className="btn btn--purple product-card__btn" type="button">Купить
         </button>
-        <Link to="#" className="btn btn--transparent" >Подробнее
+        <Link to={`${AppRoute.Product}/${id}`} className="btn btn--transparent" >Подробнее
         </Link>
       </div>
     </div>

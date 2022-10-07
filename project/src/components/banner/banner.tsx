@@ -1,4 +1,13 @@
-function Banner(): JSX.Element {
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { PromoType } from '../../types/product';
+
+type BannerProps = {
+  promo: PromoType;
+}
+
+function Banner({promo}: BannerProps): JSX.Element {
+  const {id, name} = promo;
 
   return (
     <div className="banner">
@@ -8,9 +17,9 @@ function Banner(): JSX.Element {
       </picture>
       <p className="banner__info">
         <span className="banner__message">Новинка!</span>
-        <span className="title title--h1">Cannonball&nbsp;Pro&nbsp;MX&nbsp;8i</span>
+        <span className="title title--h1">{name}</span>
         <span className="banner__text">Профессиональная камера от&nbsp;известного производителя</span>
-        <a className="btn" href="#">Подробнее</a>
+        <Link className="btn" to={`${AppRoute.Product}/${id}`}>Подробнее</Link>
       </p>
     </div>
   );

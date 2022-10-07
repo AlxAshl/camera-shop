@@ -1,14 +1,15 @@
 import { useAppSelector } from '../../hooks/index';
-import { getLoadedDataStatus, getProducts } from '../../store/product-process/selectors';
+import { getLoadedProductsStatus, getProducts } from '../../store/product-process/selectors';
 import CardsCatalog from '../cards-catalog/cards-catalog';
 import FilterBlock from '../filter-block/filter-block';
 import PaginationList from '../pagination-list/pagination-list';
+import Preloader from '../preloader/preloader';
 import SortBar from '../sort-bar/sort-bar';
 
 
 function Catalog(): JSX.Element {
 
-  const isDataLoaded = useAppSelector(getLoadedDataStatus);
+  const isDataLoaded = useAppSelector(getLoadedProductsStatus);
   const products = useAppSelector(getProducts);
 
   return (
@@ -19,8 +20,12 @@ function Catalog(): JSX.Element {
           <FilterBlock/>
           <div className="catalog__content">
             <SortBar/>
-            {isDataLoaded && <CardsCatalog products={products} />}
-            <PaginationList/>
+            {isDataLoaded
+              ? <CardsCatalog products={products} />
+              : <Preloader/>}
+            {isDataLoaded
+              ? <PaginationList/>
+              : ''}
           </div>
         </div>
       </div>
