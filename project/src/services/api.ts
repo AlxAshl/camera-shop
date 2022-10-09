@@ -1,5 +1,5 @@
-import axios, { AxiosError, AxiosInstance } from 'axios';
-import { BACKEND_URL, REQUEST_TIMEOUT } from '../const';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
+import { APIRoute, BACKEND_URL, PAGE_LIMIT, REQUEST_TIMEOUT } from '../const';
 import { store } from '../store';
 import { formMessage, toggleMessage } from '../store/ui-process/ui-process';
 
@@ -23,6 +23,18 @@ export const createAPI = (): AxiosInstance => {
       }
 
       throw error;
+    }
+  );
+  api.interceptors.request.use(
+    (config: AxiosRequestConfig) => {
+      if(config.url === `${APIRoute.Products}`) {
+        const state = store.getState();
+        config.params = {
+          '_limit': PAGE_LIMIT,
+          '_page': state.PRODUCT.currentPage
+        };
+      }
+      return config;
     }
   );
 

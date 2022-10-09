@@ -1,8 +1,9 @@
 export enum AppRoute {
-  Root = '/',
-  Product = '/cameras',
+  Root = '/catalog',
+  Product = '/cameras/:id',
   Basket = '/basket',
-  Notfound = '*'
+  Notfound = '*',
+  Pages = '/:page_id'
 }
 
 export enum NameSpace {
@@ -17,3 +18,4 @@ export enum APIRoute {
 
 export const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy';
 export const REQUEST_TIMEOUT = 5000;
+export const PAGE_LIMIT = 9;

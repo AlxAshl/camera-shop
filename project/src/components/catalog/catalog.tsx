@@ -1,5 +1,7 @@
-import { useAppSelector } from '../../hooks/index';
-import { getLoadedProductsStatus, getProducts } from '../../store/product-process/selectors';
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import { fetchProductAction } from '../../store/api-actions';
+import { getLoadedProductsStatus, getPage, getProducts } from '../../store/product-process/selectors';
 import CardsCatalog from '../cards-catalog/cards-catalog';
 import FilterBlock from '../filter-block/filter-block';
 import PaginationList from '../pagination-list/pagination-list';
@@ -9,8 +11,15 @@ import SortBar from '../sort-bar/sort-bar';
 
 function Catalog(): JSX.Element {
 
+  const dispatch = useAppDispatch();
   const isDataLoaded = useAppSelector(getLoadedProductsStatus);
+  const currentPage = useAppSelector(getPage);
   const products = useAppSelector(getProducts);
+
+  useEffect(()=>{
+    dispatch(fetchProductAction());
+  },[currentPage, dispatch]);
+
 
   return (
     <section className="catalog">

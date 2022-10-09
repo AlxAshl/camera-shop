@@ -5,6 +5,8 @@ import { ProductType, PromoType } from './product';
 export type ProductProcess = {
   isProductDataLoaded: boolean;
   isPromoDataLoaded: boolean;
+  productCount: number;
+  currentPage: number;
   products: ProductType[];
   promo: PromoType;
 }

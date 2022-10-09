@@ -7,6 +7,8 @@ import { fetchProductAction, fetchPromoAction } from '../api-actions';
 const initialState: ProductProcess = {
   isProductDataLoaded: false,
   isPromoDataLoaded: false,
+  currentPage: 1,
+  productCount: 0,
   products: [],
   promo: {} as PromoType
 };
@@ -15,7 +17,14 @@ const initialState: ProductProcess = {
 export const productProcess = createSlice({
   name: NameSpace.Product,
   initialState,
-  reducers: {},
+  reducers: {
+    setProductCount(state, action) {
+      state.productCount = action.payload as number;
+    },
+    setCurrentPage(state, action) {
+      state.currentPage = action.payload as number;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchProductAction.pending, (state) => {
@@ -40,3 +49,5 @@ export const productProcess = createSlice({
       });
   }
 });
+
+export const {setProductCount, setCurrentPage} = productProcess.actions;
