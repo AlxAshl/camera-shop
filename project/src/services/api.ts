@@ -21,7 +21,6 @@ export const createAPI = (): AxiosInstance => {
         }));
         store.dispatch(toggleMessage());
       }
-
       throw error;
     }
   );
@@ -37,6 +36,5 @@ export const createAPI = (): AxiosInstance => {
       return config;
     }
   );
-
   return api;
 };

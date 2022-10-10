@@ -6,10 +6,11 @@ import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
 import SVGRoot from '../../components/svg-root/svg-root';
 import Message from '../../components/ui/message';
+import { getNumeric } from '../../components/utils/pages';
 import { AppRoute } from '../../const';
-import { useAppSelector } from '../../hooks';
-import { store } from '../../store';
-import { getLoadedPromoStatus, getPromo } from '../../store/product-process/selectors';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setCurrentPage } from '../../store/product-process/product-process';
+import { getLoadedPromoStatus, getPage, getPromo } from '../../store/product-process/selectors';
 import { getMessageContent, getMessageVisibilityStatus } from '../../store/ui-process/selectors';
 import { toggleMessage } from '../../store/ui-process/ui-process';
 
@@ -20,18 +21,23 @@ function MainPage(): JSX.Element {
   const isVisible = useAppSelector(getMessageVisibilityStatus);
   const bannerData = useAppSelector(getPromo);
   const bannerLoaded = useAppSelector(getLoadedPromoStatus);
+  const currentPage = useAppSelector(getPage);
   const location = useLocation();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     if (isVisible) {
       setTimeout(() => {
-        store.dispatch(toggleMessage());
+        dispatch(toggleMessage());
       }, 3000);
     }
     if(location.pathname === AppRoute.Root) {
       navigate(`${AppRoute.Root}/page_1`);
     }
-  },[isVisible, location, navigate]);
+    if(getNumeric(location.pathname) !== currentPage) {
+      dispatch(setCurrentPage(getNumeric(location.pathname)));
+    }
+  },[isVisible, location, navigate, dispatch, currentPage]);
 
   return (
     <>

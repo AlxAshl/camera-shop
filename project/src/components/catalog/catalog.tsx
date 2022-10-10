@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { fetchProductAction } from '../../store/api-actions';
+import { fetchProductsAction } from '../../store/api-actions';
 import { getLoadedProductsStatus, getPage, getProducts } from '../../store/product-process/selectors';
 import CardsCatalog from '../cards-catalog/cards-catalog';
 import FilterBlock from '../filter-block/filter-block';
@@ -17,7 +17,7 @@ function Catalog(): JSX.Element {
   const products = useAppSelector(getProducts);
 
   useEffect(()=>{
-    dispatch(fetchProductAction());
+    dispatch(fetchProductsAction());
   },[currentPage, dispatch]);
 
 

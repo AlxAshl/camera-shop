@@ -1,4 +1,23 @@
-function SelectedProduct(): JSX.Element {
+import { ProductType } from '../../types/product';
+
+type SelectedProductProps = {
+  camera: ProductType;
+}
+
+function SelectedProduct({camera}: SelectedProductProps): JSX.Element {
+  const {name, id, rating, price, reviewCount} = camera;
+  const starsRating = [];
+
+  for (let i = 1; i < 6; i++) {
+    starsRating.push(
+      <svg key = {`${id}-${i}`} width="17" height="16" aria-hidden="true">
+        <use xlinkHref={rating >= i
+          ? '#icon-full-star'
+          : '#icon-star'}
+        >
+        </use>
+      </svg>);
+  }
 
   return (
     <div className="page-content__section">
@@ -6,32 +25,18 @@ function SelectedProduct(): JSX.Element {
         <div className="container">
           <div className="product__img">
             <picture>
-              <source type="image/webp" srcSet="img/content/img1.webp, img/content/img1@2x.webp 2x"/>
-              <img src="img/content/img1.jpg" srcSet="img/content/img1@2x.jpg 2x" width="560" height="480" alt="Ретрокамера Das Auge IV"/>
+              <source type="image/webp" srcSet={`img/content/img${id}.webp, img/content/img${id}@2x.webp 2x`}/>
+              <img src={`img/content/img${id}.jpg}`} srcSet={`img/content/img${id}@2x.jpg 2x`} width="560" height="480" alt="Ретрокамера Das Auge IV"/>
             </picture>
           </div>
           <div className="product__content">
-            <h1 className="title title--h3">Ретрокамера «Das Auge IV»</h1>
+            <h1 className="title title--h3">{name}</h1>
             <div className="rate product__rate">
-              <svg width="17" height="16" aria-hidden="true">
-                <use xlinkHref="#icon-full-star"></use>
-              </svg>
-              <svg width="17" height="16" aria-hidden="true">
-                <use xlinkHref="#icon-full-star"></use>
-              </svg>
-              <svg width="17" height="16" aria-hidden="true">
-                <use xlinkHref="#icon-full-star"></use>
-              </svg>
-              <svg width="17" height="16" aria-hidden="true">
-                <use xlinkHref="#icon-full-star"></use>
-              </svg>
-              <svg width="17" height="16" aria-hidden="true">
-                <use xlinkHref="#icon-star"></use>
-              </svg>
-              <p className="visually-hidden">Рейтинг: 4</p>
-              <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>12</p>
+              {starsRating}
+              <p className="visually-hidden">Рейтинг: {rating}</p>
+              <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
             </div>
-            <p className="product__price"><span className="visually-hidden">Цена:</span>73 450 ₽</p>
+            <p className="product__price"><span className="visually-hidden">Цена:</span>{price} ₽</p>
             <button className="btn btn--purple" type="button">
               <svg width="24" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-add-basket"></use>

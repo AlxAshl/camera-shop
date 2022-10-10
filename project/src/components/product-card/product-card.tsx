@@ -41,7 +41,7 @@ function ProductCard({product}: ProductCardProps): JSX.Element {
       <div className="product-card__buttons">
         <button className="btn btn--purple product-card__btn" type="button">Купить
         </button>
-        <Link to={`/cameras/${id}`} className="btn btn--transparent" >Подробнее
+        <Link to={`/cameras/${id}`} className="btn btn--transparent">Подробнее
         </Link>
       </div>
     </div>

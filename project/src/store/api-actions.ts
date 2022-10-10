@@ -6,7 +6,7 @@ import { ProductType, PromoType } from '../types/product';
 import { AppDispatch, State } from '../types/state';
 import { setProductCount } from './product-process/product-process';
 
-export const fetchProductAction = createAsyncThunk<ProductType[], undefined, {
+export const fetchProductsAction = createAsyncThunk<ProductType[], undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -17,6 +17,17 @@ export const fetchProductAction = createAsyncThunk<ProductType[], undefined, {
     store.dispatch(setProductCount(response.headers['x-total-count']));
     return response.data as ProductType[];
   },
+);
+export const fetchProductAction = createAsyncThunk<ProductType, number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'product/fetchProduct',
+  async (id, {extra: api}) => {
+    const response = await api.get(`${APIRoute.Products}/${id}`);
+    return response.data as ProductType;
+  }
 );
 export const fetchPromoAction = createAsyncThunk<PromoType, undefined, {
   dispatch: AppDispatch;
