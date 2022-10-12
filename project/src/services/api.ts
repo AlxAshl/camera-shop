@@ -26,8 +26,9 @@ export const createAPI = (): AxiosInstance => {
   );
   api.interceptors.request.use(
     (config: AxiosRequestConfig) => {
-      if(config.url === `${APIRoute.Products}`) {
+      if(config.url === `${APIRoute.Products}/pages`) {
         const state = store.getState();
+        config.url = APIRoute.Products;
         config.params = {
           '_limit': PAGE_LIMIT,
           '_page': state.PRODUCT.currentPage

@@ -3,10 +3,11 @@ import { ProductType } from '../../types/product';
 
 type ProductCardProps = {
   product: ProductType;
+  isSimilar? : boolean;
 }
 
-function ProductCard({product}: ProductCardProps): JSX.Element {
-  const {rating, reviewCount, name, price, id} = product;
+function ProductCard({product, isSimilar}: ProductCardProps): JSX.Element {
+  const {rating, reviewCount, name, price, id, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
   const starsRating = [];
 
   for (let i = 1; i < 6; i++) {
@@ -21,11 +22,14 @@ function ProductCard({product}: ProductCardProps): JSX.Element {
   }
 
   return (
-    <div className="product-card">
+    <div className={isSimilar
+      ? 'product-card is-active'
+      : 'product-card'}
+    >
       <div className="product-card__img">
         <picture>
-          <source type="image/webp" srcSet={`img/content/img${id}.webp, img/content/img${id}@2x.webp 2x`}/>
-          <img src={`img/content/img${id}.jpg`} srcSet={`img/content/img${id}@2x.jpg 2x`} width="280" height="240" alt="Ретрокамера «Das Auge IV»"/>
+          <source type="image/webp" srcSet={`${previewImgWebp}, ${previewImgWebp2x}`}/>
+          <img src={previewImg} srcSet={previewImg2x} width="280" height="240" alt="Ретрокамера «Das Auge IV»"/>
         </picture>
       </div>
       <div className="product-card__info">

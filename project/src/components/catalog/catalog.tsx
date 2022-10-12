@@ -15,7 +15,6 @@ function Catalog(): JSX.Element {
   const isDataLoaded = useAppSelector(getLoadedProductsStatus);
   const currentPage = useAppSelector(getPage);
   const products = useAppSelector(getProducts);
-
   useEffect(()=>{
     dispatch(fetchProductsAction());
   },[currentPage, dispatch]);

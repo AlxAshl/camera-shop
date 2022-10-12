@@ -13,8 +13,19 @@ export const fetchProductsAction = createAsyncThunk<ProductType[], undefined, {
 }>(
   'product/fetchProducts',
   async (_arg, {extra: api}) => {
-    const response = await api.get(APIRoute.Products);
+    const response = await api.get(`${APIRoute.Products}/pages`);
     store.dispatch(setProductCount(response.headers['x-total-count']));
+    return response.data as ProductType[];
+  },
+);
+export const fetchAllProductsAction = createAsyncThunk<ProductType[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'product/fetchProducts',
+  async (_arg, {extra: api}) => {
+    const response = await api.get(`${APIRoute.Products}`);
     return response.data as ProductType[];
   },
 );

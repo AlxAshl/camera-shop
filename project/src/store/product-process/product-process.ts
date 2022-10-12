@@ -47,7 +47,7 @@ export const productProcess = createSlice({
         state.product = action.payload;
       })
       .addCase(fetchProductAction.rejected, (state) => {
-        state.isProductDataLoaded = true;
+        state.isProductDataLoaded = false;
       })
       .addCase(fetchPromoAction.pending, (state) => {
         state.isPromoDataLoaded = false;
