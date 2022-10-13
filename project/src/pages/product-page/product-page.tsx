@@ -1,10 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import Footer from '../../components/footer/footer';
 import Header from '../../components/header/header';
-import Reviews from '../../components/reviews/reviews';
+import ModalReview from '../../components/modal-review/modal-review';
+import ReviewsList from '../../components/reviews-list/reviews-list';
 import SelectedProduct from '../../components/selected-product/selected-product';
 import Similar from '../../components/similar/similar';
 import SVGRoot from '../../components/svg-root/svg-root';
@@ -24,6 +25,7 @@ function ProductPage(): JSX.Element {
   const isProductLoaded = useSelector(getLoadedProductStatus);
   const message = useAppSelector(getMessageContent);
   const isVisible = useAppSelector(getMessageVisibilityStatus);
+  const [isModalActive, setModalActive] = useState(true);
 
   useEffect(()=>{
     if (isVisible) {
@@ -48,10 +50,11 @@ function ProductPage(): JSX.Element {
             {isVisible && <Message props={message}/>}
             {(isProductLoaded) && <SelectedProduct camera={product}/>}
             <Similar camera={product}/>
-            <Reviews/>
+            <ReviewsList id={getNumeric(location.pathname)}/>
           </div>
         </main>
         <UpButton/>
+        <ModalReview isActive={isModalActive} onClosePopup={() => setModalActive(false)}/>
         <Footer/>
       </div>
     </>

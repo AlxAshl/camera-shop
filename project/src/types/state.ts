@@ -1,6 +1,7 @@
 import { store } from '../store';
 import { MessageType } from './message';
 import { ProductType, PromoType } from './product';
+import { ReviewType } from './review';
 
 export type ProductProcess = {
   isProductsDataLoaded: boolean;
@@ -17,6 +18,11 @@ export type UiProcess = {
   showMessage: boolean;
   message: MessageType;
 }
+
+export type ReviewProcess = {
+  isReviewsDataLoaded: boolean;
+  reviews: ReviewType[];
+};
 
 export type State = ReturnType<typeof store.getState>;
 

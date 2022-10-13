@@ -3,6 +3,7 @@ import { AxiosInstance } from 'axios';
 import { store } from '.';
 import { APIRoute } from '../const';
 import { ProductType, PromoType } from '../types/product';
+import { ReviewType } from '../types/review';
 import { AppDispatch, State } from '../types/state';
 import { setProductCount } from './product-process/product-process';
 
@@ -18,14 +19,14 @@ export const fetchProductsAction = createAsyncThunk<ProductType[], undefined, {
     return response.data as ProductType[];
   },
 );
-export const fetchAllProductsAction = createAsyncThunk<ProductType[], undefined, {
+export const fetchSimilarProductsAction = createAsyncThunk<ProductType[], number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'product/fetchProducts',
-  async (_arg, {extra: api}) => {
-    const response = await api.get(`${APIRoute.Products}`);
+  'product/fetchSimilarProducts',
+  async (id: number, {extra: api}) => {
+    const response = await api.get(`${APIRoute.Products}/${id}/similar`);
     return response.data as ProductType[];
   },
 );
@@ -50,4 +51,16 @@ export const fetchPromoAction = createAsyncThunk<PromoType, undefined, {
     const {data} = await api.get<PromoType>(APIRoute.Promo);
     return data;
   },
+);
+
+export const fetchReviewsAction = createAsyncThunk<ReviewType[], number, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'review/fetchReviews',
+  async (id, {extra: api}) => {
+    const response = await api.get(`${APIRoute.Products}/${id}/reviews`);
+    return response.data as ReviewType[];
+  }
 );

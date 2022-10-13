@@ -1,5 +1,6 @@
 import { ProductType } from '../../types/product';
 import {useState} from 'react';
+import setRating from '../utils/rating';
 
 type SelectedProductProps = {
   camera: ProductType;
@@ -7,20 +8,7 @@ type SelectedProductProps = {
 
 function SelectedProduct({camera}: SelectedProductProps): JSX.Element {
   const {name, id, rating, price, reviewCount, level, type, category, vendorCode, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = camera;
-  const starsRating = [];
   const [toggle, setTabsToggle] = useState(true);
-
-  for (let i = 1; i < 6; i++) {
-    starsRating.push(
-      <svg key = {`${id}-${i}`} width="17" height="16" aria-hidden="true">
-        <use xlinkHref={rating >= i
-          ? '#icon-full-star'
-          : '#icon-star'}
-        >
-        </use>
-      </svg>);
-  }
-
   const handleTabsClick = () => {
     setTabsToggle((current) => !current);
   };
@@ -38,7 +26,7 @@ function SelectedProduct({camera}: SelectedProductProps): JSX.Element {
           <div className="product__content">
             <h1 className="title title--h3">{name}</h1>
             <div className="rate product__rate">
-              {starsRating}
+              {setRating(id, rating, true)}
               <p className="visually-hidden">Рейтинг: {rating}</p>
               <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
             </div>

@@ -8,6 +8,7 @@ export enum AppRoute {
 
 export enum NameSpace {
   Product = 'PRODUCT',
+  Review = 'REVIEW',
   Ui = 'UI',
 }
 
