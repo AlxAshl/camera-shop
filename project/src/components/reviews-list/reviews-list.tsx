@@ -6,9 +6,10 @@ import ReviewCard from '../review-card/review-card';
 
 type ReviewListProps = {
   id: number;
+  onToggleModal: () => void;
 }
 
-function ReviewsList({id}: ReviewListProps): JSX.Element {
+function ReviewsList({id, onToggleModal}: ReviewListProps): JSX.Element {
 
   const dispatch = useAppDispatch();
   const reviewsArray = useAppSelector(getReviews);
@@ -52,7 +53,11 @@ function ReviewsList({id}: ReviewListProps): JSX.Element {
         <div className="container">
           <div className="page-content__headed">
             <h2 className="title title--h3">Отзывы</h2>
-            <button className="btn" type="button">Оставить свой отзыв</button>
+            <button className="btn" type="button" onClick={() =>{
+              onToggleModal();
+            }}
+            >Оставить свой отзыв
+            </button>
           </div>
           <ul className="review-block__list">
             {isLoaded && reviews.map((review) => (<ReviewCard key={review.id} data={review}/>))}
