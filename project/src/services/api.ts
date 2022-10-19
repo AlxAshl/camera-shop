@@ -1,7 +1,7 @@
-import axios, { AxiosError, AxiosInstance, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { APIRoute, BACKEND_URL, PAGE_LIMIT, REQUEST_TIMEOUT } from '../const';
-import { store } from '../store';
-import { formMessage, toggleMessage } from '../store/ui-process/ui-process';
+import { store } from '../store/store';
+import { formMessage, toggleMessage } from '../store/utils-process/utils-process';
 
 
 export const createAPI = (): AxiosInstance => {
@@ -10,8 +10,9 @@ export const createAPI = (): AxiosInstance => {
     timeout: REQUEST_TIMEOUT,
   });
 
+
   api.interceptors.response.use(
-    (response) => response,
+    (response: AxiosResponse) => response,
     (error: AxiosError) => {
       if (error.response) {
         store.dispatch(formMessage({
@@ -24,6 +25,7 @@ export const createAPI = (): AxiosInstance => {
       throw error;
     }
   );
+
   api.interceptors.request.use(
     (config: AxiosRequestConfig) => {
       if(config.url === `${APIRoute.Products}/pages`) {

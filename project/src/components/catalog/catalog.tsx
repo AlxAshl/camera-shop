@@ -19,7 +19,6 @@ function Catalog(): JSX.Element {
     dispatch(fetchProductsAction());
   },[currentPage, dispatch]);
 
-
   return (
     <section className="catalog">
       <div className="container">

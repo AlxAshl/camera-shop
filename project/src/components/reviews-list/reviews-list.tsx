@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchReviewsAction } from '../../store/api-actions';
 import { getLoadedReviewsStatus, getReviews } from '../../store/review-process/selectors';
+import { toggleReview } from '../../store/utils-process/utils-process';
 import ReviewCard from '../review-card/review-card';
 
 type ReviewListProps = {
   id: number;
-  onToggleModal: () => void;
 }
 
-function ReviewsList({id, onToggleModal}: ReviewListProps): JSX.Element {
+function ReviewsList({id}: ReviewListProps): JSX.Element {
 
   const dispatch = useAppDispatch();
   const reviewsArray = useAppSelector(getReviews);
@@ -17,6 +17,7 @@ function ReviewsList({id, onToggleModal}: ReviewListProps): JSX.Element {
   const [sliceLimit, setSliceLimit] = useState(3);
   const [initialRender, setInitialRender] = useState(true);
   const reviews = reviewsArray.slice(0, sliceLimit);
+  reviews.sort((a, b) => (a.createAt > b.createAt ? -1 : 1));
 
   useEffect(() => {
 
@@ -35,12 +36,17 @@ function ReviewsList({id, onToggleModal}: ReviewListProps): JSX.Element {
     return () => {window.removeEventListener('scroll', loadMoreReviews);};
   },[sliceLimit, initialRender]);
 
+  const handlePostReviewButtonClick = () => {
+    dispatch(toggleReview());
+  };
+
   const handleShowMoreButton = () => {
     setSliceLimit(sliceLimit + 3);
   };
 
   useEffect(()=> {
     dispatch(fetchReviewsAction(Number(id)));
+    setSliceLimit(3);
   },[id, dispatch]);
 
   useEffect(()=> {
@@ -53,13 +59,11 @@ function ReviewsList({id, onToggleModal}: ReviewListProps): JSX.Element {
         <div className="container">
           <div className="page-content__headed">
             <h2 className="title title--h3">Отзывы</h2>
-            <button className="btn" type="button" onClick={() =>{
-              onToggleModal();
-            }}
-            >Оставить свой отзыв
+            <button className="btn" type="button" onClick={handlePostReviewButtonClick}>Оставить свой отзыв
             </button>
           </div>
           <ul className="review-block__list">
+            {reviews.length === 0 && 'Отзывов пока нет'}
             {isLoaded && reviews.map((review) => (<ReviewCard key={review.id} data={review}/>))}
           </ul>
           {(reviewsArray.length > sliceLimit) &&

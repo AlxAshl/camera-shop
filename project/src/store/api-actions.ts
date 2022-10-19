@@ -1,11 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { store } from '.';
+import { store } from './store';
 import { APIRoute } from '../const';
 import { ProductType, PromoType } from '../types/product';
-import { ReviewType } from '../types/review';
+import { ReviewPostType, ReviewType } from '../types/review';
 import { AppDispatch, State } from '../types/state';
 import { setProductCount } from './product-process/product-process';
+
 
 export const fetchProductsAction = createAsyncThunk<ProductType[], undefined, {
   dispatch: AppDispatch;
@@ -19,6 +20,7 @@ export const fetchProductsAction = createAsyncThunk<ProductType[], undefined, {
     return response.data as ProductType[];
   },
 );
+
 export const fetchSimilarProductsAction = createAsyncThunk<ProductType[], number, {
   dispatch: AppDispatch;
   state: State;
@@ -30,6 +32,7 @@ export const fetchSimilarProductsAction = createAsyncThunk<ProductType[], number
     return response.data as ProductType[];
   },
 );
+
 export const fetchProductAction = createAsyncThunk<ProductType, number, {
   dispatch: AppDispatch;
   state: State;
@@ -41,6 +44,7 @@ export const fetchProductAction = createAsyncThunk<ProductType, number, {
     return response.data as ProductType;
   }
 );
+
 export const fetchPromoAction = createAsyncThunk<PromoType, undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -62,5 +66,17 @@ export const fetchReviewsAction = createAsyncThunk<ReviewType[], number, {
   async (id, {extra: api}) => {
     const response = await api.get(`${APIRoute.Products}/${id}/reviews`);
     return response.data as ReviewType[];
+  }
+);
+
+export const postReviewAction = createAsyncThunk<unknown, ReviewPostType, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'review/postReview',
+  async (reviewData, {extra: api}) => {
+    const response = await api.post<ReviewPostType>(`${APIRoute.Reviews}`, reviewData);
+    return response;
   }
 );

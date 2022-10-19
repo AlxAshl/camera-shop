@@ -1,5 +1,6 @@
 import {
   createBrowserRouter,
+  Navigate
 } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import Basket from '../../pages/basket/basket';
@@ -12,9 +13,13 @@ const router = createBrowserRouter(
   [
     {
       path: AppRoute.Root,
+      element: <Navigate replace to={`${AppRoute.Catalog}${AppRoute.Page}`}/>
+    },
+    {
+      path: AppRoute.Catalog,
       element: <MainPage/>,
       children: [{
-        path: '/catalog/:page_id',
+        path: `${AppRoute.Catalog}${AppRoute.Page}`,
         element: <Catalog/>
       }]
     },

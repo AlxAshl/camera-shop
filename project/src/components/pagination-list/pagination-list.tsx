@@ -4,9 +4,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setCurrentPage } from '../../store/product-process/product-process';
 import { getPage, getProductCount } from '../../store/product-process/selectors';
 import {getPagesCount} from '../utils/pages';
-import { MouseEvent } from 'react';
+import { memo, MouseEvent } from 'react';
+
 
 function PaginationList(): JSX.Element {
+
   const productCount = useAppSelector(getProductCount);
   const currentPage = useAppSelector(getPage);
   const dispatch = useAppDispatch();
@@ -17,10 +19,12 @@ function PaginationList(): JSX.Element {
     const selectedPage = evt.currentTarget.getAttribute('data-tag');
     dispatch(setCurrentPage(Number(selectedPage)));
   };
+
   const handleBackButtonClick = (evt: MouseEvent<HTMLLIElement>) => {
     const selectedPage = currentPage - 1;
     dispatch(setCurrentPage(Number(selectedPage)));
   };
+
   const handleNextButtonClick = (evt: MouseEvent<HTMLLIElement>) => {
     const selectedPage = currentPage + 1;
     dispatch(setCurrentPage(Number(selectedPage)));
@@ -33,7 +37,7 @@ function PaginationList(): JSX.Element {
           (currentPage === i)
             ? 'pagination__link pagination__link--active'
             : 'pagination__link'
-        } to={`${AppRoute.Root}/page_${i}`}
+        } to={`${AppRoute.Catalog}/page_${i}`}
         >{i}
         </Link>
       </li>
@@ -44,16 +48,16 @@ function PaginationList(): JSX.Element {
     <div className="pagination">
       <ul className="pagination__list">
         {currentPage !== 1
-          ? <li className="pagination__item" onClick = {handleBackButtonClick}><Link className="pagination__link pagination__link--text" to={`${AppRoute.Root}/page_${currentPage - 1}`}>Назад</Link></li>
+          ? <li className="pagination__item" onClick = {handleBackButtonClick}><Link className="pagination__link pagination__link--text" to={`${AppRoute.Catalog}/page_${currentPage - 1}`}>Назад</Link></li>
           : ''}
         {pages}
         {currentPage !== totalPages
-          ? <li className="pagination__item" onClick = {handleNextButtonClick}><Link className="pagination__link pagination__link--text" to={`${AppRoute.Root}/page_${currentPage + 1}`}>Далее</Link></li>
+          ? <li className="pagination__item" onClick = {handleNextButtonClick}><Link className="pagination__link pagination__link--text" to={`${AppRoute.Catalog}/page_${currentPage + 1}`}>Далее</Link></li>
           : ''}
       </ul>
     </div>
   );
 }
 
-export default PaginationList;
+export default memo(PaginationList);
 

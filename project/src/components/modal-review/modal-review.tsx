@@ -1,55 +1,80 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchReviewsAction, postReviewAction } from '../../store/api-actions';
+import { getPostReviewStatus } from '../../store/review-process/selectors';
+import { getMessageContent, getMessageVisibilityStatus } from '../../store/utils-process/selectors';
+import {toggleReview, toggleSuccess} from '../../store/utils-process/utils-process';
+import Message from '../ui/message';
+
 
 type ModalProps = {
   isActive: boolean;
-  onToggleModal: () => void;
-  onReview: (reviewData: ReviewDataType) => void;
-}
-export type ReviewDataType = {
-  cameraId: string;
-  userName: string;
-  advantage: string;
-  disadvantage: string;
-  review: string;
-  rating: string;
+  id: number;
 }
 
-function ModalReview({isActive, onToggleModal, onReview}: ModalProps): JSX.Element {
+function ModalReview({isActive, id}: ModalProps): JSX.Element {
+  const dispatch = useAppDispatch();
   const params = useParams();
-  const removeInput = () => {
-    setReviewData({cameraId: '', userName: '', advantage: '', disadvantage: '', review: '', rating: ''});
-  };
+  const message = useAppSelector(getMessageContent);
+  const isVisible = useAppSelector(getMessageVisibilityStatus);
+  const postStatus = useAppSelector(getPostReviewStatus);
 
+  useEffect(() => {
+    const isEscapeKey = (evt:KeyboardEvent) => evt.key === 'Escape';
+    const handleEscKeyPress = (evt: KeyboardEvent) => {
+      if(isEscapeKey(evt)) {
+        dispatch(toggleReview());
+      }
+    };
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', handleEscKeyPress);
+    return () => {
+      document.body.style.overflow = 'visible';
+      document.removeEventListener('keydown', handleEscKeyPress);
+    };
+  },[dispatch]);
+
+  const handleToggleModalClick = () => {
+    dispatch(toggleReview());
+  };
   const handleReviewChange = (evt: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) => {
     const {name, value} = evt.target;
-    setReviewData({...reviewData, [name]: value,});
+    setReviewData({...inputData, [name]: value,});
   };
 
-  const [reviewData, setReviewData] = useState({
-    cameraId: String(params.id),
+  const [inputData, setReviewData] = useState({
+    cameraId: Number(params.id),
     userName: '',
     advantage: '',
     disadvantage: '',
     review: '',
-    rating: ''
+    rating: 0
   });
 
   return (
-    <div id='modal' className={isActive
+    <div className={isActive
       ? 'modal is-active'
       : 'modal'}
     >
+      {isVisible && <Message props={message}/>}
       <div className="modal__wrapper">
-        <div className="modal__overlay" onClick={() =>{onToggleModal();}}></div>
-        <div className="modal__content">
+        <div className="modal__overlay" onClick={handleToggleModalClick}></div>
+        <div className="modal__content" id='modal'>
           <p className="title title--h4">Оставить отзыв</p>
           <div className="form-review">
             <form method="post" onSubmit={(evt: FormEvent<HTMLFormElement>) => {
               evt.preventDefault();
-              onReview(reviewData);
-              removeInput();
-              onToggleModal();
+              const reviewData = {...inputData, rating: Number(inputData.rating)};
+              dispatch(postReviewAction(reviewData)).then(
+                (response) => {
+                  if (response.meta.requestStatus === 'fulfilled') {
+                    handleToggleModalClick();
+                    dispatch(toggleSuccess());
+                    dispatch(fetchReviewsAction(id));
+                  }
+                }
+              );
             }}
             >
               <div className="form-review__rate">
@@ -61,15 +86,15 @@ function ModalReview({isActive, onToggleModal, onReview}: ModalProps): JSX.Eleme
                   </legend>
                   <div className="rate__bar">
                     <div className="rate__group">
-                      <input onChange={handleReviewChange} className="visually-hidden" id="star-5" name="rating" type="radio" value="5"/>
+                      <input onChange={handleReviewChange} className="visually-hidden" id="star-5" name="rating" type="radio" value={5} autoFocus/>
                       <label className="rate__label" htmlFor="star-5" title="Отлично"></label>
-                      <input onChange={handleReviewChange} className="visually-hidden" id="star-4" name="rating" type="radio" value="4"/>
+                      <input onChange={handleReviewChange} className="visually-hidden" id="star-4" name="rating" type="radio" value={4}/>
                       <label className="rate__label" htmlFor="star-4" title="Хорошо"></label>
-                      <input onChange={handleReviewChange} className="visually-hidden" id="star-3" name="rating" type="radio" value="3"/>
+                      <input onChange={handleReviewChange} className="visually-hidden" id="star-3" name="rating" type="radio" value={3}/>
                       <label className="rate__label" htmlFor="star-3" title="Нормально"></label>
-                      <input onChange={handleReviewChange} className="visually-hidden" id="star-2" name="rating" type="radio" value="2"/>
+                      <input onChange={handleReviewChange} className="visually-hidden" id="star-2" name="rating" type="radio" value={2}/>
                       <label className="rate__label" htmlFor="star-2" title="Плохо"></label>
-                      <input onChange={handleReviewChange} className="visually-hidden" id="star-1" name="rating" type="radio" value="1"/>
+                      <input onChange={handleReviewChange} className="visually-hidden" id="star-1" name="rating" type="radio" value={1}/>
                       <label className="rate__label" htmlFor="star-1" title="Ужасно"></label>
                     </div>
                     <div className="rate__progress"><span className="rate__stars">0</span> <span>/</span> <span className="rate__all-stars">5</span>
@@ -122,13 +147,13 @@ function ModalReview({isActive, onToggleModal, onReview}: ModalProps): JSX.Eleme
                   <div className="custom-textarea__error">Нужно добавить комментарий</div>
                 </div>
               </div>
-              <button className="btn btn--purple form-review__btn" type="submit">Отправить отзыв</button>
+              <button className="btn btn--purple form-review__btn" type="submit" disabled={!postStatus}>{postStatus
+                ? 'Отправить отзыв'
+                : 'Отправляю...'}
+              </button>
             </form>
           </div>
-          <button className="cross-btn" type="button" onClick={() =>{
-            onToggleModal();
-          }} aria-label="Закрыть попап"
-          >
+          <button className="cross-btn" onBlur={()=>{document.getElementById('star-1')?.focus();}} type="button" onClick={handleToggleModalClick} aria-label="Закрыть попап" >
             <svg width="10" height="10" aria-hidden="true">
               <use xlinkHref="#icon-close"></use>
             </svg>
@@ -140,3 +165,4 @@ function ModalReview({isActive, onToggleModal, onReview}: ModalProps): JSX.Eleme
 }
 
 export default ModalReview;
+//
