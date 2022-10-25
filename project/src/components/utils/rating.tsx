@@ -14,3 +14,5 @@ function setRating(id: number, rating: number, ariaHiddenState: boolean) {
 }
 
 export default setRating;
+
+

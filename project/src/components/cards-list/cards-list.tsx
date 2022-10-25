@@ -1,11 +1,12 @@
 import { ProductType } from '../../types/product';
 import ProductCard from '../product-card/product-card';
 
+
 type CardsCatalogProps = {
   products: ProductType[];
 }
 
-function CardsCatalog({products}: CardsCatalogProps): JSX.Element {
+function CardsList({products}: CardsCatalogProps): JSX.Element {
 
   return (
     <div className="cards catalog__cards">
@@ -20,5 +21,5 @@ function CardsCatalog({products}: CardsCatalogProps): JSX.Element {
   );
 }
 
-export default CardsCatalog;
+export default CardsList;
 

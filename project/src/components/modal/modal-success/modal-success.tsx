@@ -1,32 +1,19 @@
-import { useEffect } from 'react';
-import { useAppDispatch } from '../../hooks';
-import { toggleSuccess } from '../../store/utils-process/utils-process';
+import { useAppDispatch } from '../../../hooks';
+import { useEventListener } from '../../../hooks/useEventListener';
+import { toggleSuccess } from '../../../store/utils-process/utils-process';
 
 type ModalSuccessProps = {
-  isActive: boolean;
+  isSuccessActive: boolean;
 }
 
-function ModalSuccess ({isActive}: ModalSuccessProps): JSX.Element {
+function ModalSuccess ({isSuccessActive}: ModalSuccessProps): JSX.Element {
 
   const dispatch = useAppDispatch();
   const handleReturnToPurchacesButtonClick = () => {
     dispatch(toggleSuccess());
   };
 
-  useEffect(() => {
-    const isEscapeKey = (evt:KeyboardEvent) => evt.key === 'Escape';
-    const handleEscKeyPress = (evt: KeyboardEvent) => {
-      if(isEscapeKey(evt)) {
-        dispatch(toggleSuccess());
-      }
-    };
-    document.body.style.overflow = 'hidden';
-    document.addEventListener('keydown', handleEscKeyPress);
-    return () => {
-      document.body.style.overflow = 'visible';
-      document.removeEventListener('keydown', handleEscKeyPress);
-    };
-  },[dispatch]);
+  useEventListener({isSuccessActive});
 
   return (
     <div className="modal is-active modal--narrow">

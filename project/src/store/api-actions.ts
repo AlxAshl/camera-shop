@@ -45,6 +45,7 @@ export const fetchProductAction = createAsyncThunk<ProductType, number, {
   }
 );
 
+
 export const fetchPromoAction = createAsyncThunk<PromoType, undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -76,7 +77,7 @@ export const postReviewAction = createAsyncThunk<unknown, ReviewPostType, {
 }>(
   'review/postReview',
   async (reviewData, {extra: api}) => {
-    const response = await api.post<ReviewPostType>(`${APIRoute.Reviews}`, reviewData);
+    const response = await api.post<ReviewPostType>(`${APIRoute.Reviews}/123`, reviewData);
     return response;
   }
 );

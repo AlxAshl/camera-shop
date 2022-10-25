@@ -2,14 +2,11 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
-import Footer from '../../components/footer/footer';
-import Header from '../../components/header/header';
-import ModalReview from '../../components/modal-review/modal-review';
-import ModalSuccess from '../../components/modal-success/modal-success';
+import ModalReview from '../../components/modal/modal-review/modal-review';
+import ModalSuccess from '../../components/modal/modal-success/modal-success';
 import ReviewsList from '../../components/reviews-list/reviews-list';
-import SelectedProduct from '../../components/selected-product/selected-product';
-import Similar from '../../components/similar/similar';
-import SVGRoot from '../../components/svg-root/svg-root';
+import SelectedProduct from '../../components/catalog/selected-product/selected-product';
+import Similar from '../../components/catalog/similar/similar';
 import Message from '../../components/ui/message';
 import UpButton from '../../components/up-button/up-button';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -31,7 +28,7 @@ function ProductPage(): JSX.Element {
   const isReviewActive = useAppSelector(getModalVisibilityStatus);
   const isSuccessActive = useAppSelector(getModalSuccessVisibilityStatus);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (isVisible) {
       setTimeout(() => {
         dispatch(toggleMessage());
@@ -45,30 +42,25 @@ function ProductPage(): JSX.Element {
 
   return(
     <>
-      <SVGRoot />
-      <div className="wrapper">
-        <Header/>
-        <main {...isReviewActive
-          ? { style:{paddingRight:' 15px'}}
-          : ''}
-        >
-          <div className="page-content">
-            <Breadcrumbs camera={product}/>
-            {isVisible && <Message props={message}/>}
-            {(isProductLoaded) && <SelectedProduct camera={product}/>}
-            <Similar camera={product}/>
-            <ReviewsList id={Number(id)}/>
-          </div>
-        </main>
-        <UpButton/>
-        {isReviewActive
-          ? <ModalReview isActive={isReviewActive} id={Number(id)}/>
-          : ''}
-        {isSuccessActive
-          ? <ModalSuccess isActive={isSuccessActive}/>
-          : ''}
-        <Footer/>
-      </div>
+      <main {...isReviewActive || isSuccessActive
+        ? { style:{paddingRight: '17px'}}
+        : ''}
+      >
+        <div className="page-content">
+          <Breadcrumbs camera={product}/>
+          {isVisible && <Message props={message}/>}
+          {(isProductLoaded) && <SelectedProduct camera={product}/>}
+          <Similar camera={product}/>
+          <ReviewsList id={Number(id)}/>
+        </div>
+      </main>
+      <UpButton/>
+      {isReviewActive
+        ? <ModalReview isReviewActive={isReviewActive} id={Number(id)}/>
+        : ''}
+      {isSuccessActive
+        ? <ModalSuccess isSuccessActive={isSuccessActive}/>
+        : ''}
     </>
   );
 }

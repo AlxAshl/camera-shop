@@ -1,6 +1,6 @@
 function Preloader(): JSX.Element {
   return (
-    <div>Loading data...</div>
+    <div data-testid='preloader-test'>Loading data...</div>
   );
 }
 

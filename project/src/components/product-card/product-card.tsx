@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ProductType } from '../../types/product';
 import setRating from '../utils/rating';
+import { seperatePrice } from '../utils/seperate-price';
 
 type ProductCardProps = {
   product: ProductType;
@@ -9,9 +10,8 @@ type ProductCardProps = {
 
 function ProductCard({product, isSimilar}: ProductCardProps): JSX.Element {
   const {rating, reviewCount, name, price, id, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
-
   return (
-    <div className={isSimilar
+    <div data-testid='product-card-test' className={isSimilar
       ? 'product-card is-active'
       : 'product-card'}
     >
@@ -28,7 +28,7 @@ function ProductCard({product, isSimilar}: ProductCardProps): JSX.Element {
           <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
         </div>
         <p className="product-card__title">{name}</p>
-        <p className="product-card__price"><span className="visually-hidden">Цена:</span>{price} ₽
+        <p className="product-card__price"><span className="visually-hidden">Цена:</span>{seperatePrice(price)} ₽
         </p>
       </div>
       <div className="product-card__buttons">

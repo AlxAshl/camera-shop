@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { ProductType, PromoType } from '../../types/product';
 import { ProductProcess } from '../../types/state';
-import { fetchSimilarProductsAction, fetchProductAction, fetchProductsAction, fetchPromoAction } from '../api-actions';
+import { fetchSimilarProductsAction, fetchProductsAction, fetchPromoAction, fetchProductAction } from '../api-actions';
 
 const initialState: ProductProcess = {
   isProductsDataLoaded: false,
@@ -14,7 +14,6 @@ const initialState: ProductProcess = {
   product: {} as ProductType,
   promo: {} as PromoType
 };
-
 
 export const productProcess = createSlice({
   name: NameSpace.Product,

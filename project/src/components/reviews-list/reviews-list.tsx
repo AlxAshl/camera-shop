@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchReviewsAction } from '../../store/api-actions';
 import { getLoadedReviewsStatus, getReviews } from '../../store/review-process/selectors';
 import { toggleReview } from '../../store/utils-process/utils-process';
-import ReviewCard from '../review-card/review-card';
+import ReviewCard from './review-card/review-card';
 
 type ReviewListProps = {
   id: number;
@@ -20,7 +20,6 @@ function ReviewsList({id}: ReviewListProps): JSX.Element {
   reviews.sort((a, b) => (a.createAt > b.createAt ? -1 : 1));
 
   useEffect(() => {
-
     function loadMoreReviews(){
       if (initialRender) {
         setInitialRender(false);
@@ -68,8 +67,7 @@ function ReviewsList({id}: ReviewListProps): JSX.Element {
           </ul>
           {(reviewsArray.length > sliceLimit) &&
             <div className="review-block__buttons">
-              <button className="btn btn--purple" type="button" onClick={handleShowMoreButton}>Показать больше отзывов
-              </button>
+              <button className="btn btn--purple" type="button" onClick={handleShowMoreButton}>Показать больше отзывов</button>
             </div>}
         </div>
       </section>

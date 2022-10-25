@@ -30,7 +30,7 @@ function Breadcrumbs({camera}: BreadcrumbsProps): JSX.Element {
             : <li className="breadcrumbs__item"><span className="breadcrumbs__link breadcrumbs__link--active">Каталог</span></li>}
 
           {camera
-            ? <li className="breadcrumbs__item"><span className="breadcrumbs__link breadcrumbs__link--active">{camera.name}</span></li>
+            ? <li className="breadcrumbs__item"><span className="breadcrumbs__link breadcrumbs__link--active" data-testid='breadcrumbs__item-test'>{camera.name}</span></li>
             : ''}
 
         </ul>

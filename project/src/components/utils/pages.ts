@@ -7,4 +7,5 @@ function getPagesCount(cameraCount: number): number {
 function getNumeric(page: string) {
   return Number(page.replace( /^\D+/g, ''));
 }
+
 export { getPagesCount, getNumeric};

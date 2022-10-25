@@ -1,6 +1,7 @@
-import { ProductType } from '../../types/product';
+import { ProductType } from '../../../types/product';
 import {useState} from 'react';
-import setRating from '../utils/rating';
+import setRating from '../../utils/rating';
+import { seperatePrice } from '../../utils/seperate-price';
 
 type SelectedProductProps = {
   camera: ProductType;
@@ -8,7 +9,7 @@ type SelectedProductProps = {
 
 function SelectedProduct({camera}: SelectedProductProps): JSX.Element {
   const {name, id, rating, price, reviewCount, level, type, category, vendorCode, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = camera;
-  const [toggle, setTabsToggle] = useState(true);
+  const [tabsToggle, setTabsToggle] = useState(true);
   const handleTabsClick = () => {
     setTabsToggle((current) => !current);
   };
@@ -30,7 +31,7 @@ function SelectedProduct({camera}: SelectedProductProps): JSX.Element {
               <p className="visually-hidden">Рейтинг: {rating}</p>
               <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
             </div>
-            <p className="product__price"><span className="visually-hidden">Цена:</span>{price} ₽</p>
+            <p className="product__price"><span className="visually-hidden">Цена:</span>{seperatePrice(price)} ₽</p>
             <button className="btn btn--purple" type="button">
               <svg width="24" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-add-basket"></use>
@@ -38,19 +39,19 @@ function SelectedProduct({camera}: SelectedProductProps): JSX.Element {
             </button>
             <div className="tabs product__tabs">
               <div className="tabs__controls product__tabs-controls">
-                <button onClick={handleTabsClick} className={toggle
+                <button onClick={handleTabsClick} data-testid='characteristics-button-test' className={tabsToggle
                   ? 'tabs__control'
                   : 'tabs__control is-active'} type="button"
                 >Характеристики
                 </button>
-                <button onClick={handleTabsClick} className={toggle
+                <button onClick={handleTabsClick} data-testid='info-button-test' className={tabsToggle
                   ? 'tabs__control is-active'
                   : 'tabs__control'} type="button"
                 >Описание
                 </button>
               </div>
               <div className="tabs__content">
-                <div className={toggle
+                <div className={tabsToggle
                   ? 'tabs__element'
                   : 'tabs__element is-active'}
                 >
@@ -69,7 +70,7 @@ function SelectedProduct({camera}: SelectedProductProps): JSX.Element {
                     </li>
                   </ul>
                 </div>
-                <div className={toggle
+                <div className={tabsToggle
                   ? 'tabs__element is-active'
                   : 'tabs__element'}
                 >

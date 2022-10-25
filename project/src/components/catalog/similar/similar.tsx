@@ -1,10 +1,10 @@
-// import { current } from '@reduxjs/toolkit';
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { fetchSimilarProductsAction } from '../../store/api-actions';
-import {/* getAllProducts,*/ getLoadedProductsStatus, getProducts } from '../../store/product-process/selectors';
-import { ProductType } from '../../types/product';
-import ProductCard from '../product-card/product-card';
+import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { fetchSimilarProductsAction } from '../../../store/api-actions';
+import { getLoadedProductsStatus, getProducts } from '../../../store/product-process/selectors';
+import { ProductType } from '../../../types/product';
+import ProductCard from '../../product-card/product-card';
+
 
 interface SimilarProps {
   camera: ProductType;

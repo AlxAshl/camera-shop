@@ -2,12 +2,11 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { fetchProductsAction } from '../../store/api-actions';
 import { getLoadedProductsStatus, getPage, getProducts } from '../../store/product-process/selectors';
-import CardsCatalog from '../cards-catalog/cards-catalog';
-import FilterBlock from '../filter-block/filter-block';
-import PaginationList from '../pagination-list/pagination-list';
+import CardsList from '../cards-list/cards-list';
+import FilterBlock from './filter-block/filter-block';
+import PaginationList from './pagination-list/pagination-list';
 import Preloader from '../preloader/preloader';
-import SortBar from '../sort-bar/sort-bar';
-
+import SortBar from './sort-bar/sort-bar';
 
 function Catalog(): JSX.Element {
 
@@ -15,9 +14,11 @@ function Catalog(): JSX.Element {
   const isDataLoaded = useAppSelector(getLoadedProductsStatus);
   const currentPage = useAppSelector(getPage);
   const products = useAppSelector(getProducts);
+
   useEffect(()=>{
     dispatch(fetchProductsAction());
   },[currentPage, dispatch]);
+
 
   return (
     <section className="catalog">
@@ -28,7 +29,7 @@ function Catalog(): JSX.Element {
           <div className="catalog__content">
             <SortBar/>
             {isDataLoaded
-              ? <CardsCatalog products={products} />
+              ? <CardsList products={products} />
               : <Preloader/>}
             {isDataLoaded
               ? <PaginationList/>

@@ -1,5 +1,5 @@
-import { ReviewType } from '../../types/review';
-import setRating from '../utils/rating';
+import { ReviewType } from '../../../types/review';
+import setRating from '../../utils/rating';
 
 type ReviewCardProps = {
   data: ReviewType;
