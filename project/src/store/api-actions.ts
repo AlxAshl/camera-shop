@@ -1,27 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { store } from './store';
+// import { store } from './store';
 import { APIRoute } from '../const';
 import { ProductType, PromoType } from '../types/product';
 import { ReviewPostType, ReviewType } from '../types/review';
 import { AppDispatch, State } from '../types/state';
-import { setProductCount } from './product-process/product-process';
+// import { setProductCount } from './product-process/product-process';
 
 
-export const fetchProductsAction = createAsyncThunk<ProductType[], undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'product/fetchProducts',
-  async (_arg, {extra: api}) => {
-    const response = await api.get(`${APIRoute.Products}/pages`);
-    store.dispatch(setProductCount(response.headers['x-total-count']));
-    return response.data as ProductType[];
-  },
-);
-
-export const fetchSimilarProductsAction = createAsyncThunk<ProductType[], number, {
+const fetchSimilarProductsAction = createAsyncThunk<ProductType[], number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -33,7 +20,7 @@ export const fetchSimilarProductsAction = createAsyncThunk<ProductType[], number
   },
 );
 
-export const fetchProductAction = createAsyncThunk<ProductType, number, {
+const fetchProductAction = createAsyncThunk<ProductType, number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -46,7 +33,7 @@ export const fetchProductAction = createAsyncThunk<ProductType, number, {
 );
 
 
-export const fetchPromoAction = createAsyncThunk<PromoType, undefined, {
+const fetchPromoAction = createAsyncThunk<PromoType, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -58,7 +45,7 @@ export const fetchPromoAction = createAsyncThunk<PromoType, undefined, {
   },
 );
 
-export const fetchReviewsAction = createAsyncThunk<ReviewType[], number, {
+const fetchReviewsAction = createAsyncThunk<ReviewType[], number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -70,7 +57,7 @@ export const fetchReviewsAction = createAsyncThunk<ReviewType[], number, {
   }
 );
 
-export const postReviewAction = createAsyncThunk<unknown, ReviewPostType, {
+const postReviewAction = createAsyncThunk<unknown, ReviewPostType, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -81,3 +68,5 @@ export const postReviewAction = createAsyncThunk<unknown, ReviewPostType, {
     return response;
   }
 );
+
+export {fetchSimilarProductsAction, fetchProductAction, fetchPromoAction, fetchReviewsAction, postReviewAction, };

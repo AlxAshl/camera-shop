@@ -1,8 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { AxiosInstance } from 'axios';
+import { APIRoute, NameSpace } from '../../const';
 import { ProductType, PromoType } from '../../types/product';
-import { ProductProcess } from '../../types/state';
-import { fetchSimilarProductsAction, fetchProductsAction, fetchPromoAction, fetchProductAction } from '../api-actions';
+import { AppDispatch, ProductProcess, State } from '../../types/state';
+import { fetchSimilarProductsAction, fetchPromoAction, fetchProductAction } from '../api-actions';
+import { store } from '../store';
 
 const initialState: ProductProcess = {
   isProductsDataLoaded: false,
@@ -11,9 +13,22 @@ const initialState: ProductProcess = {
   currentPage: 1,
   productCount: 0,
   products: [],
+  similarProducts: [],
   product: {} as ProductType,
   promo: {} as PromoType
 };
+export const fetchProductsAction = createAsyncThunk<ProductType[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'product/fetchProducts',
+  async (_arg, {extra: api}) => {
+    const response = await api.get(`${APIRoute.Products}/pages`);
+    store.dispatch(setProductCount(response.headers['x-total-count']));
+    return response.data as ProductType[];
+  },
+);
 
 export const productProcess = createSlice({
   name: NameSpace.Product,
@@ -38,15 +53,15 @@ export const productProcess = createSlice({
       .addCase(fetchProductsAction.rejected, (state) => {
         state.isProductsDataLoaded = true;
       })
-      .addCase(fetchSimilarProductsAction.pending, (state) => {
-        state.isProductsDataLoaded = false;
+      .addCase(fetchSimilarProductsAction.pending, (state, action) => {
+        //
       })
       .addCase(fetchSimilarProductsAction.fulfilled, (state, action) => {
-        state.isProductsDataLoaded = true;
-        state.products = action.payload;
+        //
+        state.similarProducts = action.payload;
       })
-      .addCase(fetchSimilarProductsAction.rejected, (state) => {
-        state.isProductsDataLoaded = true;
+      .addCase(fetchSimilarProductsAction.rejected, (state, action) => {
+        //
       })
       .addCase(fetchProductAction.pending, (state) => {
         state.isProductDataLoaded = false;

@@ -1,18 +1,15 @@
 import Similar from './similar';
-import {crumbsMock, productsMock} from '../../../test/test-mocks';
+import { productMock } from '../../../test/test-mocks';
 import { renderWithProviders } from '../../../test/utils/render-with-redux';
+import axios from 'axios';
 
-// jest.mock('axios');
-// beforeEach(() => {
-//   axios.get = jest.fn().mockResolvedValue({});
-// });
-// jest.mock('axios');
+
 jest.mock('axios', () => ({
   create: jest.fn(() => ({
-    // store: {
-    //   getState: jest.fn(() => ({})),
-    //   dispatch: jest.fn(),
-    // },
+    store: {
+      getState: jest.fn(() => ({})),
+      dispatch: jest.fn(),
+    },
     get: jest.fn(),
     interceptors: {
       request: { use: jest.fn(), eject: jest.fn() },
@@ -22,12 +19,20 @@ jest.mock('axios', () => ({
 }));
 
 describe('Similar component', () => {
+  // beforeEach(() => {
+  //   useSelectorMock.mockClear();
+  //   useDispatchMock.mockClear();
+  // });
 
+  // afterAll(() => {
+  //   cleanup();
+  // });
+  // const reactRedux = { useAppDispatch, useAppSelector };
+  // const useDispatchMock = jest.spyOn(reactRedux, 'useAppDispatch');
+  // const useSelectorMock = jest.spyOn(reactRedux, 'useAppSelector');
   test('Characteristics tab is active on initial render', () => {
-    renderWithProviders(<Similar camera={crumbsMock}/>, { initialState: {
-      PRODUCT: { products: productsMock }
-    }});
-    // expect(jest.mocked(axios).get).toHaveBeenCalledTimes(1);
+    renderWithProviders(<Similar camera={productMock}/>, );
+    expect(axios.get).toBeCalled();
   });
   // test('Changes tabs on click', () => {
   //   //

@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from '.';
-import { toggleReview, toggleSuccess } from '../store/utils-process/utils-process';
+import { toggleCart, toggleReview, toggleSuccess } from '../store/utils-process/utils-process';
 
 type ToggleModalType = {
   isReviewActive?: boolean;
   isSuccessActive?: boolean;
+  isAddToCartActive?: boolean;
 }
 
 export const useEventListener = ({...props}: ToggleModalType) => {
@@ -18,6 +19,9 @@ export const useEventListener = ({...props}: ToggleModalType) => {
         }
         if(props.isSuccessActive){
           dispatch(toggleSuccess());
+        }
+        if(props.isAddToCartActive){
+          dispatch(toggleCart());
         }
       }
     };

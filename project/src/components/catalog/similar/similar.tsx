@@ -28,6 +28,7 @@ function Similar({camera}: SimilarProps): JSX.Element {
     }
   },[dispatch, id]);
 
+
   const handleNextSlideButton = () => {
     setPrimary({start: slice.start + 3, end: slice.end + 3});
   };

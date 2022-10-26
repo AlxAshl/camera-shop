@@ -10,6 +10,7 @@ export type ProductProcess = {
   productCount: number;
   currentPage: number;
   products: ProductType[];
+  similarProducts: ProductType[];
   product: ProductType;
   promo: PromoType;
 }
@@ -18,6 +19,7 @@ export type UtilsProcess = {
   showMessage: boolean;
   showReview: boolean;
   showSuccess: boolean;
+  showCart: boolean;
   message: MessageType;
 }
 

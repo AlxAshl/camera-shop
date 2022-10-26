@@ -12,8 +12,9 @@ import UpButton from '../../components/up-button/up-button';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchProductAction } from '../../store/api-actions';
 import { getLoadedProductStatus, getProduct } from '../../store/product-process/selectors';
-import { getMessageContent, getMessageVisibilityStatus, getModalSuccessVisibilityStatus, getModalVisibilityStatus } from '../../store/utils-process/selectors';
+import { getMessageContent, getMessageVisibilityStatus, getModalCartVisibilityStatus, getModalSuccessVisibilityStatus, getModalVisibilityStatus } from '../../store/utils-process/selectors';
 import { toggleMessage } from '../../store/utils-process/utils-process';
+import ModalAddToCart from '../../components/modal/modal-add-to-cart/modal-add-to-cart';
 
 
 function ProductPage(): JSX.Element {
@@ -27,6 +28,7 @@ function ProductPage(): JSX.Element {
   const isVisible = useAppSelector(getMessageVisibilityStatus);
   const isReviewActive = useAppSelector(getModalVisibilityStatus);
   const isSuccessActive = useAppSelector(getModalSuccessVisibilityStatus);
+  const isCartActive = useAppSelector(getModalCartVisibilityStatus);
 
   useEffect(() => {
     if (isVisible) {
@@ -55,6 +57,9 @@ function ProductPage(): JSX.Element {
         </div>
       </main>
       <UpButton/>
+      {isCartActive
+        ? <ModalAddToCart isAddToCartActive={isCartActive}/>
+        : ''}
       {isReviewActive
         ? <ModalReview isReviewActive={isReviewActive} id={Number(id)}/>
         : ''}

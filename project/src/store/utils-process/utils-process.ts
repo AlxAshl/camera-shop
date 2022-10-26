@@ -8,6 +8,7 @@ const initialState: UtilsProcess = {
   showMessage: false,
   showReview: false,
   showSuccess: false,
+  showCart: false,
   message: {} as MessageType,
 };
 
@@ -27,7 +28,10 @@ export const utilsProcess = createSlice({
     toggleSuccess(state) {
       state.showSuccess = !state.showSuccess;
     },
+    toggleCart(state) {
+      state.showCart = !state.showCart;
+    }
   },
 });
 
-export const {formMessage, toggleMessage, toggleReview, toggleSuccess} = utilsProcess.actions;
+export const {formMessage, toggleMessage, toggleReview, toggleSuccess, toggleCart} = utilsProcess.actions;

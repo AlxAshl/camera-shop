@@ -1,5 +1,6 @@
 import { ReviewType } from '../../../types/review';
-import setRating from '../../utils/rating';
+import Rating from '../../rating/rating';
+
 
 type ReviewCardProps = {
   data: ReviewType;
@@ -14,7 +15,7 @@ function ReviewCard({data}: ReviewCardProps): JSX.Element {
         <time className="review-card__data" dateTime={createAt}>13 апреля</time>
       </div>
       <div className="rate review-card__rate">
-        {setRating(cameraId, rating, true)}
+        <Rating id={cameraId} rating={rating} ariaHiddenState/>
         <p className="visually-hidden">Оценка: {rating}</p>
       </div>
       <ul className="review-card__list">

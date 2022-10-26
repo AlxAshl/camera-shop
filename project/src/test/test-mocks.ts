@@ -25,7 +25,7 @@ export const bannerMock = {
   previewImgWebp2x: 'img/content/promo@2x.webp',
 };
 
-export const crumbsMock = {
+export const productMock = {
   category: 'Фотоаппарат',
   description: 'Среднеформатная 40-мегапиксельная камера',
   id: 17,

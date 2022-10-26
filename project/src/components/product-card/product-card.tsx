@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { ProductType } from '../../types/product';
-import setRating from '../utils/rating';
+import Rating from '../rating/rating';
 import { seperatePrice } from '../utils/seperate-price';
 
 type ProductCardProps = {
@@ -23,7 +23,7 @@ function ProductCard({product, isSimilar}: ProductCardProps): JSX.Element {
       </div>
       <div className="product-card__info">
         <div className="rate product-card__rate">
-          {setRating(id, rating, false)}
+          <Rating id={id} rating={rating} ariaHiddenState={false}/>
           <p className="visually-hidden">Рейтинг: {rating}</p>
           <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
         </div>

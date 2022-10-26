@@ -23,11 +23,4 @@ export enum APIRoute {
 export const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy';
 export const REQUEST_TIMEOUT = 5000;
 export const PAGE_LIMIT = 9;
-
-
-// ///--------------------TEST BLANK----------------------///////////////////
-// describe('describe', () => {
-//   test('test', ()=> {
-//     //
-//   });
-// });
+export const RATING_STARS_COUNT = 5;

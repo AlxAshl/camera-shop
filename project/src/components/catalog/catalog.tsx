@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { fetchProductsAction } from '../../store/api-actions';
+
 import { getLoadedProductsStatus, getPage, getProducts } from '../../store/product-process/selectors';
 import CardsList from '../cards-list/cards-list';
 import FilterBlock from './filter-block/filter-block';
 import PaginationList from './pagination-list/pagination-list';
 import Preloader from '../preloader/preloader';
 import SortBar from './sort-bar/sort-bar';
+import { fetchProductsAction } from '../../store/product-process/product-process';
 
 function Catalog(): JSX.Element {
 

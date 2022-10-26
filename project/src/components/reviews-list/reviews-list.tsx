@@ -16,8 +16,7 @@ function ReviewsList({id}: ReviewListProps): JSX.Element {
   const isLoaded = useAppSelector(getLoadedReviewsStatus);
   const [sliceLimit, setSliceLimit] = useState(3);
   const [initialRender, setInitialRender] = useState(true);
-  const reviews = reviewsArray.slice(0, sliceLimit);
-  reviews.sort((a, b) => (a.createAt > b.createAt ? -1 : 1));
+  const reviews = [...reviewsArray].sort((a, b) => (a.createAt > b.createAt ? -1 : 1)).slice(0, sliceLimit);
 
   useEffect(() => {
     function loadMoreReviews(){

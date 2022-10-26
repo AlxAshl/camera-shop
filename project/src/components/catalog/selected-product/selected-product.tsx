@@ -1,7 +1,9 @@
 import { ProductType } from '../../../types/product';
 import {useState} from 'react';
-import setRating from '../../utils/rating';
 import { seperatePrice } from '../../utils/seperate-price';
+import Rating from '../../rating/rating';
+import { useAppDispatch } from '../../../hooks';
+import { toggleCart } from '../../../store/utils-process/utils-process';
 
 type SelectedProductProps = {
   camera: ProductType;
@@ -10,8 +12,13 @@ type SelectedProductProps = {
 function SelectedProduct({camera}: SelectedProductProps): JSX.Element {
   const {name, id, rating, price, reviewCount, level, type, category, vendorCode, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = camera;
   const [tabsToggle, setTabsToggle] = useState(true);
+  const dispatch = useAppDispatch();
+
   const handleTabsClick = () => {
     setTabsToggle((current) => !current);
+  };
+  const handleAddToCartButtonClick = () => {
+    dispatch(toggleCart());
   };
 
   return (
@@ -27,12 +34,12 @@ function SelectedProduct({camera}: SelectedProductProps): JSX.Element {
           <div className="product__content">
             <h1 className="title title--h3">{name}</h1>
             <div className="rate product__rate">
-              {setRating(id, rating, true)}
+              <Rating id={id} rating={rating} ariaHiddenState/>
               <p className="visually-hidden">Рейтинг: {rating}</p>
               <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
             </div>
             <p className="product__price"><span className="visually-hidden">Цена:</span>{seperatePrice(price)} ₽</p>
-            <button className="btn btn--purple" type="button">
+            <button className="btn btn--purple" type="button" onClick={handleAddToCartButtonClick}>
               <svg width="24" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-add-basket"></use>
               </svg>Добавить в корзину
