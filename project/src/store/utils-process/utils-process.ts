@@ -11,7 +11,7 @@ const initialState: UtilsProcess = {
   showCart: false,
   message: {} as MessageType,
 };
-//
+
 export const utilsProcess = createSlice({
   name: NameSpace.Utils,
   initialState,
