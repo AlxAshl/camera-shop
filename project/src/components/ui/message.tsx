@@ -11,7 +11,7 @@ function Message({props}: MessageProps):JSX.Element {
   const cssClasses = `${classes.notification} ${classes.error}`;
 
   return (
-    <section className={cssClasses}>
+    <section data-testid='error-test' className={cssClasses}>
       <h2>{title}</h2>
       <p>{message}</p>
     </section>

@@ -1,11 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-// import { store } from './store';
 import { APIRoute } from '../const';
 import { ProductType, PromoType } from '../types/product';
 import { ReviewPostType, ReviewType } from '../types/review';
 import { AppDispatch, State } from '../types/state';
-// import { setProductCount } from './product-process/product-process';
 
 
 const fetchSimilarProductsAction = createAsyncThunk<ProductType[], number, {

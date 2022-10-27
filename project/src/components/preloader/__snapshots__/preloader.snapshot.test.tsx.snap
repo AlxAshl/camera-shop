@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FilterBlock renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="preloader-test"
+  >
+    Loading data...
+  </div>
+</DocumentFragment>
+`;

@@ -53,15 +53,15 @@ export const productProcess = createSlice({
       .addCase(fetchProductsAction.rejected, (state) => {
         state.isProductsDataLoaded = true;
       })
-      .addCase(fetchSimilarProductsAction.pending, (state, action) => {
-        //
+      .addCase(fetchSimilarProductsAction.pending, (state) => {
+        state.isProductDataLoaded = false;
       })
       .addCase(fetchSimilarProductsAction.fulfilled, (state, action) => {
-        //
+        state.isProductDataLoaded = true;
         state.similarProducts = action.payload;
       })
-      .addCase(fetchSimilarProductsAction.rejected, (state, action) => {
-        //
+      .addCase(fetchSimilarProductsAction.rejected, (state) => {
+        state.isProductDataLoaded = false;
       })
       .addCase(fetchProductAction.pending, (state) => {
         state.isProductDataLoaded = false;

@@ -34,7 +34,7 @@
       "project": [
         "tsconfig.json"
       ],
-     "tsconfigRootDir": "./project"
+      "tsconfigRootDir": "./project"
     },
     "overrides": [
       {

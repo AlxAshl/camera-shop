@@ -9,12 +9,13 @@ import SelectedProduct from '../../components/catalog/selected-product/selected-
 import Similar from '../../components/catalog/similar/similar';
 import Message from '../../components/ui/message';
 import UpButton from '../../components/up-button/up-button';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchProductAction } from '../../store/api-actions';
 import { getLoadedProductStatus, getProduct } from '../../store/product-process/selectors';
 import { getMessageContent, getMessageVisibilityStatus, getModalCartVisibilityStatus, getModalSuccessVisibilityStatus, getModalVisibilityStatus } from '../../store/utils-process/selectors';
 import { toggleMessage } from '../../store/utils-process/utils-process';
 import ModalAddToCart from '../../components/modal/modal-add-to-cart/modal-add-to-cart';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 
 function ProductPage(): JSX.Element {

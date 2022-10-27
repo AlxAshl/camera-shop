@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { AppRoute } from '../../const';
 import { ProductType } from '../../types/product';
 import Rating from '../rating/rating';
 import { seperatePrice } from '../utils/seperate-price';
@@ -24,17 +25,17 @@ function ProductCard({product, isSimilar}: ProductCardProps): JSX.Element {
       <div className="product-card__info">
         <div className="rate product-card__rate">
           <Rating id={id} rating={rating} ariaHiddenState={false}/>
-          <p className="visually-hidden">Рейтинг: {rating}</p>
-          <p className="rate__count"><span className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
+          <p data-testid='rating-test' className="visually-hidden">Рейтинг: {rating}</p>
+          <p className="rate__count"><span data-testid='rates-total' className="visually-hidden">Всего оценок:</span>{reviewCount}</p>
         </div>
         <p className="product-card__title">{name}</p>
-        <p className="product-card__price"><span className="visually-hidden">Цена:</span>{seperatePrice(price)} ₽
+        <p data-testid='price-test'className="product-card__price"><span className="visually-hidden">Цена:</span>{seperatePrice(price)} ₽
         </p>
       </div>
       <div className="product-card__buttons">
         <button className="btn btn--purple product-card__btn" type="button">Купить
         </button>
-        <Link to={`/cameras/${id}`} className="btn btn--transparent">Подробнее
+        <Link data-testid='link-test' to={`${AppRoute.Product}/${id}`} className="btn btn--transparent">Подробнее
         </Link>
       </div>
     </div>

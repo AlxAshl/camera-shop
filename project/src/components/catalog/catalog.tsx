@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 import { getLoadedProductsStatus, getPage, getProducts } from '../../store/product-process/selectors';
 import CardsList from '../cards-list/cards-list';
@@ -8,6 +8,7 @@ import PaginationList from './pagination-list/pagination-list';
 import Preloader from '../preloader/preloader';
 import SortBar from './sort-bar/sort-bar';
 import { fetchProductsAction } from '../../store/product-process/product-process';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 function Catalog(): JSX.Element {
 

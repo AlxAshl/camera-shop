@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchReviewsAction } from '../../store/api-actions';
 import { getLoadedReviewsStatus, getReviews } from '../../store/review-process/selectors';
 import { toggleReview } from '../../store/utils-process/utils-process';

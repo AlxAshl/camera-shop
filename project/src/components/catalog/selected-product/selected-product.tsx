@@ -2,8 +2,8 @@ import { ProductType } from '../../../types/product';
 import {useState} from 'react';
 import { seperatePrice } from '../../utils/seperate-price';
 import Rating from '../../rating/rating';
-import { useAppDispatch } from '../../../hooks';
 import { toggleCart } from '../../../store/utils-process/utils-process';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
 
 type SelectedProductProps = {
   camera: ProductType;

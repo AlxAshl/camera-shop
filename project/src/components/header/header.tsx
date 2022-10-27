@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import NavBar from '../nav-bar/nav-bar';
 
 function Header():JSX.Element {
@@ -32,11 +33,11 @@ function Header():JSX.Element {
             </svg><span className="visually-hidden">Сбросить поиск</span>
           </button>
         </div>
-        <a className="header__basket-link" href="#">
+        <Link className="header__basket-link" to="#">
           <svg width="16" height="16" aria-hidden="true">
             <use xlinkHref="#icon-basket"></use>
           </svg>
-        </a>
+        </Link>
       </div>
     </header>
   );

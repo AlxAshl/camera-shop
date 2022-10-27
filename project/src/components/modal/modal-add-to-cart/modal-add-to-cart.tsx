@@ -1,4 +1,4 @@
-import { useAppDispatch } from '../../../hooks';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { useEventListener } from '../../../hooks/useEventListener';
 import { toggleCart } from '../../../store/utils-process/utils-process';
 
@@ -38,13 +38,13 @@ function ModalAddToCart ({isAddToCartActive}: ModalAddToCartType): JSX.Element {
             </div>
           </div>
           <div className="modal__buttons">
-            <button className="btn btn--purple modal__btn modal__btn--fit-width" type="button" onClick={handleToggleModalClick}>
+            <button data-testid='cart-button-test' className="btn btn--purple modal__btn modal__btn--fit-width" type="button" onClick={handleToggleModalClick}>
               <svg width="24" height="16" aria-hidden="true">
                 <use xlinkHref="#icon-add-basket"></use>
               </svg>Добавить в корзину
             </button>
           </div>
-          <button className="cross-btn" type="button" aria-label="Закрыть попап" onClick={handleToggleModalClick}>
+          <button data-testid='cross-btn-test' className="cross-btn" type="button" aria-label="Закрыть попап" onClick={handleToggleModalClick}>
             <svg width="10" height="10" aria-hidden="true">
               <use xlinkHref="#icon-close"></use>
             </svg>

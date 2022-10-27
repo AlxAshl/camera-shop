@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../../const';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { useAppSelector } from '../../../hooks/useAppSelector';
 import { setCurrentPage } from '../../../store/product-process/product-process';
 import { getPage, getProductCount } from '../../../store/product-process/selectors';
 import {getPagesCount} from '../../utils/pages';
 import { memo, MouseEvent } from 'react';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
 
 
 function PaginationList(): JSX.Element {

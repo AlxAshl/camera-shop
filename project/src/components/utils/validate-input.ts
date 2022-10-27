@@ -1,5 +1,5 @@
 export function validateInput(target: (EventTarget & HTMLInputElement) | (EventTarget & HTMLTextAreaElement)) {
-// console.log(target, target.value.length > 0);
+
   if (target.parentElement?.parentElement && target.name === 'rating' && (Number(target.value) > 0)) {
     if (!target.parentElement.parentElement.parentElement?.className.includes('is-valid')) {
       target.parentElement.parentElement.parentElement?.classList.add('is-valid');

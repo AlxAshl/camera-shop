@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal renders correctly 1`] = `
+<DocumentFragment>
+  <section
+    class="notification error"
+  >
+    <h2>
+      Error!
+    </h2>
+    <p>
+      ERR
+    </p>
+  </section>
+</DocumentFragment>
+`;

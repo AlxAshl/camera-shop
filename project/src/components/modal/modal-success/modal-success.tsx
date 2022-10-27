@@ -1,4 +1,5 @@
-import { useAppDispatch } from '../../../hooks';
+
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { useEventListener } from '../../../hooks/useEventListener';
 import { toggleSuccess } from '../../../store/utils-process/utils-process';
 
@@ -25,10 +26,10 @@ function ModalSuccess ({isSuccessActive}: ModalSuccessProps): JSX.Element {
             <use xlinkHref="#icon-review-success"></use>
           </svg>
           <div className="modal__buttons">
-            <button className="btn btn--purple modal__btn modal__btn--fit-width" id="success-button" type="button" onClick={handleReturnToPurchacesButtonClick} autoFocus>Вернуться к покупкам
+            <button data-testid='success-button-test' className="btn btn--purple modal__btn modal__btn--fit-width" id="success-button" type="button" onClick={handleReturnToPurchacesButtonClick} autoFocus>Вернуться к покупкам
             </button>
           </div>
-          <button className="cross-btn" type="button" aria-label="Закрыть попап" onClick={handleReturnToPurchacesButtonClick} onBlur={()=>{document.getElementById('success-button')?.focus();}}>
+          <button data-testid='cross-btn-test' className="cross-btn" type="button" aria-label="Закрыть попап" onClick={handleReturnToPurchacesButtonClick} onBlur={()=>{document.getElementById('success-button')?.focus();}}>
             <svg width="10" height="10" aria-hidden="true">
               <use xlinkHref="#icon-close"></use>
             </svg>

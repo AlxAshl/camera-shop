@@ -108,3 +108,63 @@ export const productsMock = [
     vendorCode: 'LD2352000'
   }
 ];
+
+export const reviewsMock = [
+  {
+    id: '2ab4a018-2s53-4f7c-abc7-7f868093e9a5',
+    userName: 'Кирилл1',
+    advantage: 'Легкая в плане веса, удобная в интерфейсе',
+    disadvantage: 'Быстро садиться зарядка',
+    review: 'Это моя первая камера. Я в восторге, нареканий нет',
+    rating: 1,
+    createAt: '2022-07-09T13:24:57.980Z',
+    cameraId: 1
+  },
+  {
+    id: '2ab4a018-2e53-4f7c-aba7-7f868093e9a5',
+    userName: 'Кирилл2',
+    advantage: 'Легкая в плане веса, удобная в интерфейсе',
+    disadvantage: 'Быстро садиться зарядка',
+    review: 'Это моя первая камера. Я в восторге, нареканий нет',
+    rating: 4,
+    createAt: '2022-07-09T13:24:56.980Z',
+    cameraId: 1
+  },
+  {
+    id: '2ab4a218-2e53-4f7c-abc7-7f868093e9a5',
+    userName: 'Кирилл3',
+    advantage: 'Легкая в плане веса, удобная в интерфейсе',
+    disadvantage: 'Быстро садиться зарядка',
+    review: 'Это моя первая камера. Я в восторге, нареканий нет',
+    rating: 2,
+    createAt: '2022-07-09T13:24:55.980Z',
+    cameraId: 1
+  },
+  {
+    id: '2ab4a048-2e53-4f7c-abc7-7f868093e9a5',
+    userName: 'Кирилл4',
+    advantage: 'Легкая в плане веса, удобная в интерфейсе',
+    disadvantage: 'Быстро садиться зарядка',
+    review: 'Это моя первая камера. Я в восторге, нареканий нет',
+    rating: 3,
+    createAt: '2022-07-09T13:24:52.980Z',
+    cameraId: 1
+  },
+];
+
+export const reviewMock = {
+  id: '2ab4a048-2e53-4f7c-abc7-7f868093e9a5',
+  userName: 'Кирилл4',
+  advantage: 'Легкая в плане веса, удобная в интерфейсе',
+  disadvantage: 'Быстро садиться зарядка',
+  review: 'Это моя первая камера. Я в восторге, нареканий нет',
+  rating: 3,
+  createAt: '2022-07-09T13:24:52.980Z',
+  cameraId: 1
+};
+
+export const messageMock = {
+  status: 'error',
+  title: 'Error!',
+  message: 'ERR'
+};

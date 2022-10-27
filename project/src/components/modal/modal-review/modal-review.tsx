@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../../hooks';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { useAppSelector } from '../../../hooks/useAppSelector';
 import { useEventListener } from '../../../hooks/useEventListener';
 import { fetchReviewsAction, postReviewAction } from '../../../store/api-actions';
 import { getPostReviewStatus } from '../../../store/review-process/selectors';
@@ -94,7 +95,7 @@ function ModalReview({isReviewActive, id}: ModalProps): JSX.Element {
                   </div>
                   <p className="rate__message">Нужно оценить товар</p>
                 </fieldset>
-                <div className="custom-input form-review__item">
+                <div data-testid='custom-input-test' className="custom-input form-review__item">
                   <label>
                     <span className="custom-input__label">Ваше имя
                       <svg width="9" height="9" aria-hidden="true">
@@ -142,13 +143,13 @@ function ModalReview({isReviewActive, id}: ModalProps): JSX.Element {
                   </div>
                 </div>
               </div>
-              <button className="btn btn--purple form-review__btn" type="submit" disabled={!postStatus}>{postStatus
+              <button data-testid='submit-test' className="btn btn--purple form-review__btn" type="submit" disabled={!postStatus}>{postStatus
                 ? 'Отправить отзыв'
                 : 'Отправляю...'}
               </button>
             </form>
           </div>
-          <button className="cross-btn" onBlur={()=>{document.getElementById('star-1')?.focus();}} type="button" onClick={handleToggleModalClick} aria-label="Закрыть попап" >
+          <button data-testid='cross-btn-test' className="cross-btn" onBlur={()=>{document.getElementById('star-1')?.focus();}} type="button" onClick={handleToggleModalClick} aria-label="Закрыть попап" >
             <svg width="10" height="10" aria-hidden="true">
               <use xlinkHref="#icon-close"></use>
             </svg>

@@ -15,11 +15,9 @@ function Rating({id, rating, ariaHiddenState}: RatingProps): JSX.Element {
     <>
       {starsRating.map((i) => (
         <svg key = {`${id}-${i}`} width="17" height="16" aria-hidden={ariaHiddenState}>
-          <use xlinkHref={rating >= i
-            ? '#icon-full-star'
-            : '#icon-star'}
-          >
-          </use>
+          {rating >= i
+            ? <use xlinkHref='#icon-full-star' data-testid='star-test'></use>
+            : <use xlinkHref='#icon-star'> </use>}
         </svg>
       ))}
     </>
