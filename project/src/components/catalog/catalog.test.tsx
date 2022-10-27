@@ -8,10 +8,10 @@ describe('Catalog component', () => {
   beforeEach(() => {
     axios.get = jest.fn().mockResolvedValue({});
   });
-  test('renders products after fetching data and state change', async () => {
+  test('renders products after fetching data and state change', () => {
     renderWithProviders(<Catalog/>, {initialState: { PRODUCT: { products: productsMock, isProductsDataLoaded: true}}});
-    const product = await screen.findAllByTestId('product-card-test');
-    expect(product[0]).toBeInTheDocument();
+    setTimeout(() =>{const product = screen.queryAllByTestId('product-card-test');
+      expect(product[0]).toBeInTheDocument();},1000);
   });
 });
 

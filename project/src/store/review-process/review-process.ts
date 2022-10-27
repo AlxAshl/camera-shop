@@ -36,3 +36,5 @@ export const reviewProcess = createSlice({
       });
   }
 });
+
+export default reviewProcess.reducer;

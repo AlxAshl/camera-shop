@@ -10,7 +10,6 @@ export const createAPI = (): AxiosInstance => {
     timeout: REQUEST_TIMEOUT,
   });
 
-
   api.interceptors.response.use(
     (response: AxiosResponse) => response,
     (error: AxiosError) => {

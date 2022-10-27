@@ -4,6 +4,7 @@ exports[`Modal renders correctly 1`] = `
 <DocumentFragment>
   <section
     class="notification error"
+    data-testid="error-test"
   >
     <h2>
       Error!

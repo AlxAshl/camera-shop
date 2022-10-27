@@ -87,3 +87,4 @@ export const productProcess = createSlice({
 });
 
 export const {setProductCount, setCurrentPage} = productProcess.actions;
+export default productProcess.reducer;

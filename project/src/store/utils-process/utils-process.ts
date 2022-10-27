@@ -35,3 +35,4 @@ export const utilsProcess = createSlice({
 });
 
 export const {formMessage, toggleMessage, toggleReview, toggleSuccess, toggleCart} = utilsProcess.actions;
+export default utilsProcess.reducer;
