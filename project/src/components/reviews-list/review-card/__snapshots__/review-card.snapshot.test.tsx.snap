@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render ReviewCard 1`] = `
+<DocumentFragment>
+  <li
+    class="review-card"
+    data-testid="review-card-test"
+  >
+    <div
+      class="review-card__head"
+    >
+      <p
+        class="title title--h4"
+        data-testid="review-name-test"
+      >
+        Кирилл1
+      </p>
+      <time
+        class="review-card__data"
+        data-testid="review-create-test"
+        datetime="2022-07-09T13:24:57.980Z"
+      >
+        13 апреля
+      </time>
+    </div>
+    <div
+      class="rate review-card__rate"
+    >
+      <svg
+        aria-hidden="true"
+        height="16"
+        width="17"
+      >
+        <use
+          data-testid="star-test"
+          xlink:href="#icon-full-star"
+        />
+      </svg>
+      <svg
+        aria-hidden="true"
+        height="16"
+        width="17"
+      >
+        <use
+          xlink:href="#icon-star"
+        >
+           
+        </use>
+      </svg>
+      <svg
+        aria-hidden="true"
+        height="16"
+        width="17"
+      >
+        <use
+          xlink:href="#icon-star"
+        >
+           
+        </use>
+      </svg>
+      <svg
+        aria-hidden="true"
+        height="16"
+        width="17"
+      >
+        <use
+          xlink:href="#icon-star"
+        >
+           
+        </use>
+      </svg>
+      <svg
+        aria-hidden="true"
+        height="16"
+        width="17"
+      >
+        <use
+          xlink:href="#icon-star"
+        >
+           
+        </use>
+      </svg>
+      <p
+        class="visually-hidden"
+        data-testid="review-rating-test"
+      >
+        Оценка: 1
+      </p>
+    </div>
+    <ul
+      class="review-card__list"
+    >
+      <li
+        class="item-list"
+      >
+        <span
+          class="item-list__title"
+        >
+          Достоинства:
+        </span>
+        <p
+          class="item-list__text"
+          data-testid="review-advatanges-test"
+        >
+          Легкая в плане веса, удобная в интерфейсе
+        </p>
+      </li>
+      <li
+        class="item-list"
+      >
+        <span
+          class="item-list__title"
+        >
+          Недостатки:
+        </span>
+        <p
+          class="item-list__text"
+          data-testid="review-disadvatanges-test"
+        >
+          Быстро садиться зарядка
+        </p>
+      </li>
+      <li
+        class="item-list"
+      >
+        <span
+          class="item-list__title"
+        >
+          Комментарий:
+        </span>
+        <p
+          class="item-list__text"
+          data-testid="review-review-test"
+        >
+          Это моя первая камера. Я в восторге, нареканий нет
+        </p>
+      </li>
+    </ul>
+  </li>
+</DocumentFragment>
+`;

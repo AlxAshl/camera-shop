@@ -2,9 +2,9 @@
 import { cleanup } from '@testing-library/react';
 import { productMock, productsMock } from '../../test/test-mocks';
 import { ProductType, PromoType } from '../../types/product';
-import { fetchProductAction, fetchSimilarProductsAction } from '../api-actions';
+import { fetchProductAction, fetchProductsAction, fetchPromoAction, fetchSimilarProductsAction } from '../api-actions';
 import { store } from '../store';
-import reducer, { fetchProductsAction } from './product-process';
+import reducer from './product-process';
 
 describe('Reducer: productProcess', () => {
   beforeAll(()=>{
@@ -101,6 +101,31 @@ describe('Reducer: productProcess', () => {
         similarProducts: productsMock,
         product: {} as ProductType,
         promo: {} as PromoType
+      });
+  });
+  test('should update promo after fetching promo action', () => {
+    const state = {
+      isProductsDataLoaded: false,
+      isProductDataLoaded: false,
+      isPromoDataLoaded: false,
+      currentPage: 1,
+      productCount: 0,
+      products: [],
+      similarProducts: [],
+      product: {} as ProductType,
+      promo: {} as PromoType
+    };
+    expect(reducer(state, {type: fetchPromoAction.fulfilled.type, payload: productMock}))
+      .toEqual({
+        isProductsDataLoaded: false,
+        isProductDataLoaded: false,
+        isPromoDataLoaded: true,
+        currentPage: 1,
+        productCount: 0,
+        products: [],
+        similarProducts: [],
+        product: {} as ProductType,
+        promo: productMock as PromoType
       });
   });
 });

@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Rating 1`] = `
+<DocumentFragment>
+  <svg
+    aria-hidden="true"
+    height="16"
+    width="17"
+  >
+    <use
+      data-testid="star-test"
+      xlink:href="#icon-full-star"
+    />
+  </svg>
+  <svg
+    aria-hidden="true"
+    height="16"
+    width="17"
+  >
+    <use
+      data-testid="star-test"
+      xlink:href="#icon-full-star"
+    />
+  </svg>
+  <svg
+    aria-hidden="true"
+    height="16"
+    width="17"
+  >
+    <use
+      data-testid="star-test"
+      xlink:href="#icon-full-star"
+    />
+  </svg>
+  <svg
+    aria-hidden="true"
+    height="16"
+    width="17"
+  >
+    <use
+      data-testid="star-test"
+      xlink:href="#icon-full-star"
+    />
+  </svg>
+  <svg
+    aria-hidden="true"
+    height="16"
+    width="17"
+  >
+    <use
+      xlink:href="#icon-star"
+    >
+       
+    </use>
+  </svg>
+</DocumentFragment>
+`;

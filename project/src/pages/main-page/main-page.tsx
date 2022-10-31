@@ -28,7 +28,7 @@ function MainPage(): JSX.Element {
 
   useLayoutEffect(()=>{
     if((productCount !== 0 && currentPage > totalPages) || !location.pathname.includes('/page_')) {
-      navigate(`${AppRoute.Notfound1}`);
+      navigate(`${AppRoute.NotFoundPage}`);
     }
     if(location.pathname === (`${AppRoute.Catalog}`)) {
       navigate(`${AppRoute.Catalog}/page_1`);

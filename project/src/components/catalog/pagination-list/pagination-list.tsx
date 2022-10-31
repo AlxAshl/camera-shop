@@ -4,8 +4,9 @@ import { useAppSelector } from '../../../hooks/useAppSelector';
 import { setCurrentPage } from '../../../store/product-process/product-process';
 import { getPage, getProductCount } from '../../../store/product-process/selectors';
 import {getPagesCount} from '../../utils/pages';
-import { memo, MouseEvent } from 'react';
+import { memo, MouseEvent, useEffect } from 'react';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { fetchProductsCountAction } from '../../../store/api-actions';
 
 
 function PaginationList(): JSX.Element {
@@ -15,6 +16,10 @@ function PaginationList(): JSX.Element {
   const dispatch = useAppDispatch();
   const totalPages = getPagesCount(productCount);
   const pages = [];
+
+  useEffect(() => {
+    dispatch(fetchProductsCountAction());
+  },[dispatch, currentPage]);
 
   const handlePageLinkClick = (evt: MouseEvent<HTMLLIElement>) => {
     const selectedPage = evt.currentTarget.getAttribute('data-tag');

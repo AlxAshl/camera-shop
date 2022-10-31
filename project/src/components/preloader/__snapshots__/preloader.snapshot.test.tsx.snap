@@ -9,3 +9,13 @@ exports[`FilterBlock renders correctly 1`] = `
   </div>
 </DocumentFragment>
 `;
+
+exports[`Preloader renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="preloader-test"
+  >
+    Loading data...
+  </div>
+</DocumentFragment>
+`;

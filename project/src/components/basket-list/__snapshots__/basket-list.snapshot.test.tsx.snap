@@ -1,0 +1,285 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render BasketList 1`] = `
+<DocumentFragment>
+  <ul
+    class="basket__list"
+  >
+    <li
+      class="basket-item"
+    >
+      <div
+        class="basket-item__img"
+      >
+        <picture>
+          <source
+            srcset="img/content/img9.webp, img/content/img9@2x.webp 2x"
+            type="image/webp"
+          />
+          <img
+            alt="Фотоаппарат «Орлёнок»"
+            height="120"
+            src="img/content/img9.jpg"
+            srcset="img/content/img9@2x.jpg 2x"
+            width="140"
+          />
+        </picture>
+      </div>
+      <div
+        class="basket-item__description"
+      >
+        <p
+          class="basket-item__title"
+        >
+          Фотоаппарат «Орлёнок»
+        </p>
+        <ul
+          class="basket-item__list"
+        >
+          <li
+            class="basket-item__list-item"
+          >
+            <span
+              class="basket-item__article"
+            >
+              Артикул:
+            </span>
+             
+            <span
+              class="basket-item__number"
+            >
+              O78DFGSD832
+            </span>
+          </li>
+          <li
+            class="basket-item__list-item"
+          >
+            Плёночная фотокамера
+          </li>
+          <li
+            class="basket-item__list-item"
+          >
+            Любительский уровень
+          </li>
+        </ul>
+      </div>
+      <p
+        class="basket-item__price"
+      >
+        <span
+          class="visually-hidden"
+        >
+          Цена:
+        </span>
+        18 970 ₽
+      </p>
+      <div
+        class="quantity"
+      >
+        <button
+          aria-label="уменьшить количество товара"
+          class="btn-icon btn-icon--prev"
+        >
+          <svg
+            aria-hidden="true"
+            height="12"
+            width="7"
+          >
+            <use
+              xlink:href="#icon-arrow"
+            />
+          </svg>
+        </button>
+        <label
+          class="visually-hidden"
+          for="counter1"
+        />
+        <input
+          aria-label="количество товара"
+          id="counter1"
+          max="99"
+          min="1"
+          type="number"
+        />
+        <button
+          aria-label="увеличить количество товара"
+          class="btn-icon btn-icon--next"
+        >
+          <svg
+            aria-hidden="true"
+            height="12"
+            width="7"
+          >
+            <use
+              xlink:href="#icon-arrow"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        class="basket-item__total-price"
+      >
+        <span
+          class="visually-hidden"
+        >
+          Общая цена:
+        </span>
+        37 940 ₽
+      </div>
+      <button
+        aria-label="Удалить товар"
+        class="cross-btn"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          height="10"
+          width="10"
+        >
+          <use
+            xlink:href="#icon-close"
+          />
+        </svg>
+      </button>
+    </li>
+    <li
+      class="basket-item"
+    >
+      <div
+        class="basket-item__img"
+      >
+        <picture>
+          <source
+            srcset="img/content/img1.webp, img/content/img1@2x.webp 2x"
+            type="image/webp"
+          />
+          <img
+            alt="Ретрокамера «Das Auge IV»"
+            height="120"
+            src="img/content/img1.jpg"
+            srcset="img/content/img1@2x.jpg 2x"
+            width="140"
+          />
+        </picture>
+      </div>
+      <div
+        class="basket-item__description"
+      >
+        <p
+          class="basket-item__title"
+        >
+          Ретрокамера «Das Auge IV»
+        </p>
+        <ul
+          class="basket-item__list"
+        >
+          <li
+            class="basket-item__list-item"
+          >
+            <span
+              class="basket-item__article"
+            >
+              Артикул:
+            </span>
+             
+            <span
+              class="basket-item__number"
+            >
+              DA4IU67AD5
+            </span>
+          </li>
+          <li
+            class="basket-item__list-item"
+          >
+            Коллекционная видеокамера
+          </li>
+          <li
+            class="basket-item__list-item"
+          >
+            Любительский уровень
+          </li>
+        </ul>
+      </div>
+      <p
+        class="basket-item__price"
+      >
+        <span
+          class="visually-hidden"
+        >
+          Цена:
+        </span>
+        73 450 ₽
+      </p>
+      <div
+        class="quantity"
+      >
+        <button
+          aria-label="уменьшить количество товара"
+          class="btn-icon btn-icon--prev"
+          disabled=""
+        >
+          <svg
+            aria-hidden="true"
+            height="12"
+            width="7"
+          >
+            <use
+              xlink:href="#icon-arrow"
+            />
+          </svg>
+        </button>
+        <label
+          class="visually-hidden"
+          for="counter2"
+        />
+        <input
+          aria-label="количество товара"
+          id="counter2"
+          max="99"
+          min="1"
+          type="number"
+        />
+        <button
+          aria-label="увеличить количество товара"
+          class="btn-icon btn-icon--next"
+        >
+          <svg
+            aria-hidden="true"
+            height="12"
+            width="7"
+          >
+            <use
+              xlink:href="#icon-arrow"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        class="basket-item__total-price"
+      >
+        <span
+          class="visually-hidden"
+        >
+          Общая цена:
+        </span>
+        73 450 ₽
+      </div>
+      <button
+        aria-label="Удалить товар"
+        class="cross-btn"
+        type="button"
+      >
+        <svg
+          aria-hidden="true"
+          height="10"
+          width="10"
+        >
+          <use
+            xlink:href="#icon-close"
+          />
+        </svg>
+      </button>
+    </li>
+  </ul>
+</DocumentFragment>
+`;

@@ -5,7 +5,7 @@ export enum AppRoute {
   Product = '/cameras',
   Basket = '/basket',
   Notfound = '*',
-  Notfound1 = '/404'
+  NotFoundPage = '/404'
 }
 
 export enum NameSpace {

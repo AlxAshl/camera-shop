@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render ReviewsList 1`] = `
+<DocumentFragment>
+  <div
+    class="page-content__section"
+  >
+    <section
+      class="review-block"
+    >
+      <div
+        class="container"
+      >
+        <div
+          class="page-content__headed"
+        >
+          <h2
+            class="title title--h3"
+          >
+            Отзывы
+          </h2>
+          <button
+            class="btn"
+            data-testid="review-button-test"
+            type="button"
+          >
+            Оставить свой отзыв
+          </button>
+        </div>
+        <ul
+          class="review-block__list"
+        >
+          Отзывов пока нет
+        </ul>
+      </div>
+    </section>
+  </div>
+</DocumentFragment>
+`;

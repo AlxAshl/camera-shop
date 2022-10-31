@@ -30,6 +30,29 @@ const fetchProductAction = createAsyncThunk<ProductType, number, {
   }
 );
 
+export const fetchProductsAction = createAsyncThunk<ProductType[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'product/fetchProducts',
+  async (_arg, {extra: api}) => {
+    const response = await api.get(`${APIRoute.Products}/pages`);
+    return response.data as ProductType[];
+  },
+);
+
+export const fetchProductsCountAction = createAsyncThunk<unknown, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'product/fetchProductsCount',
+  async (_arg, {extra: api}) => {
+    const response = await api.get(`${APIRoute.Products}/pages`);
+    return response.headers['x-total-count'] as unknown;
+  },
+);
 
 const fetchPromoAction = createAsyncThunk<PromoType, undefined, {
   dispatch: AppDispatch;
@@ -62,7 +85,7 @@ const postReviewAction = createAsyncThunk<unknown, ReviewPostType, {
 }>(
   'review/postReview',
   async (reviewData, {extra: api}) => {
-    const response = await api.post<ReviewPostType>(`${APIRoute.Reviews}/123`, reviewData);
+    const response = await api.post<ReviewPostType>(`${APIRoute.Reviews}`, reviewData);
     return response;
   }
 );

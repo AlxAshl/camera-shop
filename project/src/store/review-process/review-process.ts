@@ -3,7 +3,7 @@ import { NameSpace } from '../../const';
 import { ReviewProcess } from '../../types/state';
 import { fetchReviewsAction, postReviewAction } from '../api-actions';
 
-const initialState: ReviewProcess = {
+export const reviewInitialState: ReviewProcess = {
   isReviewsDataLoaded: false,
   isReviewPosted: true,
   reviews: [],
@@ -11,7 +11,7 @@ const initialState: ReviewProcess = {
 
 export const reviewProcess = createSlice({
   name: NameSpace.Review,
-  initialState,
+  initialState: reviewInitialState,
   reducers: {},
   extraReducers(builder) {
     builder

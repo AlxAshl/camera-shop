@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render PaginationList 1`] = `
+<DocumentFragment>
+  <div
+    class="pagination"
+  >
+    <ul
+      class="pagination__list"
+    >
+      <li
+        class="pagination__item"
+        data-testid="pagination-item-next-test"
+      >
+        <a
+          class="pagination__link pagination__link--text"
+          href="/catalog/page_2"
+        >
+          Далее
+        </a>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;

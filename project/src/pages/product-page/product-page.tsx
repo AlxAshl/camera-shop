@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
@@ -16,6 +16,7 @@ import { getMessageContent, getMessageVisibilityStatus, getModalCartVisibilitySt
 import { toggleMessage } from '../../store/utils-process/utils-process';
 import ModalAddToCart from '../../components/modal/modal-add-to-cart/modal-add-to-cart';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import NotFoundContent from '../not-found/not-found-contents';
 
 
 function ProductPage(): JSX.Element {
@@ -30,6 +31,7 @@ function ProductPage(): JSX.Element {
   const isReviewActive = useAppSelector(getModalVisibilityStatus);
   const isSuccessActive = useAppSelector(getModalSuccessVisibilityStatus);
   const isCartActive = useAppSelector(getModalCartVisibilityStatus);
+  const [errorOccured, setErrorOccured] = useState(false);
 
   useEffect(() => {
     if (isVisible) {
@@ -38,6 +40,12 @@ function ProductPage(): JSX.Element {
       }, 3000);
     }
   },[isVisible, dispatch]);
+
+  useEffect(() => {
+    if(isVisible){
+      setErrorOccured(true);
+    }
+  },[isVisible]);
 
   useEffect(() => {
     dispatch(fetchProductAction(Number(id)));
@@ -52,6 +60,7 @@ function ProductPage(): JSX.Element {
         <div className="page-content">
           <Breadcrumbs camera={product}/>
           {isVisible && <Message props={message}/>}
+          {errorOccured && <NotFoundContent>product</NotFoundContent>}
           {(isProductLoaded) && <SelectedProduct camera={product}/>}
           <Similar camera={product}/>
           <ReviewsList id={Number(id)}/>

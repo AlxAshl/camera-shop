@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { APIRoute, BACKEND_URL, PAGE_LIMIT, REQUEST_TIMEOUT } from '../const';
 import { store } from '../store/store';
-import { formMessage, toggleMessage } from '../store/utils-process/utils-process';
+import { formErrorMessage, toggleMessage } from '../store/utils-process/utils-process';
 
 
 export const createAPI = (): AxiosInstance => {
@@ -14,7 +14,7 @@ export const createAPI = (): AxiosInstance => {
     (response: AxiosResponse) => response,
     (error: AxiosError) => {
       if (error.response) {
-        store.dispatch(formMessage({
+        store.dispatch(formErrorMessage({
           status: 'error',
           title: 'Error!',
           message: error.message

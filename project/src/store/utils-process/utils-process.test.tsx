@@ -2,7 +2,7 @@ import { cleanup } from '@testing-library/react';
 import { messageMock } from '../../test/test-mocks';
 import { MessageType } from '../../types/message';
 import { store } from '../store';
-import reducer, { formMessage } from './utils-process';
+import reducer, { formErrorMessage } from './utils-process';
 
 describe('Reducer: utilsProcess', () => {
   beforeAll(()=>{
@@ -28,7 +28,7 @@ describe('Reducer: utilsProcess', () => {
       showCart: false,
       message: {} as MessageType,
     };
-    expect(reducer(state, {type: formMessage, payload: messageMock}))
+    expect(reducer(state, {type: formErrorMessage, payload: messageMock}))
       .toEqual({
         showMessage: false,
         showReview: false,
@@ -37,17 +37,4 @@ describe('Reducer: utilsProcess', () => {
         message: messageMock as MessageType,
       });
   });
-  // test('should update state after posting review', () => {
-  //   const state = {
-  //     isReviewsDataLoaded: false,
-  //     isReviewPosted: true,
-  //     reviews: [],
-  //   };
-  //   expect(reducer(state, {type: postReviewAction.pending.type}))
-  //     .toEqual({
-  //       isReviewsDataLoaded: false,
-  //       isReviewPosted: false,
-  //       reviews: [],
-  //     });
-  // });
 });

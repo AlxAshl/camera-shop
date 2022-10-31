@@ -26,7 +26,7 @@ export const router = createBrowserRouter(
       </Route>
       <Route path={AppRoute.Basket} element={<Basket/>}/>
       <Route path={AppRoute.Notfound} element={<NotFound/>}/>
-      <Route path={AppRoute.Notfound1} element={<NotFound/>}/>
+      <Route path={AppRoute.NotFoundPage} element={<NotFound/>}/>
     </Route>
   )
 );

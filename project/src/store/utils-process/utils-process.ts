@@ -4,7 +4,7 @@ import { MessageType } from '../../types/message';
 import { UtilsProcess } from '../../types/state';
 
 
-const initialState: UtilsProcess = {
+export const utilsInitialState: UtilsProcess = {
   showMessage: false,
   showReview: false,
   showSuccess: false,
@@ -14,9 +14,9 @@ const initialState: UtilsProcess = {
 
 export const utilsProcess = createSlice({
   name: NameSpace.Utils,
-  initialState,
+  initialState: utilsInitialState,
   reducers: {
-    formMessage(state, action) {
+    formErrorMessage(state, action) {
       state.message = action.payload as MessageType;
     },
     toggleReview(state) {
@@ -34,5 +34,5 @@ export const utilsProcess = createSlice({
   },
 });
 
-export const {formMessage, toggleMessage, toggleReview, toggleSuccess, toggleCart} = utilsProcess.actions;
+export const {formErrorMessage, toggleMessage, toggleReview, toggleSuccess, toggleCart} = utilsProcess.actions;
 export default utilsProcess.reducer;

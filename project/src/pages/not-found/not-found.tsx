@@ -1,13 +1,9 @@
-import { Link } from 'react-router-dom';
-import { AppRoute } from '../../const';
+import NotFoundContent from './not-found-contents';
 
 function NotFound(): JSX.Element {
   return (
     <main>
-      <div className="page-content">
-        <p>No corresponding page found</p>
-        <Link to={AppRoute.Root}>Return to main</Link>
-      </div>
+      <NotFoundContent>page</NotFoundContent>
     </main>
   );
 }

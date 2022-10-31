@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render ProductCard 1`] = `
+<DocumentFragment>
+  <div
+    class="product-card"
+    data-testid="product-card-test"
+  >
+    <div
+      class="product-card__img"
+    >
+      <picture>
+        <source
+          srcset="img/content/look-identify.webp, img/content/look-identify@2x.webp"
+          type="image/webp"
+        />
+        <img
+          alt="Ретрокамера «Das Auge IV»"
+          height="240"
+          src="img/content/look-identify.jpg"
+          srcset="img/content/look-identify@2x.jpg"
+          width="280"
+        />
+      </picture>
+    </div>
+    <div
+      class="product-card__info"
+    >
+      <div
+        class="rate product-card__rate"
+      >
+        <svg
+          aria-hidden="false"
+          height="16"
+          width="17"
+        >
+          <use
+            data-testid="star-test"
+            xlink:href="#icon-full-star"
+          />
+        </svg>
+        <svg
+          aria-hidden="false"
+          height="16"
+          width="17"
+        >
+          <use
+            data-testid="star-test"
+            xlink:href="#icon-full-star"
+          />
+        </svg>
+        <svg
+          aria-hidden="false"
+          height="16"
+          width="17"
+        >
+          <use
+            data-testid="star-test"
+            xlink:href="#icon-full-star"
+          />
+        </svg>
+        <svg
+          aria-hidden="false"
+          height="16"
+          width="17"
+        >
+          <use
+            data-testid="star-test"
+            xlink:href="#icon-full-star"
+          />
+        </svg>
+        <svg
+          aria-hidden="false"
+          height="16"
+          width="17"
+        >
+          <use
+            data-testid="star-test"
+            xlink:href="#icon-full-star"
+          />
+        </svg>
+        <p
+          class="visually-hidden"
+          data-testid="rating-test"
+        >
+          Рейтинг: 5
+        </p>
+        <p
+          class="rate__count"
+        >
+          <span
+            class="visually-hidden"
+            data-testid="rates-total"
+          >
+            Всего оценок:
+          </span>
+          18
+        </p>
+      </div>
+      <p
+        class="product-card__title"
+      >
+        Look Identify
+      </p>
+      <p
+        class="product-card__price"
+        data-testid="price-test"
+      >
+        <span
+          class="visually-hidden"
+        >
+          Цена:
+        </span>
+        12 6000 ₽
+      </p>
+    </div>
+    <div
+      class="product-card__buttons"
+    >
+      <button
+        class="btn btn--purple product-card__btn"
+        type="button"
+      >
+        Купить
+      </button>
+      <a
+        class="btn btn--transparent"
+        data-testid="link-test"
+        href="/cameras/17"
+      >
+        Подробнее
+      </a>
+    </div>
+  </div>
+</DocumentFragment>
+`;

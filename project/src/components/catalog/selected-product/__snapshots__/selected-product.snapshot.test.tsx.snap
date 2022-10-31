@@ -1,0 +1,242 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render SelectedProduct 1`] = `
+<DocumentFragment>
+  <div
+    class="page-content__section"
+  >
+    <section
+      class="product"
+    >
+      <div
+        class="container"
+      >
+        <div
+          class="product__img"
+        >
+          <picture>
+            <source
+              srcset="img/content/look-identify.webp, img/content/look-identify@2x.webp"
+              type="image/webp"
+            />
+            <img
+              alt="Ретрокамера Das Auge IV"
+              height="480"
+              src="img/content/look-identify.jpg"
+              srcset="img/content/look-identify@2x.jpg"
+              width="560"
+            />
+          </picture>
+        </div>
+        <div
+          class="product__content"
+        >
+          <h1
+            class="title title--h3"
+          >
+            Look Identify
+          </h1>
+          <div
+            class="rate product__rate"
+          >
+            <svg
+              aria-hidden="true"
+              height="16"
+              width="17"
+            >
+              <use
+                data-testid="star-test"
+                xlink:href="#icon-full-star"
+              />
+            </svg>
+            <svg
+              aria-hidden="true"
+              height="16"
+              width="17"
+            >
+              <use
+                data-testid="star-test"
+                xlink:href="#icon-full-star"
+              />
+            </svg>
+            <svg
+              aria-hidden="true"
+              height="16"
+              width="17"
+            >
+              <use
+                data-testid="star-test"
+                xlink:href="#icon-full-star"
+              />
+            </svg>
+            <svg
+              aria-hidden="true"
+              height="16"
+              width="17"
+            >
+              <use
+                data-testid="star-test"
+                xlink:href="#icon-full-star"
+              />
+            </svg>
+            <svg
+              aria-hidden="true"
+              height="16"
+              width="17"
+            >
+              <use
+                data-testid="star-test"
+                xlink:href="#icon-full-star"
+              />
+            </svg>
+            <p
+              class="visually-hidden"
+            >
+              Рейтинг: 5
+            </p>
+            <p
+              class="rate__count"
+            >
+              <span
+                class="visually-hidden"
+              >
+                Всего оценок:
+              </span>
+              18
+            </p>
+          </div>
+          <p
+            class="product__price"
+          >
+            <span
+              class="visually-hidden"
+            >
+              Цена:
+            </span>
+            12 6000 ₽
+          </p>
+          <button
+            class="btn btn--purple"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              height="16"
+              width="24"
+            >
+              <use
+                xlink:href="#icon-add-basket"
+              />
+            </svg>
+            Добавить в корзину
+          </button>
+          <div
+            class="tabs product__tabs"
+          >
+            <div
+              class="tabs__controls product__tabs-controls"
+            >
+              <button
+                class="tabs__control"
+                data-testid="characteristics-button-test"
+                type="button"
+              >
+                Характеристики
+              </button>
+              <button
+                class="tabs__control is-active"
+                data-testid="info-button-test"
+                type="button"
+              >
+                Описание
+              </button>
+            </div>
+            <div
+              class="tabs__content"
+            >
+              <div
+                class="tabs__element"
+              >
+                <ul
+                  class="product__tabs-list"
+                >
+                  <li
+                    class="item-list"
+                  >
+                    <span
+                      class="item-list__title"
+                    >
+                      Артикул:
+                    </span>
+                    <p
+                      class="item-list__text"
+                    >
+                      LD2000
+                    </p>
+                  </li>
+                  <li
+                    class="item-list"
+                  >
+                    <span
+                      class="item-list__title"
+                    >
+                      Категория:
+                    </span>
+                    <p
+                      class="item-list__text"
+                    >
+                      Фотоаппарат
+                    </p>
+                  </li>
+                  <li
+                    class="item-list"
+                  >
+                    <span
+                      class="item-list__title"
+                    >
+                      Тип камеры:
+                    </span>
+                    <p
+                      class="item-list__text"
+                    >
+                      Коллекционная
+                    </p>
+                  </li>
+                  <li
+                    class="item-list"
+                  >
+                    <span
+                      class="item-list__title"
+                    >
+                      Уровень:
+                    </span>
+                    <p
+                      class="item-list__text"
+                    >
+                      Любительский
+                    </p>
+                  </li>
+                </ul>
+              </div>
+              <div
+                class="tabs__element is-active"
+              >
+                <div
+                  class="product__tabs-text"
+                >
+                  <p>
+                    Немецкий концерн BRW разработал видеокамеру Das Auge IV в начале 80-х годов, однако она до сих пор пользуется популярностью среди коллекционеров и яростных почитателей старинной техники.
+                  </p>
+                  <p>
+                    Вы тоже можете прикоснуться к волшебству аналоговой съёмки, заказав этот чудо-аппарат. Кто знает, может с Das Auge IV начнётся ваш путь к наградам всех престижных кинофестивалей.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</DocumentFragment>
+`;

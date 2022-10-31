@@ -7,8 +7,8 @@ import FilterBlock from './filter-block/filter-block';
 import PaginationList from './pagination-list/pagination-list';
 import Preloader from '../preloader/preloader';
 import SortBar from './sort-bar/sort-bar';
-import { fetchProductsAction } from '../../store/product-process/product-process';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { fetchProductsAction } from '../../store/api-actions';
 
 function Catalog(): JSX.Element {
 

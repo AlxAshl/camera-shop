@@ -1,12 +1,11 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
-import { APIRoute, NameSpace } from '../../const';
+import { createSlice } from '@reduxjs/toolkit';
+import { NameSpace } from '../../const';
 import { ProductType, PromoType } from '../../types/product';
-import { AppDispatch, ProductProcess, State } from '../../types/state';
-import { fetchSimilarProductsAction, fetchPromoAction, fetchProductAction } from '../api-actions';
-import { store } from '../store';
+import { ProductProcess } from '../../types/state';
+import { fetchSimilarProductsAction, fetchPromoAction, fetchProductAction, fetchProductsCountAction, fetchProductsAction } from '../api-actions';
 
-const initialState: ProductProcess = {
+
+export const productInitialState: ProductProcess = {
   isProductsDataLoaded: false,
   isProductDataLoaded: false,
   isPromoDataLoaded: false,
@@ -17,32 +16,20 @@ const initialState: ProductProcess = {
   product: {} as ProductType,
   promo: {} as PromoType
 };
-export const fetchProductsAction = createAsyncThunk<ProductType[], undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'product/fetchProducts',
-  async (_arg, {extra: api}) => {
-    const response = await api.get(`${APIRoute.Products}/pages`);
-    store.dispatch(setProductCount(response.headers['x-total-count']));
-    return response.data as ProductType[];
-  },
-);
 
 export const productProcess = createSlice({
   name: NameSpace.Product,
-  initialState,
+  initialState: productInitialState,
   reducers: {
-    setProductCount(state, action) {
-      state.productCount = action.payload as number;
-    },
     setCurrentPage(state, action) {
       state.currentPage = action.payload as number;
     },
   },
   extraReducers(builder) {
     builder
+      .addCase(fetchProductsCountAction.fulfilled, (state, action) => {
+        state.productCount = action.payload as number;
+      })
       .addCase(fetchProductsAction.pending, (state) => {
         state.isProductsDataLoaded = false;
       })
@@ -86,5 +73,5 @@ export const productProcess = createSlice({
   }
 });
 
-export const {setProductCount, setCurrentPage} = productProcess.actions;
+export const { setCurrentPage } = productProcess.actions;
 export default productProcess.reducer;
