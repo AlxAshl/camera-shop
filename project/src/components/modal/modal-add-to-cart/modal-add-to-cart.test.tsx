@@ -9,19 +9,19 @@ jest.mock('../../../hooks/useAppDispatch', () => ({
 
 describe('ModalCart component', () => {
   test('X button works correctly', () => {
-    renderWithProviders(<ModalAddToCart isAddToCartActive/>, );
+    renderWithProviders(<ModalAddToCart />, );
     const button = screen.getByTestId('cross-btn-test');
     fireEvent.click(button);
     expect(mockDispatch).toHaveBeenCalledTimes(1);
   });
   test('Back to purchases button works correctly', () => {
-    renderWithProviders(<ModalAddToCart isAddToCartActive/>, );
+    renderWithProviders(<ModalAddToCart />, );
     const button = screen.getByTestId('cart-button-test');
     fireEvent.click(button);
     expect(mockDispatch).toHaveBeenCalledTimes(1);
   });
   test('Escape works correctly', () => {
-    renderWithProviders(<ModalAddToCart isAddToCartActive/>, );
+    renderWithProviders(<ModalAddToCart />, );
     fireEvent.keyDown(document, {key: 'Escape', code: 'Escape', charCode: 27});
     expect(mockDispatch).toHaveBeenCalledTimes(1);
   });

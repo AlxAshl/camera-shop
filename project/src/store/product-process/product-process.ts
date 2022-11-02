@@ -20,9 +20,6 @@ export const productProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      // .addCase(fetchProductsCountAction.fulfilled, (state, action) => {
-      //   state.productCount = action.payload as number;
-      // })
       .addCase(fetchProductsAction.pending, (state) => {
         state.isProductsDataLoaded = false;
       })

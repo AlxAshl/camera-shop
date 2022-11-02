@@ -26,3 +26,5 @@ export type reviewDataType = {
   disadvantage: string;
   review: string;
 }
+
+export type InputType = 'rating' | 'userName' | 'advantage' | 'disadvantage' | 'review';

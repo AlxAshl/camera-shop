@@ -1,51 +1,40 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import ModalReview from '../../components/modal/modal-review/modal-review';
 import ModalSuccess from '../../components/modal/modal-success/modal-success';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import SelectedProduct from '../../components/catalog/selected-product/selected-product';
 import SimilarProducts from '../../components/catalog/similar-products/similar-products';
-import Message from '../../components/ui/message';
 import UpButton from '../../components/up-button/up-button';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchProductAction } from '../../store/api-actions';
 import { getLoadedProductStatus, getProduct } from '../../store/product-process/selectors';
-import { getMessageContent, getMessageVisibilityStatus, getModalCartVisibilityStatus, getModalSuccessVisibilityStatus, getModalVisibilityStatus } from '../../store/utils-process/selectors';
-import { messageToggler } from '../../store/utils-process/utils-process';
+import { getMessageVisibilityStatus, getModalCartVisibilityStatus, getModalSuccessVisibilityStatus, getModalVisibilityStatus } from '../../store/utils-process/selectors';
 import ModalAddToCart from '../../components/modal/modal-add-to-cart/modal-add-to-cart';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
-import NotFoundContent from '../not-found/not-found-contents';
+import { AppRoute } from '../../const';
 
 
 function ProductPage(): JSX.Element {
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const params = useParams();
   const {id} = params;
   const product = useAppSelector(getProduct);
   const isProductLoaded = useSelector(getLoadedProductStatus);
-  const message = useAppSelector(getMessageContent);
   const isVisible = useAppSelector(getMessageVisibilityStatus);
   const isReviewActive = useAppSelector(getModalVisibilityStatus);
   const isSuccessActive = useAppSelector(getModalSuccessVisibilityStatus);
   const isCartActive = useAppSelector(getModalCartVisibilityStatus);
-  const [errorOccured, setErrorOccured] = useState(false);
 
   useEffect(() => {
     if (isVisible) {
-      setTimeout(() => {
-        dispatch(messageToggler());
-      }, 3000);
+      navigate(AppRoute.NotFoundPage);
     }
-  },[isVisible, dispatch]);
-
-  useEffect(() => {
-    if(isVisible){
-      setErrorOccured(true);
-    }
-  },[isVisible]);
+  },[isVisible, dispatch, navigate]);
 
   useEffect(() => {
     dispatch(fetchProductAction(Number(id)));
@@ -53,14 +42,12 @@ function ProductPage(): JSX.Element {
 
   return(
     <>
-      <main {...isReviewActive || isSuccessActive
+      <main {...isReviewActive || isSuccessActive || isCartActive
         ? { style:{paddingRight: '17px'}}
         : ''}
       >
         <div className="page-content">
           <Breadcrumbs/>
-          {isVisible && <Message props={message}/>}
-          {errorOccured && <NotFoundContent>product</NotFoundContent>}
           {(isProductLoaded) && <SelectedProduct camera={product}/>}
           <SimilarProducts camera={product}/>
           <ReviewsList id={Number(id)}/>
@@ -68,13 +55,13 @@ function ProductPage(): JSX.Element {
       </main>
       <UpButton/>
       {isCartActive
-        ? <ModalAddToCart isAddToCartActive={isCartActive}/>
+        ? <ModalAddToCart/>
         : ''}
       {isReviewActive
-        ? <ModalReview isReviewActive={isReviewActive} id={Number(id)}/>
+        ? <ModalReview id={Number(id)}/>
         : ''}
       {isSuccessActive
-        ? <ModalSuccess isSuccessActive={isSuccessActive}/>
+        ? <ModalSuccess/>
         : ''}
     </>
   );

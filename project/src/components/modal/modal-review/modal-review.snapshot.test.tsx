@@ -3,6 +3,6 @@ import ModalReview from './modal-review';
 
 test('Render ModalReview', () => {
   const id = 17;
-  const { asFragment } = renderWithProviders(<ModalReview id={id} isReviewActive/>);
+  const { asFragment } = renderWithProviders(<ModalReview id={id} />);
   expect(asFragment()).toMatchSnapshot();
 });

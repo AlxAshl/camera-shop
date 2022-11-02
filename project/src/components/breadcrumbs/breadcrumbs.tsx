@@ -14,7 +14,7 @@ function Breadcrumbs(): JSX.Element {
   const getCrumbs = (pathsArr: string[]) => {
     const crumbsArray = [] as string[];
     pathsArr.forEach((path) => {
-      const crumb = Object.keys(BreadcrumbsSpecs).find((crumbie) => BreadcrumbsSpecs[crumbie as keyof typeof BreadcrumbsSpecs].path === `${path}`);
+      const crumb = Object.keys(BreadcrumbsSpecs).find((spec) => BreadcrumbsSpecs[spec as keyof typeof BreadcrumbsSpecs].path === `${path}`);
       if (crumb) {
         crumbsArray.push(crumb);
       }
@@ -25,14 +25,14 @@ function Breadcrumbs(): JSX.Element {
     return crumbsArray;
   };
 
-  const newPath = getCrumbs(pathsArray);
+  const crumbsPath = getCrumbs(pathsArray);
 
   return (
     <div className="breadcrumbs">
       <div className="container">
         <ul className="breadcrumbs__list">
-          {newPath.map((path, i) => {
-            const lastCrumb = newPath.length === i + 1;
+          {crumbsPath.map((path, i) => {
+            const lastCrumb = crumbsPath.length === i + 1;
             const properties = BreadcrumbsSpecs[path as keyof typeof BreadcrumbsSpecs];
             if (path === 'product') {
               return (

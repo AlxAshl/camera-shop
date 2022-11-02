@@ -4,8 +4,8 @@ export enum AppRoute {
   Page = '/:page_id',
   Product = '/cameras',
   Basket = '/basket',
-  Notfound = '*',
-  NotFoundPage = '/404'
+  NotFoundPage = '/404',
+  NotMatched = '*'
 }
 export const BreadcrumbsSpecs = {
   Root: {

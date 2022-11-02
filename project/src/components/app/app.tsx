@@ -20,8 +20,7 @@ export const router = createBrowserRouter(
         <Route path =":id" element={<ProductPage/>}/>
       </Route>
       <Route path={AppRoute.Basket} element={<Basket/>}/>
-      <Route path={AppRoute.Notfound} element={<NotFound/>}/>
-      <Route path={AppRoute.NotFoundPage} element={<NotFound/>}/>
+      {([AppRoute.NotFoundPage, AppRoute.NotMatched]).map((path) => <Route key={path.length} path={path} element={<NotFound />} />)}
     </Route>
   )
 );

@@ -2,7 +2,6 @@ import { useEffect, useLayoutEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Banner from '../../components/banner/banner';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
-import Message from '../../components/ui/message';
 import { getNumeric, getPagesCount } from '../../components/utils/pages';
 import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
@@ -10,15 +9,13 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchProductsAction } from '../../store/api-actions';
 import { getLoadedPromoStatus, getPromo } from '../../store/complementary-process/selectors';
 import { getProductCount } from '../../store/product-process/selectors';
-import { getMessageContent, getMessageVisibilityStatus, getPage } from '../../store/utils-process/selectors';
-import { messageToggler, pageSetter } from '../../store/utils-process/utils-process';
+import { getPage } from '../../store/utils-process/selectors';
+import { pageSetter } from '../../store/utils-process/utils-process';
 
 
 function MainPage(): JSX.Element {
 
   const navigate = useNavigate();
-  const message = useAppSelector(getMessageContent);
-  const isVisible = useAppSelector(getMessageVisibilityStatus);
   const bannerData = useAppSelector(getPromo);
   const bannerLoaded = useAppSelector(getLoadedPromoStatus);
   const currentPage = useAppSelector(getPage);
@@ -39,14 +36,6 @@ function MainPage(): JSX.Element {
   },[currentPage, dispatch, navigate, productCount, totalPages, location.pathname]);
 
   useEffect(() => {
-    if (isVisible) {
-      setTimeout(() => {
-        dispatch(messageToggler());
-      }, 3000);
-    }
-  },[isVisible, dispatch]);
-
-  useEffect(() => {
     if(getNumeric(location.pathname) !== currentPage) {
       dispatch(pageSetter(getNumeric(location.pathname)));
     }
@@ -61,13 +50,11 @@ function MainPage(): JSX.Element {
   useEffect(()=>{
     setInitialLoad(false);
   },[]);
-
   return (
     <main>
       {bannerLoaded
         ? <Banner promo={bannerData}/>
         : ''}
-      {isVisible && <Message props={message}/>}
       <div className="page-content">
         <Breadcrumbs />
         <Outlet />

@@ -9,13 +9,13 @@ jest.mock('../../../hooks/useAppDispatch', () => ({
 
 describe('ModalReview component render', () => {
   test('X button works correctly', () => {
-    renderWithProviders(<ModalReview id={1} isReviewActive/>, );
+    renderWithProviders(<ModalReview id={1} />, );
     const button = screen.getByTestId('cross-btn-test');
     fireEvent.click(button);
     expect(mockDispatch).toHaveBeenCalledTimes(1);
   });
   test('Submit button works correctly', () => {
-    renderWithProviders(<ModalReview id={1} isReviewActive/>, );
+    renderWithProviders(<ModalReview id={1} />, );
     const button = screen.getByTestId('submit-test');
     fireEvent.click(button);
     setTimeout(()=>{
@@ -23,7 +23,7 @@ describe('ModalReview component render', () => {
     },1000);
   });
   test('Escape works correctly', () => {
-    renderWithProviders(<ModalReview id={1} isReviewActive/>, );
+    renderWithProviders(<ModalReview id={1} />, );
     fireEvent.keyDown(document, {key: 'Escape', code: 'Escape', charCode: 27});
     expect(mockDispatch).toHaveBeenCalledTimes(1);
   });
@@ -31,7 +31,7 @@ describe('ModalReview component render', () => {
 
 describe('ModalReview component form', () => {
   test('Sends review on succesfull validation', () => {
-    renderWithProviders(<ModalReview id={1} isReviewActive/>, );
+    renderWithProviders(<ModalReview id={1} />, );
     const button = screen.getByTestId('submit-test');
     fireEvent.click(screen.getByTitle('Отлично'));
     const nameInput = screen.getByPlaceholderText('Введите ваше имя');
@@ -48,7 +48,7 @@ describe('ModalReview component form', () => {
     },1000);
   });
   test('Rejects to send review on unsuccesfull validation, adds invalid class to failed input', () => {
-    renderWithProviders(<ModalReview id={1} isReviewActive/>, );
+    renderWithProviders(<ModalReview id={1} />, );
     const button = screen.getByTestId('submit-test');
     fireEvent.click(screen.getByTitle('Отлично'));
     const nameInput = screen.getByPlaceholderText('Введите ваше имя');

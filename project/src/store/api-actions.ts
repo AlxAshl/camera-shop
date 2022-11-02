@@ -33,7 +33,7 @@ type ProductsActionType = {
   data: ProductType[];
   header: string;
 }
-/////////////////
+
 export const fetchProductsAction = createAsyncThunk<ProductsActionType, number, {
   dispatch: AppDispatch;
   state: State;
@@ -47,7 +47,6 @@ export const fetchProductsAction = createAsyncThunk<ProductsActionType, number, 
     return {data, header} as ProductsActionType;
   },
 );
-///////////////////////////
 
 const fetchPromoAction = createAsyncThunk<PromoType, undefined, {
   dispatch: AppDispatch;
