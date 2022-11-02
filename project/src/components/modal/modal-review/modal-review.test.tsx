@@ -22,6 +22,7 @@ describe('ModalReview component render', () => {
     setTimeout(()=>{
       expect(mockDispatch).toHaveBeenCalledTimes(1);
     },1000);
+
   });
   test('Escape works correctly', () => {
     renderWithProviders(<ModalReview id={1} />, );
@@ -46,6 +47,7 @@ describe('ModalReview component form', () => {
     setTimeout(()=>{
       expect(mockDispatch).toHaveBeenCalledTimes(3);
     },1000);
+
   });
   test('Rejects to send review on unsuccesfull validation, adds invalid class to failed input', () => {
     renderWithProviders(<ModalReview id={1} />, );
