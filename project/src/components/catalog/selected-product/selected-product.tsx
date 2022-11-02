@@ -2,7 +2,7 @@ import { ProductType } from '../../../types/product';
 import {useState} from 'react';
 import { seperatePrice } from '../../utils/seperate-price';
 import Rating from '../../rating/rating';
-import { toggleCart } from '../../../store/utils-process/utils-process';
+import { cartToggler } from '../../../store/utils-process/utils-process';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 
 type SelectedProductProps = {
@@ -18,7 +18,7 @@ function SelectedProduct({camera}: SelectedProductProps): JSX.Element {
     setTabsToggle((current) => !current);
   };
   const handleAddToCartButtonClick = () => {
-    dispatch(toggleCart());
+    dispatch(cartToggler());
   };
 
   return (

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { APIRoute } from '../const';
+import { APIRoute, PAGE_LIMIT } from '../const';
 import { ProductType, PromoType } from '../types/product';
 import { ReviewPostType, ReviewType } from '../types/review';
 import { AppDispatch, State } from '../types/state';
@@ -29,30 +29,25 @@ const fetchProductAction = createAsyncThunk<ProductType, number, {
     return response.data as ProductType;
   }
 );
-
-export const fetchProductsAction = createAsyncThunk<ProductType[], undefined, {
+type ProductsActionType = {
+  data: ProductType[];
+  header: string;
+}
+/////////////////
+export const fetchProductsAction = createAsyncThunk<ProductsActionType, number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'product/fetchProducts',
-  async (_arg, {extra: api}) => {
-    const response = await api.get(`${APIRoute.Products}/pages`);
-    return response.data as ProductType[];
+  async (currentPage, {extra: api}) => {
+    const response = await api.get(`${APIRoute.Products}?_limit=${PAGE_LIMIT}&_page=${currentPage}`);
+    const data = response.data as ProductType[];
+    const header = response.headers['x-total-count'];
+    return {data, header} as ProductsActionType;
   },
 );
-
-export const fetchProductsCountAction = createAsyncThunk<unknown, undefined, {
-  dispatch: AppDispatch;
-  state: State;
-  extra: AxiosInstance;
-}>(
-  'product/fetchProductsCount',
-  async (_arg, {extra: api}) => {
-    const response = await api.get(`${APIRoute.Products}/pages`);
-    return response.headers['x-total-count'] as unknown;
-  },
-);
+///////////////////////////
 
 const fetchPromoAction = createAsyncThunk<PromoType, undefined, {
   dispatch: AppDispatch;

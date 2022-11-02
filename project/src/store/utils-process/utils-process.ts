@@ -10,29 +10,33 @@ export const utilsInitialState: UtilsProcess = {
   showSuccess: false,
   showCart: false,
   message: {} as MessageType,
+  currentPage: 0,
 };
 
 export const utilsProcess = createSlice({
   name: NameSpace.Utils,
   initialState: utilsInitialState,
   reducers: {
-    formErrorMessage(state, action) {
+    pageSetter(state, action) {
+      state.currentPage = action.payload as number;
+    },
+    errorMessageCompiler(state, action) {
       state.message = action.payload as MessageType;
     },
-    toggleReview(state) {
+    reviewToggler(state) {
       state.showReview = !state.showReview;
     },
-    toggleMessage(state) {
+    messageToggler(state) {
       state.showMessage = !state.showMessage;
     },
-    toggleSuccess(state) {
+    succesToggler(state) {
       state.showSuccess = !state.showSuccess;
     },
-    toggleCart(state) {
+    cartToggler(state) {
       state.showCart = !state.showCart;
     }
   },
 });
 
-export const {formErrorMessage, toggleMessage, toggleReview, toggleSuccess, toggleCart} = utilsProcess.actions;
+export const {pageSetter, errorMessageCompiler, messageToggler, reviewToggler, succesToggler, cartToggler} = utilsProcess.actions;
 export default utilsProcess.reducer;

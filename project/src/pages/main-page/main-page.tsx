@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Banner from '../../components/banner/banner';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
@@ -7,10 +7,11 @@ import { getNumeric, getPagesCount } from '../../components/utils/pages';
 import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { setCurrentPage } from '../../store/product-process/product-process';
-import { getLoadedPromoStatus, getPage, getProductCount, getPromo } from '../../store/product-process/selectors';
-import { getMessageContent, getMessageVisibilityStatus } from '../../store/utils-process/selectors';
-import { toggleMessage } from '../../store/utils-process/utils-process';
+import { fetchProductsAction } from '../../store/api-actions';
+import { getLoadedPromoStatus, getPromo } from '../../store/complementary-process/selectors';
+import { getProductCount } from '../../store/product-process/selectors';
+import { getMessageContent, getMessageVisibilityStatus, getPage } from '../../store/utils-process/selectors';
+import { messageToggler, pageSetter } from '../../store/utils-process/utils-process';
 
 
 function MainPage(): JSX.Element {
@@ -25,6 +26,7 @@ function MainPage(): JSX.Element {
   const productCount = useAppSelector(getProductCount);
   const totalPages = getPagesCount(productCount);
   const dispatch = useAppDispatch();
+  const [initialLoad, setInitialLoad] = useState(true);
 
   useLayoutEffect(()=>{
     if((productCount !== 0 && currentPage > totalPages) || !location.pathname.includes('/page_')) {
@@ -32,22 +34,33 @@ function MainPage(): JSX.Element {
     }
     if(location.pathname === (`${AppRoute.Catalog}`)) {
       navigate(`${AppRoute.Catalog}/page_1`);
+      dispatch(pageSetter(1));
     }
-  },[currentPage, navigate, productCount, totalPages, location.pathname]);
+  },[currentPage, dispatch, navigate, productCount, totalPages, location.pathname]);
 
   useEffect(() => {
     if (isVisible) {
       setTimeout(() => {
-        dispatch(toggleMessage());
+        dispatch(messageToggler());
       }, 3000);
     }
   },[isVisible, dispatch]);
 
-  useEffect(()=>{
+  useEffect(() => {
     if(getNumeric(location.pathname) !== currentPage) {
-      dispatch(setCurrentPage(getNumeric(location.pathname)));
+      dispatch(pageSetter(getNumeric(location.pathname)));
     }
   },[currentPage, dispatch, location]);
+
+  useEffect(()=>{
+    if(!initialLoad) {
+      dispatch(fetchProductsAction(currentPage));
+    }
+  },[dispatch, currentPage, initialLoad]);
+
+  useEffect(()=>{
+    setInitialLoad(false);
+  },[]);
 
   return (
     <main>

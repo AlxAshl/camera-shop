@@ -1,29 +1,16 @@
+import { ActionCreatorWithoutPayload } from '@reduxjs/toolkit';
 import { useEffect } from 'react';
-
-import { toggleCart, toggleReview, toggleSuccess } from '../store/utils-process/utils-process';
 import { useAppDispatch } from './useAppDispatch';
 
-type ToggleModalType = {
-  isReviewActive?: boolean;
-  isSuccessActive?: boolean;
-  isAddToCartActive?: boolean;
-}
 
-export const useEventListener = ({...props}: ToggleModalType) => {
+export const useEventListener = (action: ActionCreatorWithoutPayload<string>) => {
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     const isEscapeKey = (evt:KeyboardEvent) => evt.key === 'Escape';
     const handleEscKeyPress = (evt: KeyboardEvent) => {
       if(isEscapeKey(evt)) {
-        if(props.isReviewActive){
-          dispatch(toggleReview());
-        }
-        if(props.isSuccessActive){
-          dispatch(toggleSuccess());
-        }
-        if(props.isAddToCartActive){
-          dispatch(toggleCart());
-        }
+        dispatch(action());
       }
     };
     document.body.style.overflow = 'hidden';
@@ -32,5 +19,6 @@ export const useEventListener = ({...props}: ToggleModalType) => {
       document.body.style.overflow = 'visible';
       document.removeEventListener('keydown', handleEscKeyPress);
     };
-  },[dispatch, props]);
+  },[dispatch, action]);
+
 };

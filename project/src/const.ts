@@ -7,10 +7,29 @@ export enum AppRoute {
   Notfound = '*',
   NotFoundPage = '/404'
 }
+export const BreadcrumbsSpecs = {
+  Root: {
+    title: 'Главная',
+    path: AppRoute.Root,
+  },
+  Catalog: {
+    title: 'Каталог',
+    path: AppRoute.Catalog,
+  },
+  Cameras: {
+    title: 'Каталог',
+    path: AppRoute.Product,
+  },
+  Basket: {
+    title: 'Корзина',
+    path: AppRoute.Basket
+  },
+};
 
 export enum NameSpace {
   Product = 'PRODUCT',
   Review = 'REVIEW',
+  Complementary = 'COMPLEMENTARY',
   Utils = 'UTILS',
 }
 

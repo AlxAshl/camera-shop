@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { APIRoute, BACKEND_URL, PAGE_LIMIT, REQUEST_TIMEOUT } from '../const';
 import { store } from '../store/store';
-import { formErrorMessage, toggleMessage } from '../store/utils-process/utils-process';
+import { errorMessageCompiler, messageToggler } from '../store/utils-process/utils-process';
 
 
 export const createAPI = (): AxiosInstance => {
@@ -14,29 +14,29 @@ export const createAPI = (): AxiosInstance => {
     (response: AxiosResponse) => response,
     (error: AxiosError) => {
       if (error.response) {
-        store.dispatch(formErrorMessage({
+        store.dispatch(errorMessageCompiler({
           status: 'error',
           title: 'Error!',
           message: error.message
         }));
-        store.dispatch(toggleMessage());
+        store.dispatch(messageToggler());
       }
       throw error;
     }
   );
 
-  api.interceptors.request.use(
-    (config: AxiosRequestConfig) => {
-      if(config.url === `${APIRoute.Products}/pages`) {
-        const state = store.getState();
-        config.url = APIRoute.Products;
-        config.params = {
-          '_limit': PAGE_LIMIT,
-          '_page': state.PRODUCT.currentPage
-        };
-      }
-      return config;
-    }
-  );
+  // api.interceptors.request.use(
+  //   (config: AxiosRequestConfig) => {
+  //     if(config.url === `${APIRoute.Products}/pages`) {
+  //       const state = store.getState();
+  //       config.url = APIRoute.Products;
+  //       config.params = {
+  //         '_limit': PAGE_LIMIT,
+  //         '_page': state.UTILS.currentPage
+  //       };
+  //     }
+  //     return config;
+  //   }
+  // );
   return api;
 };

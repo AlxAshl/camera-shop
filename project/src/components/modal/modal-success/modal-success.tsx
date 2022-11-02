@@ -1,7 +1,7 @@
 
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { useEventListener } from '../../../hooks/useEventListener';
-import { toggleSuccess } from '../../../store/utils-process/utils-process';
+import { succesToggler } from '../../../store/utils-process/utils-process';
 
 type ModalSuccessProps = {
   isSuccessActive: boolean;
@@ -11,10 +11,10 @@ function ModalSuccess ({isSuccessActive}: ModalSuccessProps): JSX.Element {
 
   const dispatch = useAppDispatch();
   const handleReturnToPurchacesButtonClick = () => {
-    dispatch(toggleSuccess());
+    dispatch(succesToggler());
   };
 
-  useEventListener({isSuccessActive});
+  useEventListener(succesToggler);
 
   return (
     <div className="modal is-active modal--narrow">

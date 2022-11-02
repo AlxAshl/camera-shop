@@ -5,7 +5,7 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import { State } from '../types/state';
 import { productMock, productsMock, reviewMock, reviewsMock } from '../test/test-mocks';
 import { APIRoute } from '../const';
-import { fetchProductAction, fetchProductsAction, fetchProductsCountAction, fetchPromoAction, fetchReviewsAction, fetchSimilarProductsAction, postReviewAction } from './api-actions';
+import { fetchProductAction, fetchProductsAction, fetchPromoAction, fetchReviewsAction, fetchSimilarProductsAction, postReviewAction } from './api-actions';
 import { api } from './store';
 
 
@@ -115,7 +115,8 @@ describe('async actions', () => {
       .onGet(`${APIRoute.Products}/p1ages`)
       .reply(404);
     const store = mockStore();
-    await store.dispatch(fetchProductsAction());
+    const currentPage = 1;
+    await store.dispatch(fetchProductsAction(currentPage));
     setTimeout(()=>{
       expect(mockError).toBeCalled();
     },1000);
@@ -127,33 +128,34 @@ describe('async actions', () => {
       .onGet(`${APIRoute.Products}/pages`)
       .reply(408);
     const store = mockStore();
-    await store.dispatch(fetchProductsAction());
+    const currentPage = 1;
+    await store.dispatch(fetchProductsAction(currentPage));
     setTimeout(()=>{
       expect(mockError).toBeCalled();
     },1000);
   });
 
-  test('should return error for fetchProductsCount when GET /cameras/pages adress is incorrect', async () => {
-    mockAPI
-      .onGet(`${APIRoute.Products}/pag1es`)
-      .reply(404);
-    const store = mockStore();
-    await store.dispatch(fetchProductsCountAction());
-    setTimeout(()=>{
-      expect(mockError).toBeCalled();
-    },1000);
-  });
+  // test('should return error for fetchProductsCount when GET /cameras/pages adress is incorrect', async () => {
+  //   mockAPI
+  //     .onGet(`${APIRoute.Products}/pag1es`)
+  //     .reply(404);
+  //   const store = mockStore();
+  //   await store.dispatch(fetchProductsCountAction());
+  //   setTimeout(()=>{
+  //     expect(mockError).toBeCalled();
+  //   },1000);
+  // });
 
-  test('should return error for fetchProductsCount when GET /cameras/pages call experience network error', async () => {
-    mockAPI
-      .onGet(`${APIRoute.Products}/pages`)
-      .reply(408);
-    const store = mockStore();
-    await store.dispatch(fetchProductsCountAction());
-    setTimeout(()=>{
-      expect(mockError).toBeCalled();
-    },1000);
-  });
+  // test('should return error for fetchProductsCount when GET /cameras/pages call experience network error', async () => {
+  //   mockAPI
+  //     .onGet(`${APIRoute.Products}/pages`)
+  //     .reply(408);
+  //   const store = mockStore();
+  //   await store.dispatch(fetchProductsCountAction());
+  //   setTimeout(()=>{
+  //     expect(mockError).toBeCalled();
+  //   },1000);
+  // });
 
   test('should dispatch fetchPromo when GET /promo', async () => {
     mockAPI

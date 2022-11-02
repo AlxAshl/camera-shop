@@ -1,6 +1,6 @@
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { useEventListener } from '../../../hooks/useEventListener';
-import { toggleCart } from '../../../store/utils-process/utils-process';
+import { cartToggler } from '../../../store/utils-process/utils-process';
 
 type ModalAddToCartType = {
   isAddToCartActive: boolean;
@@ -8,9 +8,9 @@ type ModalAddToCartType = {
 
 function ModalAddToCart ({isAddToCartActive}: ModalAddToCartType): JSX.Element {
   const dispatch = useAppDispatch();
-  useEventListener({isAddToCartActive});
+  useEventListener(cartToggler);
   const handleToggleModalClick = () => {
-    dispatch(toggleCart());
+    dispatch(cartToggler());
   };
 
   return (

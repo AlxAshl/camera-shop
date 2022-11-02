@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchReviewsAction } from '../../store/api-actions';
 import { getLoadedReviewsStatus, getReviews } from '../../store/review-process/selectors';
-import { toggleReview } from '../../store/utils-process/utils-process';
+import { reviewToggler } from '../../store/utils-process/utils-process';
 import ReviewCard from './review-card/review-card';
 
 type ReviewListProps = {
@@ -36,7 +36,7 @@ function ReviewsList({id}: ReviewListProps): JSX.Element {
   },[sliceLimit, initialRender]);
 
   const handlePostReviewButtonClick = () => {
-    dispatch(toggleReview());
+    dispatch(reviewToggler());
   };
 
   const handleShowMoreButton = () => {

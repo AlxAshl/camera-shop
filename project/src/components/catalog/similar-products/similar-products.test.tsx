@@ -1,4 +1,4 @@
-import Similar from './similar';
+import SimilarProducts from './similar-products';
 import { productMock, productsMock } from '../../../test/test-mocks';
 import { renderWithProviders } from '../../../test/utils/render-with-redux';
 import * as Hooks from '../../../hooks/useAppSelector';
@@ -12,13 +12,13 @@ describe('Similar component', () => {
     spySelect.mockReturnValue(productsMock);
   });
   test('Characteristics tab is active on initial render', () => {
-    renderWithProviders(<Similar camera={productMock}/>, {initialState: {PRODUCT: {
+    renderWithProviders(<SimilarProducts camera={productMock}/>, {initialState: {PRODUCT: {
       products: productsMock
     }}});
     expect(spySelect).toHaveBeenCalledTimes(2);
   });
   test('Renders correct number of cards', () => {
-    renderWithProviders(<Similar camera={productMock}/>, {initialState: {PRODUCT: {
+    renderWithProviders(<SimilarProducts camera={productMock}/>, {initialState: {PRODUCT: {
       products: productsMock
     }}});
 
@@ -26,7 +26,7 @@ describe('Similar component', () => {
     expect(cards).toHaveLength(3);
   });
   test('Renders slider buttons correctly', () => {
-    renderWithProviders(<Similar camera={productMock}/>, {initialState: {PRODUCT: {
+    renderWithProviders(<SimilarProducts camera={productMock}/>, {initialState: {PRODUCT: {
       products: [productsMock]
     }}});
     const prevButton = screen.getByTestId('slider-controls--prev-test');
@@ -35,7 +35,7 @@ describe('Similar component', () => {
     expect(prevButton).toHaveAttribute('disabled');
   });
   test('Renders one component and slider buttons correctly', () => {
-    renderWithProviders(<Similar camera={productMock}/>, {initialState: {PRODUCT: {
+    renderWithProviders(<SimilarProducts camera={productMock}/>, {initialState: {PRODUCT: {
       products: [productMock]
     }}});
     setTimeout(()=> {
@@ -48,7 +48,7 @@ describe('Similar component', () => {
     }, 1000);
   });
   test('Renders correct number of components after slider button fire', () => {
-    renderWithProviders(<Similar camera={productMock}/>, {initialState: {PRODUCT: {
+    renderWithProviders(<SimilarProducts camera={productMock}/>, {initialState: {PRODUCT: {
       products: productsMock
     }}});
     const prevButton = screen.getByTestId('slider-controls--prev-test');

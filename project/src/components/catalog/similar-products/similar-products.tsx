@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { fetchSimilarProductsAction } from '../../../store/api-actions';
-import { getLoadedProductsStatus, getProducts } from '../../../store/product-process/selectors';
+import { getLoadedProductsStatus, getSimilarProducts } from '../../../store/product-process/selectors';
 import { ProductType } from '../../../types/product';
 import ProductCard from '../../product-card/product-card';
 
@@ -11,10 +11,10 @@ interface SimilarProps {
   camera: ProductType;
 }
 
-function Similar({camera}: SimilarProps): JSX.Element {
+function SimilarProducts({camera}: SimilarProps): JSX.Element {
   const {id} = camera;
   const dispatch = useAppDispatch();
-  const similarProducts = useAppSelector(getProducts);
+  const similarProducts = useAppSelector(getSimilarProducts);
   const isDataLoaded = useAppSelector(getLoadedProductsStatus);
 
   const [slice, setPrimary] = useState({
@@ -65,4 +65,4 @@ function Similar({camera}: SimilarProps): JSX.Element {
   );
 }
 
-export default Similar;
+export default SimilarProducts;

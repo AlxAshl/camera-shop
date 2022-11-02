@@ -1,7 +1,4 @@
-import { useEffect } from 'react';
 import { createBrowserRouter, createRoutesFromElements, Navigate, Route, RouterProvider } from 'react-router-dom';
-import { store } from '../../store/store';
-import { fetchPromoAction } from '../../store/api-actions';
 import Preloader from '../preloader/preloader';
 import ProductPage from '../../pages/product-page/product-page';
 import NotFound from '../../pages/not-found/not-found';
@@ -11,8 +8,6 @@ import { AppRoute } from '../../const';
 import MainPage from '../../pages/main-page/main-page';
 import Root from '../../pages/root/root';
 
-
-let isInitial = true;
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,13 +27,6 @@ export const router = createBrowserRouter(
 );
 
 function App(): JSX.Element {
-
-  useEffect(()=> {
-    if (isInitial) {
-      store.dispatch(fetchPromoAction());
-      isInitial = false;
-    }
-  },[]);
 
   return (
     <RouterProvider router={router}

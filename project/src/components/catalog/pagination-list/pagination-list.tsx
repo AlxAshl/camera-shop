@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../../const';
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import { setCurrentPage } from '../../../store/product-process/product-process';
-import { getPage, getProductCount } from '../../../store/product-process/selectors';
+import { getProductCount } from '../../../store/product-process/selectors';
 import {getPagesCount} from '../../utils/pages';
-import { memo, MouseEvent, useEffect } from 'react';
+import { memo, MouseEvent } from 'react';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { fetchProductsCountAction } from '../../../store/api-actions';
+import { getPage } from '../../../store/utils-process/selectors';
+import { pageSetter } from '../../../store/utils-process/utils-process';
 
 
 function PaginationList(): JSX.Element {
@@ -17,23 +17,19 @@ function PaginationList(): JSX.Element {
   const totalPages = getPagesCount(productCount);
   const pages = [];
 
-  useEffect(() => {
-    dispatch(fetchProductsCountAction());
-  },[dispatch, currentPage]);
-
   const handlePageLinkClick = (evt: MouseEvent<HTMLLIElement>) => {
     const selectedPage = evt.currentTarget.getAttribute('data-tag');
-    dispatch(setCurrentPage(Number(selectedPage)));
+    dispatch(pageSetter(Number(selectedPage)));
   };
 
   const handleBackButtonClick = (evt: MouseEvent<HTMLLIElement>) => {
     const selectedPage = currentPage - 1;
-    dispatch(setCurrentPage(Number(selectedPage)));
+    dispatch(pageSetter(Number(selectedPage)));
   };
 
   const handleNextButtonClick = (evt: MouseEvent<HTMLLIElement>) => {
     const selectedPage = currentPage + 1;
-    dispatch(setCurrentPage(Number(selectedPage)));
+    dispatch(pageSetter(Number(selectedPage)));
   };
 
   for(let i = 1; i <= totalPages; i++) {

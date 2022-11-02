@@ -2,7 +2,7 @@ import { cleanup } from '@testing-library/react';
 import { messageMock } from '../../test/test-mocks';
 import { MessageType } from '../../types/message';
 import { store } from '../store';
-import reducer, { formErrorMessage } from './utils-process';
+import reducer, { errorMessageCompiler } from './utils-process';
 
 describe('Reducer: utilsProcess', () => {
   beforeAll(()=>{
@@ -17,6 +17,7 @@ describe('Reducer: utilsProcess', () => {
         showSuccess: false,
         showCart: false,
         message: {} as MessageType,
+        currentPage: 1,
       });
   });
 
@@ -27,14 +28,16 @@ describe('Reducer: utilsProcess', () => {
       showSuccess: false,
       showCart: false,
       message: {} as MessageType,
+      currentPage: 1,
     };
-    expect(reducer(state, {type: formErrorMessage, payload: messageMock}))
+    expect(reducer(state, {type: errorMessageCompiler, payload: messageMock}))
       .toEqual({
         showMessage: false,
         showReview: false,
         showSuccess: false,
         showCart: false,
         message: messageMock as MessageType,
+        currentPage: 1,
       });
   });
 });

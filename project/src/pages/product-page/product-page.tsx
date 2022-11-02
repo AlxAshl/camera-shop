@@ -6,14 +6,14 @@ import ModalReview from '../../components/modal/modal-review/modal-review';
 import ModalSuccess from '../../components/modal/modal-success/modal-success';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import SelectedProduct from '../../components/catalog/selected-product/selected-product';
-import Similar from '../../components/catalog/similar/similar';
+import SimilarProducts from '../../components/catalog/similar-products/similar-products';
 import Message from '../../components/ui/message';
 import UpButton from '../../components/up-button/up-button';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchProductAction } from '../../store/api-actions';
 import { getLoadedProductStatus, getProduct } from '../../store/product-process/selectors';
 import { getMessageContent, getMessageVisibilityStatus, getModalCartVisibilityStatus, getModalSuccessVisibilityStatus, getModalVisibilityStatus } from '../../store/utils-process/selectors';
-import { toggleMessage } from '../../store/utils-process/utils-process';
+import { messageToggler } from '../../store/utils-process/utils-process';
 import ModalAddToCart from '../../components/modal/modal-add-to-cart/modal-add-to-cart';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import NotFoundContent from '../not-found/not-found-contents';
@@ -36,7 +36,7 @@ function ProductPage(): JSX.Element {
   useEffect(() => {
     if (isVisible) {
       setTimeout(() => {
-        dispatch(toggleMessage());
+        dispatch(messageToggler());
       }, 3000);
     }
   },[isVisible, dispatch]);
@@ -58,11 +58,11 @@ function ProductPage(): JSX.Element {
         : ''}
       >
         <div className="page-content">
-          <Breadcrumbs camera={product}/>
+          <Breadcrumbs/>
           {isVisible && <Message props={message}/>}
           {errorOccured && <NotFoundContent>product</NotFoundContent>}
           {(isProductLoaded) && <SelectedProduct camera={product}/>}
-          <Similar camera={product}/>
+          <SimilarProducts camera={product}/>
           <ReviewsList id={Number(id)}/>
         </div>
       </main>

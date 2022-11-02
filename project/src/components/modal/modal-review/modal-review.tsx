@@ -6,11 +6,10 @@ import { useEventListener } from '../../../hooks/useEventListener';
 import { fetchReviewsAction, postReviewAction } from '../../../store/api-actions';
 import { getPostReviewStatus } from '../../../store/review-process/selectors';
 import { getMessageContent, getMessageVisibilityStatus } from '../../../store/utils-process/selectors';
-import {toggleReview, toggleSuccess} from '../../../store/utils-process/utils-process';
+import {reviewToggler, succesToggler} from '../../../store/utils-process/utils-process';
 import Message from '../../ui/message';
 import { validateForm } from '../../utils/validate-form';
 import { validateInput } from '../../utils/validate-input';
-
 
 type ModalProps = {
   isReviewActive: boolean;
@@ -24,10 +23,11 @@ function ModalReview({isReviewActive, id}: ModalProps): JSX.Element {
   const isVisible = useAppSelector(getMessageVisibilityStatus);
   const postStatus = useAppSelector(getPostReviewStatus);
 
-  useEventListener({isReviewActive});
+
+  useEventListener(reviewToggler);
 
   const handleToggleModalClick = () => {
-    dispatch(toggleReview());
+    dispatch(reviewToggler());
   };
 
   const handleFormSubmitClick = (evt: FormEvent<HTMLFormElement>) => {
@@ -38,7 +38,7 @@ function ModalReview({isReviewActive, id}: ModalProps): JSX.Element {
         (response) => {
           if (response.meta.requestStatus === 'fulfilled') {
             handleToggleModalClick();
-            dispatch(toggleSuccess());
+            dispatch(succesToggler());
             dispatch(fetchReviewsAction(id));
           }
         }
