@@ -7,6 +7,7 @@ jest.mock('../../../hooks/useAppDispatch', () => ({
   useAppDispatch: () => mockDispatch
 }));
 
+
 describe('ModalReview component render', () => {
   test('X button works correctly', () => {
     renderWithProviders(<ModalReview id={1} />, );
@@ -28,7 +29,6 @@ describe('ModalReview component render', () => {
     expect(mockDispatch).toHaveBeenCalledTimes(1);
   });
 });
-
 describe('ModalReview component form', () => {
   test('Sends review on succesfull validation', () => {
     renderWithProviders(<ModalReview id={1} />, );

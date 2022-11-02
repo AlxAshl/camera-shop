@@ -33,8 +33,7 @@
     "parserOptions": {
       "project": [
         "tsconfig.json"
-      ],
-      "tsconfigRootDir": "./project"
+      ]
     },
     "overrides": [
       {
