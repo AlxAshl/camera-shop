@@ -1,54 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Render App 1`] = `
-<DocumentFragment>
-  <div
-    class="banner"
-  >
-    <picture>
-      <source
-        srcset="img/content/promo.webp, img/content/promo@2x.webp"
-        type="image/webp"
-      />
-      <img
-        alt="баннер"
-        height="280"
-        src="img/content/promo.jpg"
-        srcset="img/content/promo@2x.jpg"
-        width="1280"
-      />
-    </picture>
-    <p
-      class="banner__info"
-    >
-      <span
-        class="banner__message"
-      >
-        Новинка!
-      </span>
-      <span
-        class="title title--h1"
-        data-testid="banner-test-title"
-      >
-        Look 54
-      </span>
-      <span
-        class="banner__text"
-      >
-        Профессиональная камера от известного производителя
-      </span>
-      <a
-        class="btn"
-        data-testid="banner-test-link"
-        href="/cameras/7"
-      >
-        Подробнее
-      </a>
-    </p>
-  </div>
-</DocumentFragment>
-`;
-
 exports[`Render Banner 1`] = `
 <DocumentFragment>
   <div

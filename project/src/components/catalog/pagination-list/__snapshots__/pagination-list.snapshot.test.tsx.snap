@@ -10,13 +10,13 @@ exports[`Render PaginationList 1`] = `
     >
       <li
         class="pagination__item"
-        data-testid="pagination-item-next-test"
+        data-testid="pagination-item-previous-test"
       >
         <a
           class="pagination__link pagination__link--text"
-          href="/catalog/page_2"
+          href="/catalog/page_-1"
         >
-          Далее
+          Назад
         </a>
       </li>
     </ul>

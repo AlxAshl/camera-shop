@@ -255,7 +255,6 @@ exports[`Render ModalReview 1`] = `
                     </svg>
                   </span>
                   <textarea
-                    minlength="5"
                     name="review"
                     placeholder="Поделитесь своим опытом покупки"
                     required=""

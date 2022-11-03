@@ -11,21 +11,24 @@ describe('Pagination-list component', () => {
   });
   test('Next button is not rendered, previous button is rendered', () => {
     renderWithProviders(<PaginationList/>, { initialState: {
-      PRODUCT: { productCount: 40, currentPage: 5 }
+      PRODUCT: { productCount: 40, currentPage: 5 },
+      UTILS: { currentPage: 5}
     }});
     expect(screen.queryByTestId('pagination-item-next-test')).not.toBeInTheDocument();
     expect(screen.getByTestId('pagination-item-previous-test')).toBeInTheDocument();
   });
   test('Previous button is not rendered, next button is rendered', () => {
     renderWithProviders(<PaginationList/>, { initialState: {
-      PRODUCT: { productCount: 40, currentPage: 1 }
+      PRODUCT: { productCount: 40},
+      UTILS: { currentPage: 1}
     }});
     expect(screen.queryByTestId('pagination-item-previous-test')).not.toBeInTheDocument();
     expect(screen.getByTestId('pagination-item-next-test')).toBeInTheDocument();
   });
   test('Current page button is active, others are not', () => {
     renderWithProviders(<PaginationList/>, { initialState: {
-      PRODUCT: { productCount: 40, currentPage: 1 }
+      PRODUCT: { productCount: 40 },
+      UTILS: { currentPage: 1}
     }});
     expect(screen.queryByText('1')).toHaveClass('pagination__link pagination__link--active');
     expect(screen.queryByText('2')).toHaveClass('pagination__link');

@@ -36,7 +36,7 @@ exports[`Render Breadcrumbs 1`] = `
           <span
             class="breadcrumbs__link breadcrumbs__link--active"
           >
-            Каталог
+            Главная
           </span>
         </li>
       </ul>

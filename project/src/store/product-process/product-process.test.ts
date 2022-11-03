@@ -1,8 +1,8 @@
 
 import { cleanup } from '@testing-library/react';
 import { productMock, productsMock } from '../../test/test-mocks';
-import { ProductType, PromoType } from '../../types/product';
-import { fetchProductAction, fetchProductsAction, fetchPromoAction, fetchSimilarProductsAction } from '../api-actions';
+import { ProductType } from '../../types/product';
+import { fetchProductAction, fetchProductsAction, fetchSimilarProductsAction } from '../api-actions';
 import { store } from '../store';
 import reducer from './product-process';
 
@@ -16,13 +16,10 @@ describe('Reducer: productProcess', () => {
       .toEqual({
         isProductsDataLoaded: false,
         isProductDataLoaded: false,
-        isPromoDataLoaded: false,
-        currentPage: 1,
         productCount: 0,
         products: [],
         similarProducts: [],
         product: {} as ProductType,
-        promo: {} as PromoType
       });
   });
 
@@ -30,25 +27,23 @@ describe('Reducer: productProcess', () => {
     const state = {
       isProductsDataLoaded: false,
       isProductDataLoaded: false,
-      isPromoDataLoaded: false,
-      currentPage: 1,
       productCount: 0,
       products: [],
       similarProducts: [],
       product: {} as ProductType,
-      promo: {} as PromoType
     };
-    expect(reducer(state, {type: fetchProductsAction.fulfilled.type, payload: productsMock}))
+    const porductsMockPayload = {
+      data: productsMock,
+      header: '4'
+    };
+    expect(reducer(state, {type: fetchProductsAction.fulfilled.type, payload: porductsMockPayload}))
       .toEqual({
         isProductsDataLoaded: true,
         isProductDataLoaded: false,
-        isPromoDataLoaded: false,
-        currentPage: 1,
-        productCount: 0,
+        productCount: 4,
         products: productsMock,
         similarProducts: [],
         product: {} as ProductType,
-        promo: {} as PromoType
       });
   });
 
@@ -56,25 +51,19 @@ describe('Reducer: productProcess', () => {
     const state = {
       isProductsDataLoaded: false,
       isProductDataLoaded: false,
-      isPromoDataLoaded: false,
-      currentPage: 1,
       productCount: 0,
       products: [],
       similarProducts: [],
       product: {} as ProductType,
-      promo: {} as PromoType
     };
     expect(reducer(state, {type: fetchProductAction.fulfilled.type, payload: productMock}))
       .toEqual({
         isProductsDataLoaded: false,
         isProductDataLoaded: true,
-        isPromoDataLoaded: false,
-        currentPage: 1,
         productCount: 0,
         products: [],
         similarProducts: [],
         product: productMock as ProductType,
-        promo: {} as PromoType
       });
   });
 
@@ -82,50 +71,19 @@ describe('Reducer: productProcess', () => {
     const state = {
       isProductsDataLoaded: false,
       isProductDataLoaded: false,
-      isPromoDataLoaded: false,
-      currentPage: 1,
       productCount: 0,
       products: [],
       similarProducts: [],
       product: {} as ProductType,
-      promo: {} as PromoType
     };
     expect(reducer(state, {type: fetchSimilarProductsAction.fulfilled.type, payload: productsMock}))
       .toEqual({
         isProductsDataLoaded: false,
         isProductDataLoaded: true,
-        isPromoDataLoaded: false,
-        currentPage: 1,
         productCount: 0,
         products: [],
         similarProducts: productsMock,
         product: {} as ProductType,
-        promo: {} as PromoType
-      });
-  });
-  test('should update promo after fetching promo action', () => {
-    const state = {
-      isProductsDataLoaded: false,
-      isProductDataLoaded: false,
-      isPromoDataLoaded: false,
-      currentPage: 1,
-      productCount: 0,
-      products: [],
-      similarProducts: [],
-      product: {} as ProductType,
-      promo: {} as PromoType
-    };
-    expect(reducer(state, {type: fetchPromoAction.fulfilled.type, payload: productMock}))
-      .toEqual({
-        isProductsDataLoaded: false,
-        isProductDataLoaded: false,
-        isPromoDataLoaded: true,
-        currentPage: 1,
-        productCount: 0,
-        products: [],
-        similarProducts: [],
-        product: {} as ProductType,
-        promo: productMock as PromoType
       });
   });
 });

@@ -15,19 +15,3 @@ exports[`Message renders correctly 1`] = `
   </section>
 </DocumentFragment>
 `;
-
-exports[`Modal renders correctly 1`] = `
-<DocumentFragment>
-  <section
-    class="notification error"
-    data-testid="error-test"
-  >
-    <h2>
-      Error!
-    </h2>
-    <p>
-      ERR
-    </p>
-  </section>
-</DocumentFragment>
-`;

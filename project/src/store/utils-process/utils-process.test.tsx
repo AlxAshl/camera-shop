@@ -17,7 +17,7 @@ describe('Reducer: utilsProcess', () => {
         showSuccess: false,
         showCart: false,
         message: {} as MessageType,
-        currentPage: 1,
+        currentPage: 0,
       });
   });
 

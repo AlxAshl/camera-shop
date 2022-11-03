@@ -36,7 +36,7 @@ function Breadcrumbs(): JSX.Element {
             const properties = BreadcrumbsSpecs[path as keyof typeof BreadcrumbsSpecs];
             if (path === 'product') {
               return (
-                <li key={`${path}-${i + 1}`} className="breadcrumbs__item">
+                <li key={`${path}-${i + 1}`} data-testid='breadcrumbs__item-test' className="breadcrumbs__item">
                   <span className="breadcrumbs__link breadcrumbs__link--active">{product.name}</span>
                 </li>
               );

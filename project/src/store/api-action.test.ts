@@ -135,28 +135,6 @@ describe('async actions', () => {
     },1000);
   });
 
-  // test('should return error for fetchProductsCount when GET /cameras/pages adress is incorrect', async () => {
-  //   mockAPI
-  //     .onGet(`${APIRoute.Products}/pag1es`)
-  //     .reply(404);
-  //   const store = mockStore();
-  //   await store.dispatch(fetchProductsCountAction());
-  //   setTimeout(()=>{
-  //     expect(mockError).toBeCalled();
-  //   },1000);
-  // });
-
-  // test('should return error for fetchProductsCount when GET /cameras/pages call experience network error', async () => {
-  //   mockAPI
-  //     .onGet(`${APIRoute.Products}/pages`)
-  //     .reply(408);
-  //   const store = mockStore();
-  //   await store.dispatch(fetchProductsCountAction());
-  //   setTimeout(()=>{
-  //     expect(mockError).toBeCalled();
-  //   },1000);
-  // });
-
   test('should dispatch fetchPromo when GET /promo', async () => {
     mockAPI
       .onGet(APIRoute.Promo)
