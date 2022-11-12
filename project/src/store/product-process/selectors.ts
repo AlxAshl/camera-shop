@@ -8,3 +8,4 @@ export const getProducts = (state: State): ProductType[] => state[NameSpace.Prod
 export const getSimilarProducts = (state: State): ProductType[] => state[NameSpace.Product].similarProducts;
 export const getProduct = (state: State): ProductType => state[NameSpace.Product].product;
 export const getProductCount = (state: State): number => state[NameSpace.Product].productCount;
+export const getSearchSuggestions = (state: State): ProductType[] => state[NameSpace.Product].searchSuggestions;

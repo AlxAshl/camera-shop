@@ -8,6 +8,7 @@ export type ProductProcess = {
   isProductDataLoaded: boolean;
   productCount: number;
   products: ProductType[];
+  searchSuggestions: ProductType[];
   similarProducts: ProductType[];
   product: ProductType;
 }

@@ -7,6 +7,9 @@ import Catalog from '../catalog/catalog';
 import { AppRoute } from '../../const';
 import MainPage from '../../pages/main-page/main-page';
 import Root from '../../pages/root/root';
+import { store } from '../../store/store';
+import { fetchSearchSuggestionsAction } from '../../store/api-actions';
+import { useEffect } from 'react';
 
 
 export const router = createBrowserRouter(
@@ -26,7 +29,9 @@ export const router = createBrowserRouter(
 );
 
 function App(): JSX.Element {
-
+  useEffect(()=>{
+    store.dispatch(fetchSearchSuggestionsAction());
+  },[]);
   return (
     <RouterProvider router={router}
       fallbackElement = {<Preloader/>}

@@ -4,8 +4,14 @@ import { APIRoute, PAGE_LIMIT } from '../const';
 import { ProductType, PromoType } from '../types/product';
 import { ReviewPostType, ReviewType } from '../types/review';
 import { AppDispatch, State } from '../types/state';
+// import { getLoadedProductStatus } from './product-process/selectors';
+// import { useAppSelector } from '../hooks/useAppSelector';
+// import { store } from './store';
 
+// const mystate = store.getState();
 
+// // eslint-disable-next-line no-console
+// console.log(mystate);
 const fetchSimilarProductsAction = createAsyncThunk<ProductType[], number, {
   dispatch: AppDispatch;
   state: State;
@@ -33,7 +39,19 @@ type ProductsActionType = {
   data: ProductType[];
   header: string;
 }
-
+//----------------SEARCHSUGGESTIONS---------------------------//
+export const fetchSearchSuggestionsAction = createAsyncThunk<ProductType[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'product/fetchSearhSuggestions',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<ProductType[]>(`${APIRoute.Products}`);
+    return data;
+  },
+);
+//----------------SEARCHSUGGESTIONS---------------------------//
 export const fetchProductsAction = createAsyncThunk<ProductsActionType, number, {
   dispatch: AppDispatch;
   state: State;
@@ -47,7 +65,7 @@ export const fetchProductsAction = createAsyncThunk<ProductsActionType, number, 
     return {data, header} as ProductsActionType;
   },
 );
-
+// cameras?limit=9&_page=1&category=Фотоаппарат&level=Нулевой
 const fetchPromoAction = createAsyncThunk<PromoType, undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -55,6 +73,7 @@ const fetchPromoAction = createAsyncThunk<PromoType, undefined, {
 }>(
   'product/fetchPromo',
   async (_arg, {extra: api}) => {
+
     const {data} = await api.get<PromoType>(APIRoute.Promo);
     return data;
   },
