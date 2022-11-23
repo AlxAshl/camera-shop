@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { AppRoute } from '../../../const';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { getProductCount } from '../../../store/product-process/selectors';
@@ -16,6 +16,8 @@ function PaginationList(): JSX.Element {
   const dispatch = useAppDispatch();
   const totalPages = getPagesCount(productCount);
   const pages = [];
+  const [urlParams] = useSearchParams();
+  const newParams = urlParams.toString();
 
   const handlePageLinkClick = (evt: MouseEvent<HTMLLIElement>) => {
     const selectedPage = evt.currentTarget.getAttribute('data-tag');
@@ -39,7 +41,7 @@ function PaginationList(): JSX.Element {
           (currentPage === i)
             ? 'pagination__link pagination__link--active'
             : 'pagination__link'
-        } to={`${AppRoute.Catalog}/page_${i}`}
+        } to={`${AppRoute.Catalog}/page_${i}${(newParams ? `?${newParams}` : '')}`}
         >{i}
         </Link>
       </li>
@@ -50,11 +52,11 @@ function PaginationList(): JSX.Element {
     <div className="pagination">
       <ul className="pagination__list">
         {currentPage !== 1
-          ? <li className="pagination__item" data-testid='pagination-item-previous-test' onClick = {handleBackButtonClick}><Link className="pagination__link pagination__link--text" to={`${AppRoute.Catalog}/page_${currentPage - 1}`}>Назад</Link></li>
+          ? <li className="pagination__item" data-testid='pagination-item-previous-test' onClick = {handleBackButtonClick}><Link className="pagination__link pagination__link--text" to={`${AppRoute.Catalog}/page_${currentPage - 1}${(newParams ? `?${newParams}` : '')}`}>Назад</Link></li>
           : ''}
         {pages}
         {currentPage !== totalPages
-          ? <li className="pagination__item" data-testid='pagination-item-next-test' onClick = {handleNextButtonClick}><Link className="pagination__link pagination__link--text" to={`${AppRoute.Catalog}/page_${currentPage + 1}`}>Далее</Link></li>
+          ? <li className="pagination__item" data-testid='pagination-item-next-test' onClick = {handleNextButtonClick}><Link className="pagination__link pagination__link--text" to={`${AppRoute.Catalog}/page_${currentPage + 1}${(newParams ? `?${newParams}` : '')}`}>Далее</Link></li>
           : ''}
       </ul>
     </div>

@@ -43,3 +43,18 @@ export const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy';
 export const REQUEST_TIMEOUT = 5000;
 export const PAGE_LIMIT = 9;
 export const RATING_STARS_COUNT = 5;
+
+export const SortOrder = {
+  Asc: 'asc',
+  Desc: 'desc',
+};
+
+export const SortType = {
+  Price: 'price',
+  Rating: 'rating',
+};
+
+export const URLParams = {
+  Sort: '_sort',
+  Order: '_order',
+};

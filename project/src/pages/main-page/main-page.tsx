@@ -1,12 +1,12 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Banner from '../../components/banner/banner';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
-import { getNumeric, getPagesCount } from '../../components/utils/pages';
+import { getPagesCount } from '../../components/utils/pages';
 import { AppRoute } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { fetchProductsAction } from '../../store/api-actions';
+import { fetchPromoAction } from '../../store/api-actions';
 import { getLoadedPromoStatus, getPromo } from '../../store/complementary-process/selectors';
 import { getProductCount } from '../../store/product-process/selectors';
 import { getPage } from '../../store/utils-process/selectors';
@@ -15,15 +15,14 @@ import { pageSetter } from '../../store/utils-process/utils-process';
 
 function MainPage(): JSX.Element {
 
-  const navigate = useNavigate();
   const bannerData = useAppSelector(getPromo);
   const bannerLoaded = useAppSelector(getLoadedPromoStatus);
-  const currentPage = useAppSelector(getPage);
-  const location = useLocation();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const productCount = useAppSelector(getProductCount);
   const totalPages = getPagesCount(productCount);
-  const dispatch = useAppDispatch();
-  const [initialLoad, setInitialLoad] = useState(true);
+  const location = useLocation();
+  const currentPage = useAppSelector(getPage);
 
   useLayoutEffect(()=>{
     if((productCount !== 0 && currentPage > totalPages) || !location.pathname.includes('/page_')) {
@@ -35,21 +34,10 @@ function MainPage(): JSX.Element {
     }
   },[currentPage, dispatch, navigate, productCount, totalPages, location.pathname]);
 
-  useEffect(() => {
-    if(getNumeric(location.pathname) !== currentPage) {
-      dispatch(pageSetter(getNumeric(location.pathname)));
-    }
-  },[currentPage, dispatch, location]);
-
   useEffect(()=>{
-    if(!initialLoad) {
-      dispatch(fetchProductsAction(currentPage));
-    }
-  },[dispatch, currentPage, initialLoad]);
+    dispatch(fetchPromoAction());
+  },[dispatch]);
 
-  useEffect(()=>{
-    setInitialLoad(false);
-  },[]);
   return (
     <main>
       {bannerLoaded

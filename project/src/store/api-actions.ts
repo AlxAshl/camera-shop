@@ -4,14 +4,8 @@ import { APIRoute, PAGE_LIMIT } from '../const';
 import { ProductType, PromoType } from '../types/product';
 import { ReviewPostType, ReviewType } from '../types/review';
 import { AppDispatch, State } from '../types/state';
-// import { getLoadedProductStatus } from './product-process/selectors';
-// import { useAppSelector } from '../hooks/useAppSelector';
-// import { store } from './store';
 
-// const mystate = store.getState();
 
-// // eslint-disable-next-line no-console
-// console.log(mystate);
 const fetchSimilarProductsAction = createAsyncThunk<ProductType[], number, {
   dispatch: AppDispatch;
   state: State;
@@ -52,20 +46,24 @@ export const fetchSearchSuggestionsAction = createAsyncThunk<ProductType[], unde
   },
 );
 //----------------SEARCHSUGGESTIONS---------------------------//
-export const fetchProductsAction = createAsyncThunk<ProductsActionType, number, {
+type fetchParamsType = {
+  currentPage: number;
+  newParams? : string;
+}
+export const fetchProductsAction = createAsyncThunk<ProductsActionType, fetchParamsType, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'product/fetchProducts',
-  async (currentPage, {extra: api}) => {
-    const response = await api.get(`${APIRoute.Products}?_limit=${PAGE_LIMIT}&_page=${currentPage}`);
+  async (params, {extra: api}) => {
+    const response = await api.get(`${APIRoute.Products}?_limit=${PAGE_LIMIT}&_page=${params.currentPage}${(params.newParams ? `&${params.newParams}` : '')}`);
     const data = response.data as ProductType[];
     const header = response.headers['x-total-count'];
     return {data, header} as ProductsActionType;
   },
 );
-// cameras?limit=9&_page=1&category=Фотоаппарат&level=Нулевой
+
 const fetchPromoAction = createAsyncThunk<PromoType, undefined, {
   dispatch: AppDispatch;
   state: State;

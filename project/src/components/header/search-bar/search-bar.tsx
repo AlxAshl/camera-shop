@@ -10,18 +10,22 @@ function SearchBar (): JSX.Element {
   const [searchQuery, setSearchQuery] = useState('');
   const searchInputField = document.getElementById('search') as HTMLInputElement;
   let filteredProducts = [] as ProductType[];
+
   if (searchQuery !== '' && products.length > 0) {
     filteredProducts = products.filter((product) => product.name.toLowerCase().includes(searchQuery.toLowerCase()));
   }
+
   const handleSearchInputChange = (evt: React.SyntheticEvent) => {
     setSearchQuery((evt.target as HTMLInputElement).value);
   };
+
   const handleSearchResetButton = () => {
     setSearchQuery('');
     if(searchInputField !== null) {
       searchInputField.value = '';
     }
   };
+
   return (
     <div className={searchQuery !== '' && filteredProducts.length !== 0
       ? 'form-search list-opened'
