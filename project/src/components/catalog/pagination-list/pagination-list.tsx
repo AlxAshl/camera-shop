@@ -55,7 +55,7 @@ function PaginationList(): JSX.Element {
           ? <li className="pagination__item" data-testid='pagination-item-previous-test' onClick = {handleBackButtonClick}><Link className="pagination__link pagination__link--text" to={`${AppRoute.Catalog}/page_${currentPage - 1}${(newParams ? `?${newParams}` : '')}`}>Назад</Link></li>
           : ''}
         {pages}
-        {currentPage !== totalPages
+        {currentPage !== totalPages && productCount !== 0
           ? <li className="pagination__item" data-testid='pagination-item-next-test' onClick = {handleNextButtonClick}><Link className="pagination__link pagination__link--text" to={`${AppRoute.Catalog}/page_${currentPage + 1}${(newParams ? `?${newParams}` : '')}`}>Далее</Link></li>
           : ''}
       </ul>

@@ -18,6 +18,8 @@ describe('Reducer: utilsProcess', () => {
         showCart: false,
         message: {} as MessageType,
         currentPage: 0,
+        paramsSetup: '',
+        paramsUpdate: false
       });
   });
 
@@ -29,6 +31,9 @@ describe('Reducer: utilsProcess', () => {
       showCart: false,
       message: {} as MessageType,
       currentPage: 1,
+      paramsSetup: '',
+      paramsUpdate: false,
+      pageUpdate: true
     };
     expect(reducer(state, {type: errorMessageCompiler, payload: messageMock}))
       .toEqual({
@@ -38,6 +43,9 @@ describe('Reducer: utilsProcess', () => {
         showCart: false,
         message: messageMock as MessageType,
         currentPage: 1,
+        paramsSetup: '',
+        paramsUpdate: false,
+        pageUpdate: true
       });
   });
 });

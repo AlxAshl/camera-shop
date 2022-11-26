@@ -8,6 +8,7 @@ export type ProductProcess = {
   isProductDataLoaded: boolean;
   productCount: number;
   products: ProductType[];
+  allProducts: ProductType[];
   searchSuggestions: ProductType[];
   similarProducts: ProductType[];
   product: ProductType;
@@ -23,6 +24,9 @@ export type UtilsProcess = {
   showCart: boolean;
   message: MessageType;
   currentPage: number;
+  paramsSetup: unknown;
+  paramsUpdate: boolean;
+  pageUpdate: boolean;
 }
 
 export type ReviewProcess = {

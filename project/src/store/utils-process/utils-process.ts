@@ -11,12 +11,22 @@ export const utilsInitialState: UtilsProcess = {
   showCart: false,
   message: {} as MessageType,
   currentPage: 0,
+  paramsSetup: '' as unknown,
+  paramsUpdate: false,
+  pageUpdate: true,
 };
 
 export const utilsProcess = createSlice({
   name: NameSpace.Utils,
   initialState: utilsInitialState,
   reducers: {
+    pageUpdateSetter(state, action) {
+      state.pageUpdate = action.payload as boolean;
+    },
+    paramsSetter(state, action) {
+      state.paramsSetup = action.payload as unknown;
+      state.paramsUpdate = !state.paramsUpdate;
+    },
     pageSetter(state, action) {
       state.currentPage = action.payload as number;
     },
@@ -38,5 +48,5 @@ export const utilsProcess = createSlice({
   },
 });
 
-export const {pageSetter, errorMessageCompiler, messageToggler, reviewToggler, succesToggler, cartToggler} = utilsProcess.actions;
+export const {pageUpdateSetter, paramsSetter, pageSetter, errorMessageCompiler, messageToggler, reviewToggler, succesToggler, cartToggler} = utilsProcess.actions;
 export default utilsProcess.reducer;

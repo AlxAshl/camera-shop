@@ -55,6 +55,30 @@ export const SortType = {
 };
 
 export const URLParams = {
+  Search: 'name_like',
   Sort: '_sort',
   Order: '_order',
+  PriceMin: 'price_gte',
+  PriceMax: 'price_lte',
+  Category: 'category',
+  Level: 'level',
+  Type: 'type',
+};
+
+export const typeFilter = {
+  Digital: 'Цифровая',
+  Film: 'Плёночная',
+  Instant: 'Моментальная',
+  Collectible: 'Коллекционная'
+};
+
+export const categoryFilter = {
+  Camera: 'Фотоаппарат',
+  Video: 'Видеокамера'
+};
+
+export const levelFilter = {
+  Novice: 'Нулевой',
+  Amateur: 'Любительский',
+  Pro: 'Профессиональный'
 };

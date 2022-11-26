@@ -6,23 +6,26 @@ import PaginationList from './pagination-list/pagination-list';
 import Preloader from '../preloader/preloader';
 import SortBar from './sort-bar/sort-bar';
 import { useEffect, useState } from 'react';
-import { fetchProductsAction } from '../../store/api-actions';
+import { fetchAllProductsAction, fetchProductsAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { getNumeric } from '../utils/pages';
-import { pageSetter } from '../../store/utils-process/utils-process';
+import { pageSetter, pageUpdateSetter, paramsSetter } from '../../store/utils-process/utils-process';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import { getPage } from '../../store/utils-process/selectors';
+import { getPage, getPageUpdateStatus, getParams, getParamsUpdateStatus } from '../../store/utils-process/selectors';
 
 
 function Catalog(): JSX.Element {
 
   const isDataLoaded = useAppSelector(getLoadedProductsStatus);
   const products = useAppSelector(getProducts);
+  const updateStatus = useAppSelector(getParamsUpdateStatus);
+  const updatedParams = useAppSelector(getParams);
   const dispatch = useAppDispatch();
   const currentPage = useAppSelector(getPage);
   const location = useLocation();
   const [initialLoad, setInitialLoad] = useState(true);
-  const [urlParams] = useSearchParams();
+  const pageUpdateStatus = useAppSelector(getPageUpdateStatus);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
     if(getNumeric(location.pathname) !== currentPage) {
@@ -31,12 +34,27 @@ function Catalog(): JSX.Element {
   },[currentPage, dispatch, location]);
 
   useEffect(()=>{
-    const newParams = urlParams.toString();
-    const params = {currentPage, newParams};
-    if(!initialLoad) {
-      dispatch(fetchProductsAction(params));
+    const urlParams = searchParams.toString();
+    const params = {currentPage, urlParams};
+    if(updateStatus) {
+      dispatch(fetchProductsAction({...params, urlParams: updatedParams as string}));
+      setSearchParams(updatedParams as string);
+      dispatch(paramsSetter(''));
+      dispatch(pageUpdateSetter(false));
     }
-  },[dispatch, currentPage, initialLoad, urlParams]);
+    if(!initialLoad) {
+      if(!updateStatus && pageUpdateStatus) {
+        dispatch(fetchProductsAction(params));
+      }
+      dispatch(pageUpdateSetter(true));
+    }
+  },[dispatch, initialLoad, currentPage, searchParams, updateStatus, pageUpdateStatus, setSearchParams, updatedParams]);
+
+  useEffect(()=>{
+    if(!initialLoad) {
+      dispatch(fetchAllProductsAction());
+    }
+  },[initialLoad, dispatch, pageUpdateStatus]);
 
   useEffect(()=>{
     setInitialLoad(false);
@@ -55,6 +73,9 @@ function Catalog(): JSX.Element {
               : <Preloader/>}
             {isDataLoaded
               ? <PaginationList/>
+              : ''}
+            {products.length === 0 && isDataLoaded
+              ? <div>По вашему запросу ничего не найдено</div>
               : ''}
           </div>
         </div>

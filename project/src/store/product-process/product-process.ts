@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { ProductType } from '../../types/product';
 import { ProductProcess } from '../../types/state';
-import { fetchSimilarProductsAction, fetchProductAction, fetchProductsAction, fetchSearchSuggestionsAction } from '../api-actions';
+import { fetchSimilarProductsAction, fetchProductAction, fetchProductsAction, fetchSearchSuggestionsAction, fetchAllProductsAction } from '../api-actions';
 
 
 export const productInitialState: ProductProcess = {
@@ -10,6 +10,7 @@ export const productInitialState: ProductProcess = {
   isProductDataLoaded: false,
   productCount: 0,
   products: [],
+  allProducts: [],
   searchSuggestions: [],
   similarProducts: [],
   product: {} as ProductType,
@@ -21,6 +22,9 @@ export const productProcess = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
+      .addCase(fetchAllProductsAction.fulfilled, (state, action) => {
+        state.allProducts = action.payload;
+      })
       .addCase(fetchProductsAction.pending, (state) => {
         state.isProductsDataLoaded = false;
       })

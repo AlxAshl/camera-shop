@@ -33,22 +33,35 @@ type ProductsActionType = {
   data: ProductType[];
   header: string;
 }
-//----------------SEARCHSUGGESTIONS---------------------------//
-export const fetchSearchSuggestionsAction = createAsyncThunk<ProductType[], undefined, {
+
+export const fetchAllProductsAction = createAsyncThunk<ProductType[], undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'product/fetchAllProducts',
+  async (_arg, {extra: api}) => {
+    const {data} = await api.get<ProductType[]>(`${APIRoute.Products}`);
+    return data;
+  }
+);
+
+//----------------SEARCHSUGGESTIONS----------delete-----------------//
+export const fetchSearchSuggestionsAction = createAsyncThunk<ProductType[], string, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'product/fetchSearhSuggestions',
-  async (_arg, {extra: api}) => {
-    const {data} = await api.get<ProductType[]>(`${APIRoute.Products}`);
+  async (urlParams, {extra: api}) => {
+    const {data} = await api.get<ProductType[]>(`${APIRoute.Products}?${(urlParams ? `${urlParams}` : '')}`);
     return data;
   },
 );
 //----------------SEARCHSUGGESTIONS---------------------------//
 type fetchParamsType = {
   currentPage: number;
-  newParams? : string;
+  urlParams? : string;
 }
 export const fetchProductsAction = createAsyncThunk<ProductsActionType, fetchParamsType, {
   dispatch: AppDispatch;
@@ -57,7 +70,7 @@ export const fetchProductsAction = createAsyncThunk<ProductsActionType, fetchPar
 }>(
   'product/fetchProducts',
   async (params, {extra: api}) => {
-    const response = await api.get(`${APIRoute.Products}?_limit=${PAGE_LIMIT}&_page=${params.currentPage}${(params.newParams ? `&${params.newParams}` : '')}`);
+    const response = await api.get(`${APIRoute.Products}?_limit=${PAGE_LIMIT}&_page=${params.currentPage}${(params.urlParams ? `&${params.urlParams}` : '')}`);
     const data = response.data as ProductType[];
     const header = response.headers['x-total-count'];
     return {data, header} as ProductsActionType;
