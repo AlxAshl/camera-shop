@@ -5,6 +5,9 @@ import { ProductType } from '../../../../types/product';
 import useDebounce from '../../../../hooks/use-debounce';
 import { getProductsByPrice } from '../../../../store/product-process/selectors';
 import { URLParams } from '../../../../const';
+import { getCleanUpStatus as getFieldsStatus } from '../../../../store/utils-process/selectors';
+import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import { fieldCleaner } from '../../../../store/utils-process/utils-process';
 
 
 export function Price() {
@@ -12,12 +15,20 @@ export function Price() {
   const [inputValue, setInputValue] = useState({ min: '', max: ''});
   const [searchParams, setSearchParams] = useSearchParams();
   const productsByPrice: ProductType[] = useAppSelector(getProductsByPrice);
+  const clearPrice = useAppSelector(getFieldsStatus);
+  const dispatch = useAppDispatch();
   const debouncedMinInput = useDebounce(inputValue.min, 1250);
   const debouncedMaxInput = useDebounce(inputValue.max, 1250);
 
+  useEffect(()=>{
+    if(clearPrice){
+      setInputValue({ min: '', max: ''});
+      dispatch(fieldCleaner());
+    }
+  },[clearPrice, dispatch]);
+
   useEffect(
     () => {
-
       if (debouncedMinInput !== '' && productsByPrice) {
         if (Number(debouncedMinInput) < productsByPrice[0].price && inputValue.min !== '') {
           setInputValue((prev) => ({...prev, min: String(productsByPrice[0].price)}));

@@ -82,3 +82,5 @@ export const levelFilter = {
   Amateur: 'Любительский',
   Pro: 'Профессиональный'
 };
+
+export const DEFAULT_PAGE_NUMBER = 1;

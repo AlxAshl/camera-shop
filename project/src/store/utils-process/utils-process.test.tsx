@@ -33,7 +33,7 @@ describe('Reducer: utilsProcess', () => {
       currentPage: 1,
       paramsSetup: '',
       paramsUpdate: false,
-      pageUpdate: true
+      cleanPrice: false
     };
     expect(reducer(state, {type: errorMessageCompiler, payload: messageMock}))
       .toEqual({
@@ -45,7 +45,7 @@ describe('Reducer: utilsProcess', () => {
         currentPage: 1,
         paramsSetup: '',
         paramsUpdate: false,
-        pageUpdate: true
+        cleanPrice: false
       });
   });
 });

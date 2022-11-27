@@ -9,7 +9,6 @@ export type ProductProcess = {
   productCount: number;
   products: ProductType[];
   allProducts: ProductType[];
-  searchSuggestions: ProductType[];
   similarProducts: ProductType[];
   product: ProductType;
 }
@@ -26,7 +25,7 @@ export type UtilsProcess = {
   currentPage: number;
   paramsSetup: unknown;
   paramsUpdate: boolean;
-  pageUpdate: boolean;
+  cleanPrice: boolean;
 }
 
 export type ReviewProcess = {

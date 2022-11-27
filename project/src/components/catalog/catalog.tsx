@@ -9,22 +9,22 @@ import { useEffect, useState } from 'react';
 import { fetchAllProductsAction, fetchProductsAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { getNumeric } from '../utils/pages';
-import { pageSetter, pageUpdateSetter, paramsSetter } from '../../store/utils-process/utils-process';
+import { pageSetter, paramsSetter } from '../../store/utils-process/utils-process';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import { getPage, getPageUpdateStatus, getParams, getParamsUpdateStatus } from '../../store/utils-process/selectors';
+import { getPage, getParams, getParamsUpdateStatus } from '../../store/utils-process/selectors';
 
 
 function Catalog(): JSX.Element {
 
   const isDataLoaded = useAppSelector(getLoadedProductsStatus);
   const products = useAppSelector(getProducts);
-  const updateStatus = useAppSelector(getParamsUpdateStatus);
+  const paramsUpdateStatus = useAppSelector(getParamsUpdateStatus);
   const updatedParams = useAppSelector(getParams);
   const dispatch = useAppDispatch();
   const currentPage = useAppSelector(getPage);
   const location = useLocation();
   const [initialLoad, setInitialLoad] = useState(true);
-  const pageUpdateStatus = useAppSelector(getPageUpdateStatus);
+  const [pageUpdateStatus, setPageUpdateStatus] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -36,25 +36,24 @@ function Catalog(): JSX.Element {
   useEffect(()=>{
     const urlParams = searchParams.toString();
     const params = {currentPage, urlParams};
-    if(updateStatus) {
-      dispatch(fetchProductsAction({...params, urlParams: updatedParams as string}));
+    if(paramsUpdateStatus) {
       setSearchParams(updatedParams as string);
       dispatch(paramsSetter(''));
-      dispatch(pageUpdateSetter(false));
+      setPageUpdateStatus(false);
     }
     if(!initialLoad) {
-      if(!updateStatus && pageUpdateStatus) {
+      if(!paramsUpdateStatus && pageUpdateStatus) {
         dispatch(fetchProductsAction(params));
       }
-      dispatch(pageUpdateSetter(true));
     }
-  },[dispatch, initialLoad, currentPage, searchParams, updateStatus, pageUpdateStatus, setSearchParams, updatedParams]);
+    setPageUpdateStatus(true);
+  },[initialLoad, searchParams, setSearchParams, updatedParams, pageUpdateStatus]);
 
   useEffect(()=>{
     if(!initialLoad) {
       dispatch(fetchAllProductsAction());
     }
-  },[initialLoad, dispatch, pageUpdateStatus]);
+  },[initialLoad, dispatch]);
 
   useEffect(()=>{
     setInitialLoad(false);

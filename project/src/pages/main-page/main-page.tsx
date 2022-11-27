@@ -3,7 +3,7 @@ import { Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-
 import Banner from '../../components/banner/banner';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
 import { getPagesCount } from '../../components/utils/pages';
-import { AppRoute } from '../../const';
+import { AppRoute, DEFAULT_PAGE_NUMBER } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchPromoAction } from '../../store/api-actions';
@@ -28,16 +28,16 @@ function MainPage(): JSX.Element {
   useEffect(()=>{
     const passedParams = searchParams.toString();
     if((productCount !== 0 && currentPage > totalPages) && typeof passedParams === 'string') {
-      dispatch(pageSetter(1));
+      dispatch(pageSetter(DEFAULT_PAGE_NUMBER));
       dispatch(paramsSetter(passedParams));
-      navigate(`${AppRoute.Catalog}/page_1`);
+      navigate(`${AppRoute.Catalog}/page_${DEFAULT_PAGE_NUMBER}`);
     }
     if(!location.pathname.includes('/page_')) {
       navigate(`${AppRoute.NotFoundPage}`);
     }
     if(location.pathname === (`${AppRoute.Catalog}`)) {
-      navigate(`${AppRoute.Catalog}/page_1`);
-      dispatch(pageSetter(1));
+      navigate(`${AppRoute.Catalog}/page_${DEFAULT_PAGE_NUMBER}`);
+      dispatch(pageSetter(DEFAULT_PAGE_NUMBER));
     }
   },[currentPage, dispatch, navigate, productCount, totalPages, location.pathname]);
 

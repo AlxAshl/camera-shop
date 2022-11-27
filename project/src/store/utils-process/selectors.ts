@@ -10,4 +10,4 @@ export const getModalCartVisibilityStatus = (state: State): boolean => state[Nam
 export const getPage = (state: State): number => state[NameSpace.Utils].currentPage;
 export const getParamsUpdateStatus = (state: State): boolean => state[NameSpace.Utils].paramsUpdate;
 export const getParams = (state: State): unknown => state[NameSpace.Utils].paramsSetup;
-export const getPageUpdateStatus = (state: State): boolean => state[NameSpace.Utils].pageUpdate;
+export const getCleanUpStatus = (state: State): boolean => state[NameSpace.Utils].cleanPrice;

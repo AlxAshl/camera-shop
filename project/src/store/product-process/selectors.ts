@@ -9,7 +9,6 @@ export const getProducts = (state: State): ProductType[] => state[NameSpace.Prod
 export const getSimilarProducts = (state: State): ProductType[] => state[NameSpace.Product].similarProducts;
 export const getProduct = (state: State): ProductType => state[NameSpace.Product].product;
 export const getProductCount = (state: State): number => state[NameSpace.Product].productCount;
-export const getSearchSuggestions = (state: State): ProductType[] => state[NameSpace.Product].searchSuggestions;
 export const getAllProducts = (state: State): ProductType[] => state[NameSpace.Product].allProducts;
 export const getProductsByPrice = createSelector(
   getAllProducts,
@@ -17,5 +16,13 @@ export const getProductsByPrice = createSelector(
     const productsByPrice = products?.slice();
     productsByPrice?.sort((a, b) => a.price - b.price);
     return productsByPrice;
+  }
+);
+export const getProductsAlphabetic = createSelector(
+  getAllProducts,
+  (products) => {
+    const productsAlphabetic = products?.slice();
+    productsAlphabetic?.sort((a, b) => a.name.localeCompare(b.name));
+    return productsAlphabetic;
   }
 );

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { ProductType } from '../../types/product';
 import { ProductProcess } from '../../types/state';
-import { fetchSimilarProductsAction, fetchProductAction, fetchProductsAction, fetchSearchSuggestionsAction, fetchAllProductsAction } from '../api-actions';
+import { fetchSimilarProductsAction, fetchProductAction, fetchProductsAction, fetchAllProductsAction } from '../api-actions';
 
 
 export const productInitialState: ProductProcess = {
@@ -11,7 +11,6 @@ export const productInitialState: ProductProcess = {
   productCount: 0,
   products: [],
   allProducts: [],
-  searchSuggestions: [],
   similarProducts: [],
   product: {} as ProductType,
 };
@@ -55,10 +54,6 @@ export const productProcess = createSlice({
       })
       .addCase(fetchSimilarProductsAction.rejected, (state) => {
         state.isProductDataLoaded = false;
-      })
-      .addCase(fetchSearchSuggestionsAction.fulfilled, (state, action) => {
-        state.isProductsDataLoaded = true;
-        state.searchSuggestions = action.payload;
       });
   }
 });

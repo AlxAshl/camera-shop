@@ -1,19 +1,30 @@
+import { useSearchParams } from 'react-router-dom';
+import { URLParams } from '../../../const';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { fieldCleaner } from '../../../store/utils-process/utils-process';
 import { CameraType } from './camera-type/camera-type';
 import { Category } from './category/category';
 import { Level } from './level/level';
 import { Price } from './price/price';
 
 function FilterBlock(): JSX.Element {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useAppDispatch();
+  const handleFilterReset = () => {
+    Object.entries(URLParams).forEach(([key, value]) => searchParams.delete(value));
+    setSearchParams(searchParams);
+    dispatch(fieldCleaner());
+  };
   return (
     <div className="catalog__aside">
       <div className="catalog-filter">
         <form action="#">
           <h2 className="visually-hidden">Фильтр</h2>
-          <Price />
+          <Price/>
           <Category/>
           <CameraType/>
           <Level/>
-          <button className="btn catalog-filter__reset-btn" type="reset">Сбросить фильтры
+          <button onClick={handleFilterReset} className="btn catalog-filter__reset-btn" type="reset">Сбросить фильтры
           </button>
         </form>
       </div>
