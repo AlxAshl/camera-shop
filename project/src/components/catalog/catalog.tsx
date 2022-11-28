@@ -9,9 +9,11 @@ import { useEffect, useState } from 'react';
 import { fetchAllProductsAction, fetchProductsAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { getNumeric } from '../utils/pages';
-import { pageSetter, paramsSetter } from '../../store/utils-process/utils-process';
+import { pageSetter } from '../../store/utils-process/utils-process';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import { getPage, getParams, getParamsUpdateStatus } from '../../store/utils-process/selectors';
+import { getPage } from '../../store/utils-process/selectors';
+import { getParams, getParamsUpdateStatus } from '../../store/filters-process/selectors';
+import { paramsSetter } from '../../store/filters-process/filters-process';
 
 
 function Catalog(): JSX.Element {

@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render Formsearchlist 1`] = `
+<DocumentFragment>
+  <ul
+    class="form-search__select-list"
+  >
+    <a
+      href="/cameras/1"
+    >
+      <li
+        class="form-search__select-item"
+      >
+        Look Identify1
+      </li>
+    </a>
+    <a
+      href="/cameras/2"
+    >
+      <li
+        class="form-search__select-item"
+      >
+        Look Identify2
+      </li>
+    </a>
+    <a
+      href="/cameras/3"
+    >
+      <li
+        class="form-search__select-item"
+      >
+        Look Identify3
+      </li>
+    </a>
+    <a
+      href="/cameras/4"
+    >
+      <li
+        class="form-search__select-item"
+      >
+        Look Identify4
+      </li>
+    </a>
+  </ul>
+</DocumentFragment>
+`;

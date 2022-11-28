@@ -46,9 +46,12 @@ exports[`Render Cataog 1`] = `
                   >
                     <label>
                       <input
+                        data-testid="minPrice-test"
+                        id="minPrice"
                         name="price"
                         placeholder="от"
                         type="number"
+                        value=""
                       />
                     </label>
                   </div>
@@ -57,9 +60,12 @@ exports[`Render Cataog 1`] = `
                   >
                     <label>
                       <input
+                        data-testid="maxPrice-test"
+                        id="maxPrice"
                         name="priceUp"
                         placeholder="до"
                         type="number"
+                        value=""
                       />
                     </label>
                   </div>
@@ -78,6 +84,7 @@ exports[`Render Cataog 1`] = `
                 >
                   <label>
                     <input
+                      data-testid="photocamera-test"
                       name="photocamera"
                       type="checkbox"
                     />
@@ -96,6 +103,7 @@ exports[`Render Cataog 1`] = `
                 >
                   <label>
                     <input
+                      data-testid="videocamera-test"
                       name="videocamera"
                       type="checkbox"
                     />
@@ -123,6 +131,7 @@ exports[`Render Cataog 1`] = `
                 >
                   <label>
                     <input
+                      data-testid="digital-test"
                       name="digital"
                       type="checkbox"
                     />
@@ -141,7 +150,7 @@ exports[`Render Cataog 1`] = `
                 >
                   <label>
                     <input
-                      disabled=""
+                      data-testid="film-test"
                       name="film"
                       type="checkbox"
                     />
@@ -160,6 +169,7 @@ exports[`Render Cataog 1`] = `
                 >
                   <label>
                     <input
+                      data-testid="snapshot-test"
                       name="snapshot"
                       type="checkbox"
                     />
@@ -178,7 +188,7 @@ exports[`Render Cataog 1`] = `
                 >
                   <label>
                     <input
-                      disabled=""
+                      data-testid="collection-test"
                       name="collection"
                       type="checkbox"
                     />
@@ -206,6 +216,7 @@ exports[`Render Cataog 1`] = `
                 >
                   <label>
                     <input
+                      data-testid="level-zero-test"
                       name="zero"
                       type="checkbox"
                     />
@@ -224,6 +235,7 @@ exports[`Render Cataog 1`] = `
                 >
                   <label>
                     <input
+                      data-testid="level-amateur-test"
                       name="non-professional"
                       type="checkbox"
                     />
@@ -242,6 +254,7 @@ exports[`Render Cataog 1`] = `
                 >
                   <label>
                     <input
+                      data-testid="level-pro-test"
                       name="professional"
                       type="checkbox"
                     />
@@ -258,6 +271,7 @@ exports[`Render Cataog 1`] = `
               </fieldset>
               <button
                 class="btn catalog-filter__reset-btn"
+                data-testid="reset-button-test"
                 type="reset"
               >
                 Сбросить фильтры
@@ -289,6 +303,7 @@ exports[`Render Cataog 1`] = `
                     class="catalog-sort__btn-text"
                   >
                     <input
+                      data-testid="sort-test"
                       id="sortPrice"
                       name="sort"
                       type="radio"
@@ -303,6 +318,7 @@ exports[`Render Cataog 1`] = `
                     class="catalog-sort__btn-text"
                   >
                     <input
+                      data-testid="sort-test"
                       id="sortPopular"
                       name="sort"
                       type="radio"
@@ -322,6 +338,7 @@ exports[`Render Cataog 1`] = `
                   >
                     <input
                       aria-label="По возрастанию"
+                      data-testid="sort-test"
                       id="up"
                       name="sort-icon"
                       type="radio"
@@ -345,6 +362,7 @@ exports[`Render Cataog 1`] = `
                   >
                     <input
                       aria-label="По убыванию"
+                      data-testid="sort-test"
                       id="down"
                       name="sort-icon"
                       type="radio"
@@ -368,9 +386,25 @@ exports[`Render Cataog 1`] = `
             </form>
           </div>
           <div
+            class="page-content"
             data-testid="preloader-test"
           >
-            Loading data...
+            <div
+              class="container"
+              style="padding: 10px; width: 100%;"
+            >
+              <span
+                style="display: inherit; position: relative; width: 100%; height: 20px; overflow: hidden; background-color: rgba(117, 117, 226, 0.2); background-clip: padding-box;"
+              >
+                <span
+                  style="position: absolute; height: 20px; overflow: hidden; background-color: rgb(117, 117, 226); background-clip: padding-box; display: block; border-radius: 2px; will-change: left, right; animation-fill-mode: forwards; animation: react-spinners-BarLoader-long 2.1s  cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;"
+                />
+                <span
+                  style="position: absolute; height: 20px; overflow: hidden; background-color: rgb(117, 117, 226); background-clip: padding-box; display: block; border-radius: 2px; will-change: left, right; animation-fill-mode: forwards; animation: react-spinners-BarLoader-short 2.1s 1.15s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;"
+                />
+              </span>
+              Loading data...
+            </div>
           </div>
         </div>
       </div>

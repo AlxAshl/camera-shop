@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { levelFilter, URLParams } from '../../../../const';
+import { LevelFilter, URLParams } from '../../../../const';
 
 
 export function Level() {
@@ -25,21 +25,21 @@ export function Level() {
       <legend className="title title--h5">Уровень</legend>
       <div className="custom-checkbox catalog-filter__item">
         <label>
-          <input type="checkbox" name="zero" checked={levelFilters.includes(levelFilter.Novice)} onChange={() => handleLevelInputChange(levelFilter.Novice)}/>
+          <input data-testid='level-zero-test' type="checkbox" name="zero" checked={levelFilters.includes(LevelFilter.Novice)} onChange={() => handleLevelInputChange(LevelFilter.Novice)}/>
           <span className="custom-checkbox__icon"></span>
           <span className="custom-checkbox__label">Нулевой</span>
         </label>
       </div>
       <div className="custom-checkbox catalog-filter__item">
         <label>
-          <input type="checkbox" name="non-professional" checked={levelFilters.includes(levelFilter.Amateur)} onChange={() => handleLevelInputChange(levelFilter.Amateur)}/>
+          <input data-testid='level-amateur-test' type="checkbox" name="non-professional" checked={levelFilters.includes(LevelFilter.Amateur)} onChange={() => handleLevelInputChange(LevelFilter.Amateur)}/>
           <span className="custom-checkbox__icon"></span>
           <span className="custom-checkbox__label">Любительский</span>
         </label>
       </div>
       <div className="custom-checkbox catalog-filter__item">
         <label>
-          <input type="checkbox" name="professional" checked={levelFilters.includes(levelFilter.Pro)} onChange={() => handleLevelInputChange(levelFilter.Pro)}/>
+          <input data-testid='level-pro-test' type="checkbox" name="professional" checked={levelFilters.includes(LevelFilter.Pro)} onChange={() => handleLevelInputChange(LevelFilter.Pro)}/>
           <span className="custom-checkbox__icon"></span>
           <span className="custom-checkbox__label">Профессиональный</span>
         </label>

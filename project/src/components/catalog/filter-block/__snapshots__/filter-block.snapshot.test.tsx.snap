@@ -32,9 +32,12 @@ exports[`FilterBlock renders correctly 1`] = `
             >
               <label>
                 <input
+                  data-testid="minPrice-test"
+                  id="minPrice"
                   name="price"
                   placeholder="от"
                   type="number"
+                  value=""
                 />
               </label>
             </div>
@@ -43,9 +46,12 @@ exports[`FilterBlock renders correctly 1`] = `
             >
               <label>
                 <input
+                  data-testid="maxPrice-test"
+                  id="maxPrice"
                   name="priceUp"
                   placeholder="до"
                   type="number"
+                  value=""
                 />
               </label>
             </div>
@@ -64,6 +70,7 @@ exports[`FilterBlock renders correctly 1`] = `
           >
             <label>
               <input
+                data-testid="photocamera-test"
                 name="photocamera"
                 type="checkbox"
               />
@@ -82,6 +89,7 @@ exports[`FilterBlock renders correctly 1`] = `
           >
             <label>
               <input
+                data-testid="videocamera-test"
                 name="videocamera"
                 type="checkbox"
               />
@@ -109,6 +117,7 @@ exports[`FilterBlock renders correctly 1`] = `
           >
             <label>
               <input
+                data-testid="digital-test"
                 name="digital"
                 type="checkbox"
               />
@@ -127,7 +136,7 @@ exports[`FilterBlock renders correctly 1`] = `
           >
             <label>
               <input
-                disabled=""
+                data-testid="film-test"
                 name="film"
                 type="checkbox"
               />
@@ -146,6 +155,7 @@ exports[`FilterBlock renders correctly 1`] = `
           >
             <label>
               <input
+                data-testid="snapshot-test"
                 name="snapshot"
                 type="checkbox"
               />
@@ -164,7 +174,7 @@ exports[`FilterBlock renders correctly 1`] = `
           >
             <label>
               <input
-                disabled=""
+                data-testid="collection-test"
                 name="collection"
                 type="checkbox"
               />
@@ -192,6 +202,7 @@ exports[`FilterBlock renders correctly 1`] = `
           >
             <label>
               <input
+                data-testid="level-zero-test"
                 name="zero"
                 type="checkbox"
               />
@@ -210,6 +221,7 @@ exports[`FilterBlock renders correctly 1`] = `
           >
             <label>
               <input
+                data-testid="level-amateur-test"
                 name="non-professional"
                 type="checkbox"
               />
@@ -228,6 +240,7 @@ exports[`FilterBlock renders correctly 1`] = `
           >
             <label>
               <input
+                data-testid="level-pro-test"
                 name="professional"
                 type="checkbox"
               />
@@ -244,6 +257,7 @@ exports[`FilterBlock renders correctly 1`] = `
         </fieldset>
         <button
           class="btn catalog-filter__reset-btn"
+          data-testid="reset-button-test"
           type="reset"
         >
           Сбросить фильтры

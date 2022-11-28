@@ -11,19 +11,12 @@ export const utilsInitialState: UtilsProcess = {
   showCart: false,
   message: {} as MessageType,
   currentPage: 0,
-  paramsSetup: '' as unknown,
-  paramsUpdate: false,
-  cleanPrice: false,
 };
 
 export const utilsProcess = createSlice({
   name: NameSpace.Utils,
   initialState: utilsInitialState,
   reducers: {
-    paramsSetter(state, action) {
-      state.paramsSetup = action.payload as unknown;
-      state.paramsUpdate = !state.paramsUpdate;
-    },
     pageSetter(state, action) {
       state.currentPage = action.payload as number;
     },
@@ -42,11 +35,8 @@ export const utilsProcess = createSlice({
     cartToggler(state) {
       state.showCart = !state.showCart;
     },
-    fieldCleaner(state) {
-      state.cleanPrice = !state.cleanPrice;
-    }
   },
 });
 
-export const { fieldCleaner, paramsSetter, pageSetter, errorMessageCompiler, messageToggler, reviewToggler, succesToggler, cartToggler} = utilsProcess.actions;
+export const { pageSetter, errorMessageCompiler, messageToggler, reviewToggler, succesToggler, cartToggler} = utilsProcess.actions;
 export default utilsProcess.reducer;

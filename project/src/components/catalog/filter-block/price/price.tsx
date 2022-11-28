@@ -3,11 +3,10 @@ import { useSearchParams } from 'react-router-dom';
 import { useAppSelector } from '../../../../hooks/useAppSelector';
 import { ProductType } from '../../../../types/product';
 import useDebounce from '../../../../hooks/use-debounce';
-import { getProductsByPrice } from '../../../../store/product-process/selectors';
 import { URLParams } from '../../../../const';
-import { getCleanUpStatus as getFieldsStatus } from '../../../../store/utils-process/selectors';
 import { useAppDispatch } from '../../../../hooks/useAppDispatch';
-import { fieldCleaner } from '../../../../store/utils-process/utils-process';
+import { fieldCleaner } from '../../../../store/filters-process/filters-process';
+import { getCleanUpStatus, getProductsByPrice } from '../../../../store/filters-process/selectors';
 
 
 export function Price() {
@@ -15,7 +14,7 @@ export function Price() {
   const [inputValue, setInputValue] = useState({ min: '', max: ''});
   const [searchParams, setSearchParams] = useSearchParams();
   const productsByPrice: ProductType[] = useAppSelector(getProductsByPrice);
-  const clearPrice = useAppSelector(getFieldsStatus);
+  const clearPrice = useAppSelector(getCleanUpStatus);
   const dispatch = useAppDispatch();
   const debouncedMinInput = useDebounce(inputValue.min, 1250);
   const debouncedMaxInput = useDebounce(inputValue.max, 1250);
@@ -40,11 +39,13 @@ export function Price() {
             setInputValue((prev) => ({...prev, min: inputValue.max}));
             searchParams.delete(URLParams.PriceMin);
             searchParams.append(URLParams.PriceMin, inputValue.max);
+            return;
           }
-          if(Number(inputValue.min) > productsByPrice[productsByPrice.length - 1].price) {
+          if(Number(debouncedMinInput) > productsByPrice[productsByPrice.length - 1].price) {
             setInputValue((prev) => ({...prev, min: String(productsByPrice[productsByPrice.length - 1].price)}));
             searchParams.delete(URLParams.PriceMin);
             searchParams.append(URLParams.PriceMin, String(productsByPrice[productsByPrice.length - 1].price));
+            return;
           }
           if(!productsByPrice.find((product) => product.price === Number(inputValue.min))) {
             const newPriceInput = productsByPrice.find((product, i) => {
@@ -72,10 +73,11 @@ export function Price() {
 
   useEffect(
     () => {
-
       if (debouncedMaxInput !== '' && productsByPrice) {
         if (Number(inputValue.max) > productsByPrice[productsByPrice.length - 1].price && inputValue.max !== '') {
           setInputValue((prev) => ({...prev, max: String(productsByPrice[productsByPrice.length - 1].price)}));
+          searchParams.delete(URLParams.PriceMax);
+          searchParams.append(URLParams.PriceMax, String(productsByPrice[productsByPrice.length - 1].price));
         }
         else {
           if (Number(debouncedMaxInput) < Number(inputValue.min)) {
@@ -100,7 +102,6 @@ export function Price() {
           }
         }
       }
-
       else {
         const piceMaxParam = searchParams.get(URLParams.PriceMax) || '';
         if (piceMaxParam !== inputValue.max) {
@@ -118,12 +119,12 @@ export function Price() {
       <div className="catalog-filter__price-range">
         <div className="custom-input">
           <label>
-            <input type="number" id='minPrice' value={inputValue.min} name="price" placeholder={productsByPrice[0] ? productsByPrice[0].price?.toString() : 'от'} onChange={(evt) => setInputValue((prev) => ({...prev, min: evt.target.value}))}/>
+            <input type="number" data-testid='minPrice-test' id='minPrice' value={inputValue.min} name="price" placeholder={productsByPrice[0] ? productsByPrice[0].price?.toString() : 'от'} onChange={(evt) => setInputValue((prev) => ({...prev, min: evt.target.value}))}/>
           </label>
         </div>
         <div className="custom-input">
           <label>
-            <input type="number" id='maxPrice' value={inputValue.max} name="priceUp" placeholder={productsByPrice[0] ? productsByPrice[productsByPrice.length - 1].price?.toString() : 'до'} onChange={(evt) => setInputValue((prev) => ({...prev, max: evt.target.value}))}/>
+            <input type="number" data-testid='maxPrice-test' id='maxPrice' value={inputValue.max} name="priceUp" placeholder={productsByPrice[0] ? productsByPrice[productsByPrice.length - 1].price?.toString() : 'до'} onChange={(evt) => setInputValue((prev) => ({...prev, max: evt.target.value}))}/>
           </label>
         </div>
       </div>

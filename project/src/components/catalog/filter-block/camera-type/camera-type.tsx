@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { categoryFilter, typeFilter, URLParams } from '../../../../const';
+import { CategoryFilter, TypeFilter, URLParams } from '../../../../const';
 
 
 export function CameraType() {
@@ -26,8 +26,8 @@ export function CameraType() {
   };
 
   useEffect(()=>{
-    if(categoryFilters.includes(categoryFilter.Video) && (typeFilters.includes(typeFilter.Film) || typeFilters.includes(typeFilter.Instant)) && !categoryFilters.includes(categoryFilter.Camera)) {
-      const typeFilterArray = typeFilters.filter((entry) => entry !== typeFilter.Film).filter((entry) => entry !== typeFilter.Instant);
+    if(categoryFilters.includes(CategoryFilter.Video) && (typeFilters.includes(TypeFilter.Film) || typeFilters.includes(TypeFilter.Instant)) && !categoryFilters.includes(CategoryFilter.Camera)) {
+      const typeFilterArray = typeFilters.filter((entry) => entry !== TypeFilter.Film).filter((entry) => entry !== TypeFilter.Instant);
       searchParams.delete(URLParams.Type);
       typeFilterArray.forEach((entry) => {
         searchParams.append(URLParams.Type, entry);
@@ -41,28 +41,28 @@ export function CameraType() {
       <legend className="title title--h5">Тип камеры</legend>
       <div className="custom-checkbox catalog-filter__item">
         <label>
-          <input type="checkbox" name="digital" checked={typeFilters.includes(typeFilter.Digital)} onChange={() => handleTypeInputChange(typeFilter.Digital)}/>
+          <input type="checkbox" data-testid='digital-test' name="digital" checked={typeFilters.includes(TypeFilter.Digital)} onChange={() => handleTypeInputChange(TypeFilter.Digital)}/>
           <span className="custom-checkbox__icon"></span>
           <span className="custom-checkbox__label">Цифровая</span>
         </label>
       </div>
       <div className="custom-checkbox catalog-filter__item">
         <label>
-          <input type="checkbox" name="film" checked={typeFilters.includes(typeFilter.Film)} disabled={videoCam?.checked && !photoCam?.checked} onChange={() =>handleTypeInputChange(typeFilter.Film)}/>
+          <input type="checkbox" data-testid='film-test' name="film" checked={typeFilters.includes(TypeFilter.Film)} disabled={videoCam?.checked && !photoCam?.checked} onChange={() =>handleTypeInputChange(TypeFilter.Film)}/>
           <span className="custom-checkbox__icon"></span>
           <span className="custom-checkbox__label">Плёночная</span>
         </label>
       </div>
       <div className="custom-checkbox catalog-filter__item">
         <label>
-          <input type="checkbox" name="snapshot" checked={typeFilters.includes(typeFilter.Instant)} disabled={videoCam?.checked && !photoCam?.checked} onChange={() =>handleTypeInputChange(typeFilter.Instant)}/>
+          <input type="checkbox" data-testid='snapshot-test' name="snapshot" checked={typeFilters.includes(TypeFilter.Instant)} disabled={videoCam?.checked && !photoCam?.checked} onChange={() =>handleTypeInputChange(TypeFilter.Instant)}/>
           <span className="custom-checkbox__icon"></span>
           <span className="custom-checkbox__label">Моментальная</span>
         </label>
       </div>
       <div className="custom-checkbox catalog-filter__item">
         <label>
-          <input type="checkbox" name="collection" checked={typeFilters.includes(typeFilter.Collectible)} onChange={() =>handleTypeInputChange(typeFilter.Collectible)}/>
+          <input type="checkbox" data-testid='collection-test' name="collection" checked={typeFilters.includes(TypeFilter.Collectible)} onChange={() =>handleTypeInputChange(TypeFilter.Collectible)}/>
           <span className="custom-checkbox__icon"></span>
           <span className="custom-checkbox__label">Коллекционная</span>
         </label>

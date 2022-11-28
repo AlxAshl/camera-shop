@@ -3,9 +3,25 @@
 exports[`Preloader renders correctly 1`] = `
 <DocumentFragment>
   <div
+    class="page-content"
     data-testid="preloader-test"
   >
-    Loading data...
+    <div
+      class="container"
+      style="padding: 10px; width: 100%;"
+    >
+      <span
+        style="display: inherit; position: relative; width: 100%; height: 20px; overflow: hidden; background-color: rgba(117, 117, 226, 0.2); background-clip: padding-box;"
+      >
+        <span
+          style="position: absolute; height: 20px; overflow: hidden; background-color: rgb(117, 117, 226); background-clip: padding-box; display: block; border-radius: 2px; will-change: left, right; animation-fill-mode: forwards; animation: react-spinners-BarLoader-long 2.1s  cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;"
+        />
+        <span
+          style="position: absolute; height: 20px; overflow: hidden; background-color: rgb(117, 117, 226); background-clip: padding-box; display: block; border-radius: 2px; will-change: left, right; animation-fill-mode: forwards; animation: react-spinners-BarLoader-short 2.1s 1.15s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;"
+        />
+      </span>
+      Loading data...
+    </div>
   </div>
 </DocumentFragment>
 `;

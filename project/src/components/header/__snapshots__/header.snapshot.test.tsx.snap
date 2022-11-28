@@ -75,55 +75,56 @@ exports[`Header renders correctly 1`] = `
       <div
         class="form-search"
       >
-        <form>
-          <label>
+        <div
+          class="form-search "
+          data-testid="search-form-test"
+          id="search-form"
+        >
+          <form>
+            <label>
+              <svg
+                aria-hidden="true"
+                class="form-search__icon"
+                height="16"
+                width="16"
+              >
+                <use
+                  xlink:href="#icon-lens"
+                />
+              </svg>
+              <input
+                autocomplete="off"
+                class="form-search__input"
+                data-testid="search-input-test"
+                id="search"
+                placeholder="Поиск по сайту"
+                type="text"
+                value=""
+              />
+            </label>
+          </form>
+          <button
+            class="form-search__reset"
+            data-testid="search-reset-test"
+            id="reset"
+            type="reset"
+          >
             <svg
               aria-hidden="true"
-              class="form-search__icon"
-              height="16"
-              width="16"
+              height="10"
+              width="10"
             >
               <use
-                xlink:href="#icon-lens"
+                xlink:href="#icon-close"
               />
             </svg>
-            <input
-              autocomplete="off"
-              class="form-search__input"
-              placeholder="Поиск по сайту"
-              type="text"
-            />
-          </label>
-          <ul
-            class="form-search__select-list"
-          >
-            <li
-              class="form-search__select-item"
+            <span
+              class="visually-hidden"
             >
-              Cannonball Pro MX 8i
-            </li>
-            <li
-              class="form-search__select-item"
-            >
-              Cannonball Pro MX 7i
-            </li>
-            <li
-              class="form-search__select-item"
-            >
-              Cannonball Pro MX 6i
-            </li>
-            <li
-              class="form-search__select-item"
-            >
-              Cannonball Pro MX 5i
-            </li>
-            <li
-              class="form-search__select-item"
-            >
-              Cannonball Pro MX 4i
-            </li>
-          </ul>
-        </form>
+              Сбросить поиск
+            </span>
+          </button>
+        </div>
         <button
           class="form-search__reset"
           type="reset"
@@ -146,7 +147,7 @@ exports[`Header renders correctly 1`] = `
       </div>
       <a
         class="header__basket-link"
-        href="/"
+        href="/basket"
       >
         <svg
           aria-hidden="true"

@@ -1,13 +1,13 @@
 import { useAppSelector } from '../../../hooks/useAppSelector';
-import { getProductsAlphabetic } from '../../../store/product-process/selectors';
 import FormSearchList from './form-search-list/form-search-list';
 import { useEffect, useState } from 'react';
 import { ProductType } from '../../../types/product';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import {AppRoute, DEFAULT_PAGE_NUMBER, URLParams} from '../../../const';
-import { paramsSetter } from '../../../store/utils-process/utils-process';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { getCleanUpStatus } from '../../../store/utils-process/selectors';
+import { getCleanUpStatus, getProductsAlphabetic } from '../../../store/filters-process/selectors';
+import { paramsSetter } from '../../../store/filters-process/filters-process';
+
 
 function SearchBar (): JSX.Element {
   const products = useAppSelector(getProductsAlphabetic);
@@ -92,7 +92,7 @@ function SearchBar (): JSX.Element {
   };
 
   return (
-    <div id='search-form' className={searchQuery !== '' && focused
+    <div id='search-form' data-testid='search-form-test' className={searchQuery !== '' && focused
       ? 'form-search list-opened'
       : 'form-search '}
     >
@@ -101,13 +101,13 @@ function SearchBar (): JSX.Element {
           <svg className="form-search__icon" width="16" height="16" aria-hidden="true">
             <use xlinkHref="#icon-lens"></use>
           </svg>
-          <input id="search" className="form-search__input" value={searchQuery} onFocus={handleSearchBarFocus} onChange={handleSearchInputChange} type="text" autoComplete="off" placeholder="Поиск по сайту"/>
+          <input id="search" data-testid='search-input-test' className="form-search__input" value={searchQuery} onFocus={handleSearchBarFocus} onChange={handleSearchInputChange} type="text" autoComplete="off" placeholder="Поиск по сайту"/>
         </label>
         {filteredProducts.length !== 0
           ? <FormSearchList onLinkPass={() => handleSearchResetButton()} searchProducts = {filteredProducts}/>
           : ''}
       </form>
-      <button onClick={handleSearchResetButton} className="form-search__reset" id='reset' type="reset">
+      <button onClick={handleSearchResetButton} data-testid='search-reset-test' className="form-search__reset" id='reset' type="reset">
         <svg width="10" height="10" aria-hidden="true">
           <use xlinkHref="#icon-close"></use>
         </svg><span className="visually-hidden" >Сбросить поиск</span>

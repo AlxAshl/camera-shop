@@ -23,6 +23,7 @@ exports[`SortBar renders correctly 1`] = `
             class="catalog-sort__btn-text"
           >
             <input
+              data-testid="sort-test"
               id="sortPrice"
               name="sort"
               type="radio"
@@ -37,6 +38,7 @@ exports[`SortBar renders correctly 1`] = `
             class="catalog-sort__btn-text"
           >
             <input
+              data-testid="sort-test"
               id="sortPopular"
               name="sort"
               type="radio"
@@ -56,6 +58,7 @@ exports[`SortBar renders correctly 1`] = `
           >
             <input
               aria-label="По возрастанию"
+              data-testid="sort-test"
               id="up"
               name="sort-icon"
               type="radio"
@@ -79,6 +82,7 @@ exports[`SortBar renders correctly 1`] = `
           >
             <input
               aria-label="По убыванию"
+              data-testid="sort-test"
               id="down"
               name="sort-icon"
               type="radio"

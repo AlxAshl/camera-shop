@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import { URLParams } from '../../../const';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { fieldCleaner } from '../../../store/utils-process/utils-process';
+import { fieldCleaner } from '../../../store/filters-process/filters-process';
 import { CameraType } from './camera-type/camera-type';
 import { Category } from './category/category';
 import { Level } from './level/level';
@@ -24,7 +24,7 @@ function FilterBlock(): JSX.Element {
           <Category/>
           <CameraType/>
           <Level/>
-          <button onClick={handleFilterReset} className="btn catalog-filter__reset-btn" type="reset">Сбросить фильтры
+          <button onClick={handleFilterReset} data-testid='reset-button-test' className="btn catalog-filter__reset-btn" type="reset">Сбросить фильтры
           </button>
         </form>
       </div>

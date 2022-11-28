@@ -5,7 +5,7 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import { State } from '../types/state';
 import { productMock, productsMock, reviewMock, reviewsMock } from '../test/test-mocks';
 import { APIRoute } from '../const';
-import { fetchProductAction/*, fetchProductsAction*/, fetchPromoAction, fetchReviewsAction, fetchSimilarProductsAction, postReviewAction } from './api-actions';
+import { fetchProductAction, fetchProductsAction, fetchPromoAction, fetchReviewsAction, fetchSimilarProductsAction, postReviewAction } from './api-actions';
 import { api } from './store';
 
 
@@ -109,31 +109,36 @@ describe('async actions', () => {
     },1000);
   });
 
-  // test('should return error for fetchProducts when GET /cameras/pages adress is incorrect', async () => {
+  test('should return error for fetchProducts when GET /cameras/pages adress is incorrect', async () => {
 
-  //   mockAPI
-  //     .onGet(`${APIRoute.Products}/p1ages`)
-  //     .reply(404);
-  //   const store = mockStore();
-  //   const currentPage = 1;
-  //   await store.dispatch(fetchProductsAction(currentPage));
-  //   setTimeout(()=>{
-  //     expect(mockError).toBeCalled();
-  //   },1000);
-  // });
+    mockAPI
+      .onGet(`${APIRoute.Products}/p1ages`)
+      .reply(404);
+    const store = mockStore();
+    const mockURLParams = {
+      currentPage: 1,
+      urlParams: ''
+    };
+    await store.dispatch(fetchProductsAction(mockURLParams));
+    setTimeout(()=>{
+      expect(mockError).toBeCalled();
+    },1000);
+  });
 
-  // test('should return error for fetchProducts when GET /cameras/pages call experience network error', async () => {
-
-  //   mockAPI
-  //     .onGet(`${APIRoute.Products}/pages`)
-  //     .reply(408);
-  //   const store = mockStore();
-  //   const currentPage = 1;
-  //   await store.dispatch(fetchProductsAction(currentPage, urlParams));
-  //   setTimeout(()=>{
-  //     expect(mockError).toBeCalled();
-  //   },1000);
-  // });
+  test('should return error for fetchProducts when GET /cameras/pages call experience network error', async () => {
+    mockAPI
+      .onGet(`${APIRoute.Products}/pages`)
+      .reply(408);
+    const store = mockStore();
+    const mockURLParams = {
+      currentPage: 1,
+      urlParams: ''
+    };
+    await store.dispatch(fetchProductsAction(mockURLParams));
+    setTimeout(()=>{
+      expect(mockError).toBeCalled();
+    },1000);
+  });
 
   test('should dispatch fetchPromo when GET /promo', async () => {
     mockAPI

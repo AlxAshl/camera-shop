@@ -8,9 +8,10 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchPromoAction } from '../../store/api-actions';
 import { getLoadedPromoStatus, getPromo } from '../../store/complementary-process/selectors';
+import { paramsSetter } from '../../store/filters-process/filters-process';
 import { getProductCount } from '../../store/product-process/selectors';
 import { getPage } from '../../store/utils-process/selectors';
-import { pageSetter, paramsSetter } from '../../store/utils-process/utils-process';
+import { pageSetter } from '../../store/utils-process/utils-process';
 
 
 function MainPage(): JSX.Element {

@@ -31,6 +31,7 @@ export enum NameSpace {
   Review = 'REVIEW',
   Complementary = 'COMPLEMENTARY',
   Utils = 'UTILS',
+  Filters = 'FILTERS'
 }
 
 export enum APIRoute {
@@ -43,6 +44,7 @@ export const BACKEND_URL = 'https://camera-shop.accelerator.pages.academy';
 export const REQUEST_TIMEOUT = 5000;
 export const PAGE_LIMIT = 9;
 export const RATING_STARS_COUNT = 5;
+export const DEFAULT_PAGE_NUMBER = 1;
 
 export const SortOrder = {
   Asc: 'asc',
@@ -65,22 +67,21 @@ export const URLParams = {
   Type: 'type',
 };
 
-export const typeFilter = {
+export const TypeFilter = {
   Digital: 'Цифровая',
   Film: 'Плёночная',
   Instant: 'Моментальная',
   Collectible: 'Коллекционная'
 };
 
-export const categoryFilter = {
+export const CategoryFilter = {
   Camera: 'Фотоаппарат',
   Video: 'Видеокамера'
 };
 
-export const levelFilter = {
+export const LevelFilter = {
   Novice: 'Нулевой',
   Amateur: 'Любительский',
   Pro: 'Профессиональный'
 };
 
-export const DEFAULT_PAGE_NUMBER = 1;

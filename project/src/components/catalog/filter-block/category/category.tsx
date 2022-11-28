@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { categoryFilter, URLParams } from '../../../../const';
+import { CategoryFilter, URLParams } from '../../../../const';
 
 
 export function Category() {
@@ -25,14 +25,14 @@ export function Category() {
       <legend className="title title--h5">Категория</legend>
       <div className="custom-checkbox catalog-filter__item">
         <label>
-          <input type="checkbox" name="photocamera" checked={categoryFilters.includes(categoryFilter.Camera)} onChange={() => handleCategoryInputChange(categoryFilter.Camera)}/>
+          <input data-testid='photocamera-test' type="checkbox" name="photocamera" checked={categoryFilters.includes(CategoryFilter.Camera)} onChange={() => handleCategoryInputChange(CategoryFilter.Camera)}/>
           <span className="custom-checkbox__icon"></span>
           <span className="custom-checkbox__label">Фотокамера</span>
         </label>
       </div>
       <div className="custom-checkbox catalog-filter__item">
         <label>
-          <input type="checkbox" name="videocamera" checked={categoryFilters.includes(categoryFilter.Video)} onChange={() => handleCategoryInputChange(categoryFilter.Video)}/>
+          <input data-testid='videocamera-test' type="checkbox" name="videocamera" checked={categoryFilters.includes(CategoryFilter.Video)} onChange={() => handleCategoryInputChange(CategoryFilter.Video)}/>
           <span className="custom-checkbox__icon"></span>
           <span className="custom-checkbox__label">Видеокамера</span>
         </label>

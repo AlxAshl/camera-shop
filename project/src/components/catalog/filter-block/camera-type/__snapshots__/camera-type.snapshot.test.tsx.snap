@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render CameraType 1`] = `
+<DocumentFragment>
+  <fieldset
+    class="catalog-filter__block"
+  >
+    <legend
+      class="title title--h5"
+    >
+      Тип камеры
+    </legend>
+    <div
+      class="custom-checkbox catalog-filter__item"
+    >
+      <label>
+        <input
+          data-testid="digital-test"
+          name="digital"
+          type="checkbox"
+        />
+        <span
+          class="custom-checkbox__icon"
+        />
+        <span
+          class="custom-checkbox__label"
+        >
+          Цифровая
+        </span>
+      </label>
+    </div>
+    <div
+      class="custom-checkbox catalog-filter__item"
+    >
+      <label>
+        <input
+          data-testid="film-test"
+          name="film"
+          type="checkbox"
+        />
+        <span
+          class="custom-checkbox__icon"
+        />
+        <span
+          class="custom-checkbox__label"
+        >
+          Плёночная
+        </span>
+      </label>
+    </div>
+    <div
+      class="custom-checkbox catalog-filter__item"
+    >
+      <label>
+        <input
+          data-testid="snapshot-test"
+          name="snapshot"
+          type="checkbox"
+        />
+        <span
+          class="custom-checkbox__icon"
+        />
+        <span
+          class="custom-checkbox__label"
+        >
+          Моментальная
+        </span>
+      </label>
+    </div>
+    <div
+      class="custom-checkbox catalog-filter__item"
+    >
+      <label>
+        <input
+          data-testid="collection-test"
+          name="collection"
+          type="checkbox"
+        />
+        <span
+          class="custom-checkbox__icon"
+        />
+        <span
+          class="custom-checkbox__label"
+        >
+          Коллекционная
+        </span>
+      </label>
+    </div>
+  </fieldset>
+</DocumentFragment>
+`;

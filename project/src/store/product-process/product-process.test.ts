@@ -18,7 +18,6 @@ describe('Reducer: productProcess', () => {
         isProductDataLoaded: false,
         productCount: 0,
         products: [],
-        searchSuggestions: [],
         similarProducts: [],
         product: {} as ProductType,
       });
@@ -30,8 +29,6 @@ describe('Reducer: productProcess', () => {
       isProductDataLoaded: false,
       productCount: 0,
       products: [],
-      allProducts: [],
-      searchSuggestions: [],
       similarProducts: [],
       product: {} as ProductType,
     };
@@ -44,9 +41,7 @@ describe('Reducer: productProcess', () => {
         isProductsDataLoaded: true,
         isProductDataLoaded: false,
         productCount: 4,
-        searchSuggestions: [],
         products: productsMock,
-        allProducts: [],
         similarProducts: [],
         product: {} as ProductType,
       });
@@ -58,8 +53,6 @@ describe('Reducer: productProcess', () => {
       isProductDataLoaded: false,
       productCount: 0,
       products: [],
-      allProducts: [],
-      searchSuggestions: [],
       similarProducts: [],
       product: {} as ProductType,
     };
@@ -69,8 +62,6 @@ describe('Reducer: productProcess', () => {
         isProductDataLoaded: true,
         productCount: 0,
         products: [],
-        allProducts: [],
-        suggestedProducts: [],
         similarProducts: [],
         product: productMock as ProductType,
       });
@@ -82,8 +73,6 @@ describe('Reducer: productProcess', () => {
       isProductDataLoaded: false,
       productCount: 0,
       products: [],
-      allProducts: [],
-      searchSuggestions: [],
       similarProducts: [],
       product: {} as ProductType,
     };
@@ -93,8 +82,6 @@ describe('Reducer: productProcess', () => {
         isProductDataLoaded: true,
         productCount: 0,
         products: [],
-        allProducts: [],
-        searchSuggestions: [],
         similarProducts: productsMock,
         product: {} as ProductType,
       });

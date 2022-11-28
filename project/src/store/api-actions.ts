@@ -46,19 +46,6 @@ export const fetchAllProductsAction = createAsyncThunk<ProductType[], undefined,
   }
 );
 
-//----------------SEARCHSUGGESTIONS----------delete-----------------//
-// export const fetchSearchSuggestionsAction = createAsyncThunk<ProductType[], string, {
-//   dispatch: AppDispatch;
-//   state: State;
-//   extra: AxiosInstance;
-// }>(
-//   'product/fetchSearhSuggestions',
-//   async (urlParams, {extra: api}) => {
-//     const {data} = await api.get<ProductType[]>(`${APIRoute.Products}?${(urlParams ? `${urlParams}` : '')}`);
-//     return data;
-//   },
-// );
-//----------------SEARCHSUGGESTIONS---------------------------//
 type fetchParamsType = {
   currentPage: number;
   urlParams? : string;
