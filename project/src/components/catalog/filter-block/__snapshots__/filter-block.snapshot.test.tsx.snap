@@ -3,267 +3,263 @@
 exports[`FilterBlock renders correctly 1`] = `
 <DocumentFragment>
   <div
-    class="catalog__aside"
+    class="catalog-filter"
   >
-    <div
-      class="catalog-filter"
+    <form
+      action="#"
     >
-      <form
-        action="#"
+      <h2
+        class="visually-hidden"
       >
-        <h2
-          class="visually-hidden"
+        Фильтр
+      </h2>
+      <fieldset
+        class="catalog-filter__block"
+      >
+        <legend
+          class="title title--h5"
         >
-          Фильтр
-        </h2>
-        <fieldset
-          class="catalog-filter__block"
+          Цена, ₽
+        </legend>
+        <div
+          class="catalog-filter__price-range"
         >
-          <legend
-            class="title title--h5"
-          >
-            Цена, ₽
-          </legend>
           <div
-            class="catalog-filter__price-range"
+            class="custom-input"
           >
-            <div
-              class="custom-input"
+            <label>
+              <input
+                data-testid="minPrice-test"
+                id="minPrice"
+                name="price"
+                placeholder="от"
+                type="number"
+                value=""
+              />
+            </label>
+          </div>
+          <div
+            class="custom-input"
+          >
+            <label>
+              <input
+                data-testid="maxPrice-test"
+                id="maxPrice"
+                name="priceUp"
+                placeholder="до"
+                type="number"
+                value=""
+              />
+            </label>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset
+        class="catalog-filter__block"
+      >
+        <legend
+          class="title title--h5"
+        >
+          Категория
+        </legend>
+        <div
+          class="custom-checkbox catalog-filter__item"
+        >
+          <label>
+            <input
+              data-testid="photocamera-test"
+              name="photocamera"
+              type="checkbox"
+            />
+            <span
+              class="custom-checkbox__icon"
+            />
+            <span
+              class="custom-checkbox__label"
             >
-              <label>
-                <input
-                  data-testid="minPrice-test"
-                  id="minPrice"
-                  name="price"
-                  placeholder="от"
-                  type="number"
-                  value=""
-                />
-              </label>
-            </div>
-            <div
-              class="custom-input"
+              Фотокамера
+            </span>
+          </label>
+        </div>
+        <div
+          class="custom-checkbox catalog-filter__item"
+        >
+          <label>
+            <input
+              data-testid="videocamera-test"
+              name="videocamera"
+              type="checkbox"
+            />
+            <span
+              class="custom-checkbox__icon"
+            />
+            <span
+              class="custom-checkbox__label"
             >
-              <label>
-                <input
-                  data-testid="maxPrice-test"
-                  id="maxPrice"
-                  name="priceUp"
-                  placeholder="до"
-                  type="number"
-                  value=""
-                />
-              </label>
-            </div>
-          </div>
-        </fieldset>
-        <fieldset
-          class="catalog-filter__block"
+              Видеокамера
+            </span>
+          </label>
+        </div>
+      </fieldset>
+      <fieldset
+        class="catalog-filter__block"
+      >
+        <legend
+          class="title title--h5"
         >
-          <legend
-            class="title title--h5"
-          >
-            Категория
-          </legend>
-          <div
-            class="custom-checkbox catalog-filter__item"
-          >
-            <label>
-              <input
-                data-testid="photocamera-test"
-                name="photocamera"
-                type="checkbox"
-              />
-              <span
-                class="custom-checkbox__icon"
-              />
-              <span
-                class="custom-checkbox__label"
-              >
-                Фотокамера
-              </span>
-            </label>
-          </div>
-          <div
-            class="custom-checkbox catalog-filter__item"
-          >
-            <label>
-              <input
-                data-testid="videocamera-test"
-                name="videocamera"
-                type="checkbox"
-              />
-              <span
-                class="custom-checkbox__icon"
-              />
-              <span
-                class="custom-checkbox__label"
-              >
-                Видеокамера
-              </span>
-            </label>
-          </div>
-        </fieldset>
-        <fieldset
-          class="catalog-filter__block"
+          Тип камеры
+        </legend>
+        <div
+          class="custom-checkbox catalog-filter__item"
         >
-          <legend
-            class="title title--h5"
-          >
-            Тип камеры
-          </legend>
-          <div
-            class="custom-checkbox catalog-filter__item"
-          >
-            <label>
-              <input
-                data-testid="digital-test"
-                name="digital"
-                type="checkbox"
-              />
-              <span
-                class="custom-checkbox__icon"
-              />
-              <span
-                class="custom-checkbox__label"
-              >
-                Цифровая
-              </span>
-            </label>
-          </div>
-          <div
-            class="custom-checkbox catalog-filter__item"
-          >
-            <label>
-              <input
-                data-testid="film-test"
-                name="film"
-                type="checkbox"
-              />
-              <span
-                class="custom-checkbox__icon"
-              />
-              <span
-                class="custom-checkbox__label"
-              >
-                Плёночная
-              </span>
-            </label>
-          </div>
-          <div
-            class="custom-checkbox catalog-filter__item"
-          >
-            <label>
-              <input
-                data-testid="snapshot-test"
-                name="snapshot"
-                type="checkbox"
-              />
-              <span
-                class="custom-checkbox__icon"
-              />
-              <span
-                class="custom-checkbox__label"
-              >
-                Моментальная
-              </span>
-            </label>
-          </div>
-          <div
-            class="custom-checkbox catalog-filter__item"
-          >
-            <label>
-              <input
-                data-testid="collection-test"
-                name="collection"
-                type="checkbox"
-              />
-              <span
-                class="custom-checkbox__icon"
-              />
-              <span
-                class="custom-checkbox__label"
-              >
-                Коллекционная
-              </span>
-            </label>
-          </div>
-        </fieldset>
-        <fieldset
-          class="catalog-filter__block"
+          <label>
+            <input
+              data-testid="digital-test"
+              name="digital"
+              type="checkbox"
+            />
+            <span
+              class="custom-checkbox__icon"
+            />
+            <span
+              class="custom-checkbox__label"
+            >
+              Цифровая
+            </span>
+          </label>
+        </div>
+        <div
+          class="custom-checkbox catalog-filter__item"
         >
-          <legend
-            class="title title--h5"
-          >
-            Уровень
-          </legend>
-          <div
-            class="custom-checkbox catalog-filter__item"
-          >
-            <label>
-              <input
-                data-testid="level-zero-test"
-                name="zero"
-                type="checkbox"
-              />
-              <span
-                class="custom-checkbox__icon"
-              />
-              <span
-                class="custom-checkbox__label"
-              >
-                Нулевой
-              </span>
-            </label>
-          </div>
-          <div
-            class="custom-checkbox catalog-filter__item"
-          >
-            <label>
-              <input
-                data-testid="level-amateur-test"
-                name="non-professional"
-                type="checkbox"
-              />
-              <span
-                class="custom-checkbox__icon"
-              />
-              <span
-                class="custom-checkbox__label"
-              >
-                Любительский
-              </span>
-            </label>
-          </div>
-          <div
-            class="custom-checkbox catalog-filter__item"
-          >
-            <label>
-              <input
-                data-testid="level-pro-test"
-                name="professional"
-                type="checkbox"
-              />
-              <span
-                class="custom-checkbox__icon"
-              />
-              <span
-                class="custom-checkbox__label"
-              >
-                Профессиональный
-              </span>
-            </label>
-          </div>
-        </fieldset>
-        <button
-          class="btn catalog-filter__reset-btn"
-          data-testid="reset-button-test"
-          type="reset"
+          <label>
+            <input
+              data-testid="film-test"
+              name="film"
+              type="checkbox"
+            />
+            <span
+              class="custom-checkbox__icon"
+            />
+            <span
+              class="custom-checkbox__label"
+            >
+              Плёночная
+            </span>
+          </label>
+        </div>
+        <div
+          class="custom-checkbox catalog-filter__item"
         >
-          Сбросить фильтры
-        </button>
-      </form>
-    </div>
+          <label>
+            <input
+              data-testid="snapshot-test"
+              name="snapshot"
+              type="checkbox"
+            />
+            <span
+              class="custom-checkbox__icon"
+            />
+            <span
+              class="custom-checkbox__label"
+            >
+              Моментальная
+            </span>
+          </label>
+        </div>
+        <div
+          class="custom-checkbox catalog-filter__item"
+        >
+          <label>
+            <input
+              data-testid="collection-test"
+              name="collection"
+              type="checkbox"
+            />
+            <span
+              class="custom-checkbox__icon"
+            />
+            <span
+              class="custom-checkbox__label"
+            >
+              Коллекционная
+            </span>
+          </label>
+        </div>
+      </fieldset>
+      <fieldset
+        class="catalog-filter__block"
+      >
+        <legend
+          class="title title--h5"
+        >
+          Уровень
+        </legend>
+        <div
+          class="custom-checkbox catalog-filter__item"
+        >
+          <label>
+            <input
+              data-testid="level-zero-test"
+              name="zero"
+              type="checkbox"
+            />
+            <span
+              class="custom-checkbox__icon"
+            />
+            <span
+              class="custom-checkbox__label"
+            >
+              Нулевой
+            </span>
+          </label>
+        </div>
+        <div
+          class="custom-checkbox catalog-filter__item"
+        >
+          <label>
+            <input
+              data-testid="level-amateur-test"
+              name="non-professional"
+              type="checkbox"
+            />
+            <span
+              class="custom-checkbox__icon"
+            />
+            <span
+              class="custom-checkbox__label"
+            >
+              Любительский
+            </span>
+          </label>
+        </div>
+        <div
+          class="custom-checkbox catalog-filter__item"
+        >
+          <label>
+            <input
+              data-testid="level-pro-test"
+              name="professional"
+              type="checkbox"
+            />
+            <span
+              class="custom-checkbox__icon"
+            />
+            <span
+              class="custom-checkbox__label"
+            >
+              Профессиональный
+            </span>
+          </label>
+        </div>
+      </fieldset>
+      <button
+        class="btn catalog-filter__reset-btn"
+        data-testid="reset-button-test"
+        type="reset"
+      >
+        Сбросить фильтры
+      </button>
+    </form>
   </div>
 </DocumentFragment>
 `;

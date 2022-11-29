@@ -27,6 +27,7 @@ exports[`SortBar renders correctly 1`] = `
               id="sortPrice"
               name="sort"
               type="radio"
+              value="price"
             />
             <label
               for="sortPrice"
@@ -42,6 +43,7 @@ exports[`SortBar renders correctly 1`] = `
               id="sortPopular"
               name="sort"
               type="radio"
+              value="rating"
             />
             <label
               for="sortPopular"
@@ -60,8 +62,9 @@ exports[`SortBar renders correctly 1`] = `
               aria-label="По возрастанию"
               data-testid="sort-test"
               id="up"
-              name="sort-icon"
+              name="icon-order"
               type="radio"
+              value="asc"
             />
             <label
               for="up"
@@ -84,8 +87,9 @@ exports[`SortBar renders correctly 1`] = `
               aria-label="По убыванию"
               data-testid="sort-test"
               id="down"
-              name="sort-icon"
+              name="icon-order"
               type="radio"
+              value="desc"
             />
             <label
               for="down"

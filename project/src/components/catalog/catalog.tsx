@@ -66,7 +66,9 @@ function Catalog(): JSX.Element {
       <div className="container">
         <h1 className="title title--h2">Каталог фото- и видеотехники</h1>
         <div className="page-content__columns">
-          <FilterBlock/>
+          <div className="catalog__aside">
+            <FilterBlock/>
+          </div>
           <div className="catalog__content">
             <SortBar/>
             {isDataLoaded
