@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { SyntheticEvent, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { SortOrder, SortType, URLParams } from '../../../const';
 
@@ -9,6 +9,7 @@ function SortBar(): JSX.Element {
   const [sort, setSort] = useState('');
   const [order, setOrder] = useState('');
   const [isInitial, setIsInitial] = useState(true);
+  const [rendered, setRendered] = useState(true);
 
   useEffect(() => {
     if(isInitial) {
@@ -44,17 +45,25 @@ function SortBar(): JSX.Element {
     }
   },[isInitial, sort, order, searchParams, setSearchParams]);
 
-  const handleSortChange = (evt: ChangeEvent) => {
+  useEffect(()=>{
+    if(!rendered){
+      setRendered(true);
+    }
+  },[rendered]);
+
+  const handleSortChange = (evt: SyntheticEvent) => {
     const target = evt.target as HTMLInputElement;
     setSort(`${target.value}`);
+    setRendered(false);
     if(order === ''){
       setOrder(SortOrder.Asc);
     }
   };
 
-  const handleOrderChange = (evt: ChangeEvent) => {
+  const handleOrderChange = (evt: SyntheticEvent) => {
     const target = evt.target as HTMLInputElement;
     setOrder(`${target.value}`);
+    setRendered(false);
     if(sort === '') {
       setSort(SortType.Price);
     }
@@ -67,26 +76,36 @@ function SortBar(): JSX.Element {
           <p className="title title--h5">Сортировать:</p>
           <div className="catalog-sort__type">
             <div className="catalog-sort__btn-text">
-              <input type="radio" data-testid='sort-test' id="sortPrice" name='sort' value={SortType.Price}
-                checked={(sort === SortType.Price)}
-                onChange={(evt) =>handleSortChange(evt)}
-              />
+              {rendered
+                ?
+                <input type="radio" data-testid='sort-test' id="sortPrice" name='sort' value={SortType.Price}
+                  checked={(sort === SortType.Price)}
+                  onChange={(evt) =>handleSortChange(evt)}
+                />
+                : ''}
+
               <label htmlFor="sortPrice">по цене</label>
             </div>
             <div className="catalog-sort__btn-text">
-              <input type="radio" data-testid='sort-test' id="sortPopular" name='sort' value={SortType.Rating}
-                checked={(sort === SortType.Rating)}
-                onChange={(evt) =>handleSortChange(evt)}
-              />
+              {rendered
+                ?
+                <input type="radio" data-testid='sort-test' id="sortPopular" name='sort' value={SortType.Rating}
+                  checked={(sort === SortType.Rating)}
+                  onChange={(evt) =>handleSortChange(evt)}
+                />
+                : ''}
               <label htmlFor="sortPopular">по популярности</label>
             </div>
           </div>
           <div className="catalog-sort__order">
             <div className="catalog-sort__btn catalog-sort__btn--up">
-              <input type="radio" data-testid='sort-test' id="up" name="icon-order" value={SortOrder.Asc} aria-label="По возрастанию"
-                checked={(order === SortOrder.Asc)}
-                onChange={(evt) => handleOrderChange(evt)}
-              />
+              {rendered
+                ?
+                <input type="radio" data-testid='sort-test' id="up" name="icon-order" value={SortOrder.Asc} aria-label="По возрастанию"
+                  checked={(order === SortOrder.Asc)}
+                  onChange={(evt) => handleOrderChange(evt)}
+                />
+                : ''}
               <label htmlFor="up">
                 <svg width="16" height="14" aria-hidden="true">
                   <use xlinkHref="#icon-sort"></use>
@@ -94,10 +113,13 @@ function SortBar(): JSX.Element {
               </label>
             </div>
             <div className="catalog-sort__btn catalog-sort__btn--down">
-              <input type="radio" data-testid='sort-test' id="down" name="icon-order" value={SortOrder.Desc} aria-label="По убыванию"
-                checked={(order === SortOrder.Desc)}
-                onChange={(evt) => handleOrderChange(evt)}
-              />
+              {rendered
+                ?
+                <input type="radio" data-testid='sort-test' id="down" name="icon-order" value={SortOrder.Desc} aria-label="По убыванию"
+                  checked={(order === SortOrder.Desc)}
+                  onChange={(evt) => handleOrderChange(evt)}
+                />
+                : ''}
               <label htmlFor="down">
                 <svg width="16" height="14" aria-hidden="true">
                   <use xlinkHref="#icon-sort"></use>
