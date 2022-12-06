@@ -2,93 +2,63 @@ import { useAppSelector } from '../../../hooks/useAppSelector';
 import FormSearchList from './form-search-list/form-search-list';
 import { useEffect, useState } from 'react';
 import { ProductType } from '../../../types/product';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import {AppRoute, DEFAULT_PAGE_NUMBER, URLParams} from '../../../const';
+import { useLocation, useNavigate } from 'react-router-dom';
+import {AppRoute, DEFAULT_PAGE_NUMBER} from '../../../const';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { getCleanUpStatus, getProductsAlphabetic } from '../../../store/filters-process/selectors';
-import { paramsSetter } from '../../../store/filters-process/filters-process';
+import { getProductsAlphabetic } from '../../../store/filters-process/selectors';
+import { searchFilterSetter } from '../../../store/filters-process/filters-process';
+import useInputEventListener from '../../../hooks/use-input-event-listener';
 
 
 function SearchBar (): JSX.Element {
-  const products = useAppSelector(getProductsAlphabetic);
-  const clearSearch = useAppSelector(getCleanUpStatus);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState('');
-  const searchInputField = document.getElementById('search') as HTMLInputElement;
-  const resetButton = document.getElementById('reset');
-  const [focused, setFocused] = useState(false);
-  const handleSearchBarFocus = () => setFocused(true);
   const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const products = useAppSelector(getProductsAlphabetic);
+  const searchInputField = document.getElementById('search') as HTMLInputElement;
+  const resetButton = document.getElementById('reset');
+  const [focused, setFocused] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [initial, setInitial] = useState(true);
+  const returnedSearchInput = useInputEventListener(searchInputField, searchFilterSetter);
 
   useEffect(()=> {
-    if(clearSearch) {
-      setSearchQuery('');
+    if(location.pathname.includes(AppRoute.Catalog) && !initial) {
+      setSearchQuery(returnedSearchInput);
+      dispatch(searchFilterSetter([returnedSearchInput.toLowerCase()]));
+      setFocused(false);
     }
-  },[clearSearch]);
+    if(!location.pathname.includes(AppRoute.Catalog) && !initial) {
+      navigate(`${AppRoute.Catalog}/page_${DEFAULT_PAGE_NUMBER}`);
+      dispatch(searchFilterSetter([returnedSearchInput.toLowerCase()]));
+      setFocused(false);
+    }
+    setInitial(false);
+  },[returnedSearchInput]);
+
+  const handleMouseClickOff = (evt: MouseEvent) => {
+    if(evt.target !== (searchInputField || resetButton)) {
+      setFocused(false);
+    }
+  };
 
   useEffect(()=> {
-    if(focused){
-      const isEscapeKey = (evt:KeyboardEvent) => evt.key === 'Escape';
-      const isEnterKey = (evt:KeyboardEvent) => evt.key === 'Enter';
-      const handleEscKeyPress = (evt: KeyboardEvent) => {
-        if(isEscapeKey(evt)) {
-          setFocused(false);
-          (evt.target as HTMLInputElement)?.blur();
-        }
-      };
-      const handleEnterKeyPress = (evt: KeyboardEvent) => {
-        if(isEnterKey(evt)) {
-          setFocused(false);
-          (evt.target as HTMLInputElement)?.blur();
-          if(location.pathname.includes(AppRoute.Catalog)) {
-            if (!searchParams.has(URLParams.Search)) {
-              searchParams.append(URLParams.Search, searchQuery.toLowerCase());
-            }
-            else {
-              searchParams.set(URLParams.Search, searchQuery.toLowerCase());
-            }
-            setSearchParams(searchParams);
-          }
-          else {
-            navigate(`${AppRoute.Catalog}/page_${DEFAULT_PAGE_NUMBER}`);
-            searchParams.append(URLParams.Search, searchQuery.toLowerCase());
-            dispatch(paramsSetter(searchParams.toString()));
-          }
-        }
-      };
-      const handleMouseClickOff = (evt: MouseEvent) => {
-        if(evt.target !== (searchInputField || resetButton)) {
-          setFocused(false);
-        }
-      };
+    if(focused) {
       document.addEventListener('click', handleMouseClickOff);
-      document.addEventListener('keydown', handleEscKeyPress);
-      document.addEventListener('keydown', handleEnterKeyPress);
       return () => {
         document.removeEventListener('click', handleMouseClickOff);
-        document.removeEventListener('keydown', handleEscKeyPress);
-        document.removeEventListener('keydown', handleEnterKeyPress);
       };
     }
-  },[focused, searchQuery]);
+  },[focused]);
 
   let filteredProducts = [] as ProductType[];
   if (searchQuery.length > 1 && products.length > 0) {
     filteredProducts = products.filter((product) => product.name.toLowerCase().includes(searchQuery.toLowerCase()));
   }
-  const handleSearchInputChange = (evt: React.SyntheticEvent) => {
-    setSearchQuery((evt.target as HTMLInputElement).value);
-  };
 
   const handleSearchResetButton = () => {
     setSearchQuery('');
     searchInputField.value = '';
-    if (searchParams.has(URLParams.Search)) {
-      searchParams.delete(URLParams.Search);
-      setSearchParams(searchParams);
-    }
   };
 
   return (
@@ -101,7 +71,7 @@ function SearchBar (): JSX.Element {
           <svg className="form-search__icon" width="16" height="16" aria-hidden="true">
             <use xlinkHref="#icon-lens"></use>
           </svg>
-          <input id="search" data-testid='search-input-test' className="form-search__input" value={searchQuery} onFocus={handleSearchBarFocus} onChange={handleSearchInputChange} type="text" autoComplete="off" placeholder="Поиск по сайту"/>
+          <input id="search" data-testid='search-input-test' className="form-search__input" value={searchQuery} onFocus={() => setFocused(true)} onChange={(evt)=> setSearchQuery(evt.target.value)} type="text" autoComplete="off" placeholder="Поиск по сайту"/>
         </label>
         {filteredProducts.length !== 0
           ? <FormSearchList onLinkPass={() => handleSearchResetButton()} searchProducts = {filteredProducts}/>

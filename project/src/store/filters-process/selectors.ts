@@ -3,15 +3,23 @@ import { ProductType } from '../../types/product';
 import { State } from '../../types/state';
 import { createSelector } from 'reselect';
 
-export const getParamsUpdateStatus = (state: State): boolean => state[NameSpace.Filters].paramsUpdate;
-export const getParams = (state: State): unknown => state[NameSpace.Filters].paramsSetup;
-export const getCleanUpStatus = (state: State): boolean => state[NameSpace.Filters].clearInputs;
+export const getPageUpdateStatus = (state: State): boolean => state[NameSpace.Filters].pageUpdate;
 export const getAllProducts = (state: State): ProductType[] => state[NameSpace.Filters].allProducts;
+export const getFilters = (state: State) => state[NameSpace.Filters].extraFilters;
+
 export const getProductsByPrice = createSelector(
   getAllProducts,
   (products) => {
     const productsByPrice = products?.slice();
     productsByPrice?.sort((a, b) => a.price - b.price);
+    return productsByPrice;
+  }
+);
+export const getProductsByPriceDesc = createSelector(
+  getAllProducts,
+  (products) => {
+    const productsByPrice = products?.slice();
+    productsByPrice?.sort((a, b) => b.price - a.price);
     return productsByPrice;
   }
 );

@@ -1,28 +1,36 @@
-import { useSearchParams } from 'react-router-dom';
-import { URLParams } from '../../../const';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { fieldCleaner } from '../../../store/filters-process/filters-process';
-import { CameraType } from './camera-type/camera-type';
-import { Category } from './category/category';
-import { Level } from './level/level';
-import { Price } from './price/price';
+import { filtersSetter } from '../../../store/filters-process/filters-process';
+import { CameraTypeBlock } from './camera-type/camera-type-block';
+import { CategoryBlock } from './category/category-block';
+import { LevelBlock } from './level/level-block';
+import { PriceBlock } from './price/price-block';
 
 function FilterBlock(): JSX.Element {
-  const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useAppDispatch();
-  const handleFilterReset = () => {
-    Object.entries(URLParams).forEach(([key, value]) => searchParams.delete(value));
-    setSearchParams(searchParams);
-    dispatch(fieldCleaner());
+
+  const extraFilters = {
+    PriceMin: [] as string[],
+    PriceMax: [] as string[],
+    Sort: [] as string[],
+    Order: [] as string[],
+    Search: [] as string[],
+    Level: [] as string[],
+    Category: [] as string[],
+    Type: [] as string[]
   };
+
+  const handleFilterReset = () => {
+    dispatch(filtersSetter(extraFilters));
+  };
+
   return (
     <div className="catalog-filter">
       <form action="#">
         <h2 className="visually-hidden">Фильтр</h2>
-        <Price/>
-        <Category/>
-        <CameraType/>
-        <Level/>
+        <PriceBlock/>
+        <CategoryBlock/>
+        <CameraTypeBlock/>
+        <LevelBlock/>
         <button onClick={handleFilterReset} data-testid='reset-button-test' className="btn catalog-filter__reset-btn" type="reset">Сбросить фильтры
         </button>
       </form>

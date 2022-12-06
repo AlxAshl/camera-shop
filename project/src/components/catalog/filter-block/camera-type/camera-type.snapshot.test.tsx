@@ -1,7 +1,7 @@
 import { renderWithProviders } from '../../../../test/utils/render-with-redux';
-import { CameraType } from './camera-type';
+import { CameraTypeBlock } from './camera-type-block';
 
 test('Render CameraType', () => {
-  const { asFragment } = renderWithProviders(<CameraType />);
+  const { asFragment } = renderWithProviders(<CameraTypeBlock />);
   expect(asFragment()).toMatchSnapshot();
 });

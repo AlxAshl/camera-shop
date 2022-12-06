@@ -1,73 +1,53 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { SortOrder, SortType, URLParams } from '../../../const';
+import { SortOrder, SortType } from '../../../const';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { useAppSelector } from '../../../hooks/useAppSelector';
+import { orderFilterSetter, sortFilterSetter } from '../../../store/filters-process/filters-process';
+import { getFilters } from '../../../store/filters-process/selectors';
 
 
 function SortBar(): JSX.Element {
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [sort, setSort] = useState('');
-  const [order, setOrder] = useState('');
-  const [isInitial, setIsInitial] = useState(true);
+  const {Sort, Order} = useAppSelector(getFilters);
   const [rendered, setRendered] = useState(true);
-
-  useEffect(() => {
-    if(isInitial) {
-      if(searchParams.has(URLParams.Sort) && searchParams.has(URLParams.Order)) {
-        setSort(searchParams.get(URLParams.Sort) as string);
-        setOrder(searchParams.get(URLParams.Order) as string);
-      }
-      if(searchParams.has(URLParams.Order) && !searchParams.has(URLParams.Sort)) {
-        setSort(SortType.Price);
-        searchParams.set(URLParams.Sort, SortType.Price);
-        setOrder(searchParams.get(URLParams.Order) as string);
-        setSearchParams(searchParams);
-      }
-      if(searchParams.has(URLParams.Sort) && !searchParams.has(URLParams.Order)) {
-        setOrder(SortOrder.Asc);
-        searchParams.set(URLParams.Order, SortOrder.Asc);
-        setSort(searchParams.get(URLParams.Order) as string);
-        setSearchParams(searchParams);
-      }
-    }
-    setIsInitial(false);
-  }, [isInitial, searchParams, setSearchParams]);
-
-  useEffect(()=>{
-    if(!isInitial) {
-      if(sort !== searchParams.get(URLParams.Sort) && sort !== '') {
-        searchParams.set(URLParams.Sort, sort);
-      }
-      if(order !== searchParams.get(URLParams.Order) && order !== '') {
-        searchParams.set(URLParams.Order, order);
-      }
-      setSearchParams(searchParams);
-    }
-  },[isInitial, sort, order, searchParams, setSearchParams]);
-
-  useEffect(()=>{
-    if(!rendered){
-      setRendered(true);
-    }
-  },[rendered]);
+  const [sortFilter, setSortFilter] = useState(Sort);
+  const [orderFilter, setOrderFilter] = useState(Order);
+  const dispatch = useAppDispatch();
 
   const handleSortChange = (evt: SyntheticEvent) => {
     const target = evt.target as HTMLInputElement;
-    setSort(`${target.value}`);
-    setRendered(false);
-    if(order === ''){
-      setOrder(SortOrder.Asc);
-    }
+    setSortFilter([`${target.value}`]);
   };
-
   const handleOrderChange = (evt: SyntheticEvent) => {
     const target = evt.target as HTMLInputElement;
-    setOrder(`${target.value}`);
-    setRendered(false);
-    if(sort === '') {
-      setSort(SortType.Price);
-    }
+    setOrderFilter([`${target.value}`]);
   };
+
+  useEffect(()=> {
+    if(Order.length !== 0 && Sort.length === 0) {
+      setSortFilter([SortType.Price]);
+    }
+    if(Sort.length !== 0 && Order.length === 0) {
+      setOrderFilter([SortOrder.Asc]);
+    }
+  },[Sort, Order]);
+
+  useEffect(()=>{
+    dispatch(orderFilterSetter(orderFilter));
+    setRendered(false);
+  },[orderFilter, dispatch]);
+
+  useEffect(()=>{
+    dispatch(sortFilterSetter(sortFilter));
+    setRendered(false);
+  },[sortFilter, dispatch]);
+
+  // Костыль для решения проблемы обновления UI (если не форсить рендер, то кнопки не перерисовываются при изменении).
+  useEffect(()=>{
+    if(!rendered) {
+      setRendered(true);
+    }
+  },[rendered]);
 
   return (
     <div className="catalog-sort">
@@ -79,19 +59,18 @@ function SortBar(): JSX.Element {
               {rendered
                 ?
                 <input type="radio" data-testid='sort-test' id="sortPrice" name='sort' value={SortType.Price}
-                  checked={(sort === SortType.Price)}
+                  checked={(Sort[0] === SortType.Price)}
                   onChange={(evt) =>handleSortChange(evt)}
                 />
                 : ''}
-
               <label htmlFor="sortPrice">по цене</label>
             </div>
             <div className="catalog-sort__btn-text">
               {rendered
                 ?
                 <input type="radio" data-testid='sort-test' id="sortPopular" name='sort' value={SortType.Rating}
-                  checked={(sort === SortType.Rating)}
-                  onChange={(evt) =>handleSortChange(evt)}
+                  checked={(Sort[0] === SortType.Rating)}
+                  onChange={(evt) => handleSortChange(evt)}
                 />
                 : ''}
               <label htmlFor="sortPopular">по популярности</label>
@@ -102,7 +81,7 @@ function SortBar(): JSX.Element {
               {rendered
                 ?
                 <input type="radio" data-testid='sort-test' id="up" name="icon-order" value={SortOrder.Asc} aria-label="По возрастанию"
-                  checked={(order === SortOrder.Asc)}
+                  checked={(Order[0] === SortOrder.Asc)}
                   onChange={(evt) => handleOrderChange(evt)}
                 />
                 : ''}
@@ -116,7 +95,7 @@ function SortBar(): JSX.Element {
               {rendered
                 ?
                 <input type="radio" data-testid='sort-test' id="down" name="icon-order" value={SortOrder.Desc} aria-label="По убыванию"
-                  checked={(order === SortOrder.Desc)}
+                  checked={(Order[0] === SortOrder.Desc)}
                   onChange={(evt) => handleOrderChange(evt)}
                 />
                 : ''}

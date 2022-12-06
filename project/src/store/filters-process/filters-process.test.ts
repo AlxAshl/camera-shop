@@ -13,26 +13,50 @@ describe('Reducer: filtersProcess', () => {
   test('without additional parameters should return initial state', () => {
     expect(reducer(void 0, {type:'UNKNOWN_ACTION'}))
       .toEqual({
-        paramsSetup: '' as unknown,
-        paramsUpdate: false,
-        clearInputs: false,
+        pageUpdate: false,
         allProducts: [],
+        extraFilters: {
+          PriceMin: [] as string[],
+          PriceMax: [] as string[],
+          Sort: [] as string[],
+          Order: [] as string[],
+          Search: [] as string[],
+          Level: [] as string[],
+          Category: [] as string[],
+          Type: [] as string[]
+        }
       });
   });
 
   test('should update products after fetching products action', () => {
     const state = {
-      paramsSetup: '' as unknown,
-      paramsUpdate: false,
-      clearInputs: false,
+      pageUpdate: false,
       allProducts: [],
+      extraFilters: {
+        PriceMin: [] as string[],
+        PriceMax: [] as string[],
+        Sort: [] as string[],
+        Order: [] as string[],
+        Search: [] as string[],
+        Level: [] as string[],
+        Category: [] as string[],
+        Type: [] as string[]
+      }
     };
     expect(reducer(state, {type: fetchAllProductsAction.fulfilled.type, payload: productsMock}))
       .toEqual({
-        paramsSetup: '' as unknown,
-        paramsUpdate: false,
-        clearInputs: false,
+        pageUpdate: false,
         allProducts: productsMock,
+        extraFilters: {
+          PriceMin: [] as string[],
+          PriceMax: [] as string[],
+          Sort: [] as string[],
+          Order: [] as string[],
+          Search: [] as string[],
+          Level: [] as string[],
+          Category: [] as string[],
+          Type: [] as string[]
+        }
       });
   });
 

@@ -1,13 +1,13 @@
-import { AppRoute } from '../../../../const';
+import { AppRoute, TypeFilter } from '../../../../const';
 import { productsMock } from '../../../../test/test-mocks';
 import { renderWithProviders } from '../../../../test/utils/render-with-redux';
 import { screen } from '@testing-library/react';
-import { CameraType } from './camera-type';
+import { CameraTypeBlock } from './camera-type-block';
 
 
-describe('Cameratype component', () => {
+describe('Cameratypeblock component', () => {
   test('renders unchecked camtype checkboxes on initial', () => {
-    renderWithProviders(<CameraType/>,{initialState: { FILTERS: { allProducts: productsMock}} , route: AppRoute.Catalog});
+    renderWithProviders(<CameraTypeBlock/>,{initialState: { FILTERS: { allProducts: productsMock, extraFilters:{Type: [''], Category:[]}}} , route: AppRoute.Catalog});
     const digitalCheckbox = screen.getByTestId('digital-test');
     const filmCheckbox = screen.getByTestId('film-test');
     const snapshotCheckbox = screen.getByTestId('snapshot-test');
@@ -19,8 +19,8 @@ describe('Cameratype component', () => {
     expect(collectionCheckbox).not.toBeChecked();
 
   });
-  test('renders checked camtype checkboxes if from url', () => {
-    renderWithProviders(<CameraType/>,{initialState: { FILTERS: { allProducts: productsMock}} , route: `${AppRoute.Catalog}?level=Нулевой&category=Видеокамера&type=Коллекционная`});
+  test('renders checked camtype checkboxes from store', () => {
+    renderWithProviders(<CameraTypeBlock/>,{initialState: { FILTERS: { allProducts: productsMock, extraFilters:{Type: [TypeFilter.Collectible], Category:[]}}}});
     const digitalCheckbox = screen.getByTestId('digital-test');
     const collectionCheckbox = screen.getByTestId('collection-test');
     expect(digitalCheckbox).not.toBeChecked();

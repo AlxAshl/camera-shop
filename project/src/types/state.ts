@@ -24,11 +24,29 @@ export type UtilsProcess = {
   currentPage: number;
 }
 
+export type ExtraFilters = {
+  PriceMin: string[];
+  PriceMax: string[];
+  Sort: string[];
+  Order: string[];
+  Search: string[];
+  Level: string[];
+  Category: string[];
+  Type: string[];
+};
 export type FiltersProcess = {
-  paramsSetup: unknown;
-  paramsUpdate: boolean;
-  clearInputs: boolean;
+  pageUpdate: boolean;
   allProducts: ProductType[];
+  extraFilters: {
+    PriceMin: string[];
+    PriceMax: string[];
+    Sort: string[];
+    Order: string[];
+    Search: string[];
+    Level: string[];
+    Category: string[];
+    Type: string[];
+  };
 }
 
 export type ReviewProcess = {

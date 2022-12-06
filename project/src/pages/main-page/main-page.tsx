@@ -8,7 +8,7 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchPromoAction } from '../../store/api-actions';
 import { getLoadedPromoStatus, getPromo } from '../../store/complementary-process/selectors';
-import { paramsSetter } from '../../store/filters-process/filters-process';
+import { pageUpdateSetter } from '../../store/filters-process/filters-process';
 import { getProductCount } from '../../store/product-process/selectors';
 import { getPage } from '../../store/utils-process/selectors';
 import { pageSetter } from '../../store/utils-process/utils-process';
@@ -30,7 +30,7 @@ function MainPage(): JSX.Element {
     const passedParams = searchParams.toString();
     if((productCount !== 0 && currentPage > totalPages) && typeof passedParams === 'string') {
       dispatch(pageSetter(DEFAULT_PAGE_NUMBER));
-      dispatch(paramsSetter(passedParams));
+      dispatch(pageUpdateSetter(true));
       navigate(`${AppRoute.Catalog}/page_${DEFAULT_PAGE_NUMBER}`);
     }
     if(!location.pathname.includes('/page_')) {

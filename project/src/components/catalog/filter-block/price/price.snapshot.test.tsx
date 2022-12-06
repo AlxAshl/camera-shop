@@ -1,7 +1,7 @@
 import { renderWithProviders } from '../../../../test/utils/render-with-redux';
-import { Price } from './price';
+import { PriceBlock } from './price-block';
 
 test('Render Price', () => {
-  const { asFragment } = renderWithProviders(<Price />);
+  const { asFragment } = renderWithProviders(<PriceBlock />);
   expect(asFragment()).toMatchSnapshot();
 });

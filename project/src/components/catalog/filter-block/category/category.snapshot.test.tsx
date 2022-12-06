@@ -1,7 +1,7 @@
 import { renderWithProviders } from '../../../../test/utils/render-with-redux';
-import { Category } from './category';
+import { CategoryBlock } from './category-block';
 
 test('Render Category', () => {
-  const { asFragment } = renderWithProviders(<Category />);
+  const { asFragment } = renderWithProviders(<CategoryBlock />);
   expect(asFragment()).toMatchSnapshot();
 });

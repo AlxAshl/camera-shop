@@ -12,22 +12,54 @@ import { getNumeric } from '../utils/pages';
 import { pageSetter } from '../../store/utils-process/utils-process';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { getPage } from '../../store/utils-process/selectors';
-import { getParams, getParamsUpdateStatus } from '../../store/filters-process/selectors';
-import { paramsSetter } from '../../store/filters-process/filters-process';
+import { getFilters, getPageUpdateStatus } from '../../store/filters-process/selectors';
+import { filtersSetter, pageUpdateSetter } from '../../store/filters-process/filters-process';
+import { URLParams } from '../../const';
 
 
 function Catalog(): JSX.Element {
 
   const isDataLoaded = useAppSelector(getLoadedProductsStatus);
   const products = useAppSelector(getProducts);
-  const paramsUpdateStatus = useAppSelector(getParamsUpdateStatus);
-  const updatedParams = useAppSelector(getParams);
+  const allFilters = useAppSelector(getFilters);
   const dispatch = useAppDispatch();
   const currentPage = useAppSelector(getPage);
+  const pageUpdate = useAppSelector(getPageUpdateStatus);
   const location = useLocation();
   const [initialLoad, setInitialLoad] = useState(true);
-  const [pageUpdateStatus, setPageUpdateStatus] = useState(true);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [filters, setFilters] = useState(allFilters);
+
+  useEffect(()=> {
+    if(initialLoad) {
+      Object.entries(URLParams).forEach(([key, value]) => {
+        if (searchParams.has(value)) {
+          setFilters((prevState) => ({...prevState, [key]: searchParams.getAll(value)}));
+        }
+      });
+      setInitialLoad(false);
+    }
+    else{
+      dispatch(fetchAllProductsAction());
+    }
+    dispatch(filtersSetter(filters));
+  },[initialLoad]);
+
+  useEffect(()=>{
+    const newParams = new URLSearchParams();
+    Object.entries(allFilters).forEach((key, value) => {
+      const [paramsName, [paramsValue]] = key;
+      if(paramsValue !== undefined && key[1].length < 2) {
+        newParams.append(URLParams[paramsName as keyof typeof URLParams] , paramsValue);
+      }
+      if(paramsValue !== undefined && key[1].length >= 2) {
+        key[1].forEach((paramsValueEntry)=> {
+          newParams.append(URLParams[paramsName as keyof typeof URLParams] , paramsValueEntry);
+        });
+      }
+    });
+    setSearchParams(newParams);
+  },[allFilters, currentPage]);
 
   useEffect(() => {
     if(getNumeric(location.pathname) !== currentPage) {
@@ -38,28 +70,11 @@ function Catalog(): JSX.Element {
   useEffect(()=>{
     const urlParams = searchParams.toString();
     const params = {currentPage, urlParams};
-    if(paramsUpdateStatus) {
-      setSearchParams(updatedParams as string);
-      dispatch(paramsSetter(''));
-      setPageUpdateStatus(false);
+    if(!initialLoad && !pageUpdate) {
+      dispatch(fetchProductsAction(params));
     }
-    if(!initialLoad) {
-      if(!paramsUpdateStatus && pageUpdateStatus) {
-        dispatch(fetchProductsAction(params));
-      }
-    }
-    setPageUpdateStatus(true);
-  },[initialLoad, searchParams, setSearchParams, updatedParams, pageUpdateStatus]);
-
-  useEffect(()=>{
-    if(!initialLoad) {
-      dispatch(fetchAllProductsAction());
-    }
-  },[initialLoad, dispatch]);
-
-  useEffect(()=>{
-    setInitialLoad(false);
-  },[]);
+    dispatch(pageUpdateSetter(false));
+  },[initialLoad, searchParams, setSearchParams]);
 
   return (
     <section className="catalog">
@@ -88,3 +103,4 @@ function Catalog(): JSX.Element {
 }
 
 export default Catalog;
+
