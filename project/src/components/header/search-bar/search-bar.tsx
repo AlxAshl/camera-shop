@@ -1,6 +1,6 @@
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import FormSearchList from './form-search-list/form-search-list';
-import { useEffect, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { ProductType } from '../../../types/product';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {AppRoute, DEFAULT_PAGE_NUMBER} from '../../../const';
@@ -15,12 +15,12 @@ function SearchBar (): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const products = useAppSelector(getProductsAlphabetic);
-  const searchInputField = document.getElementById('search') as HTMLInputElement;
+  const searchInputFieldRef = useRef() as MutableRefObject<HTMLInputElement>;
   const resetButton = document.getElementById('reset');
   const [focused, setFocused] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [initial, setInitial] = useState(true);
-  const returnedSearchInput = useInputEventListener(searchInputField, searchFilterSetter);
+  const returnedSearchInput = useInputEventListener(searchInputFieldRef, searchFilterSetter);
 
   useEffect(()=> {
     if(location.pathname.includes(AppRoute.Catalog) && !initial) {
@@ -37,7 +37,7 @@ function SearchBar (): JSX.Element {
   },[returnedSearchInput]);
 
   const handleMouseClickOff = (evt: MouseEvent) => {
-    if(evt.target !== (searchInputField || resetButton)) {
+    if(evt.target !== (searchInputFieldRef.current || resetButton)) {
       setFocused(false);
     }
   };
@@ -58,7 +58,7 @@ function SearchBar (): JSX.Element {
 
   const handleSearchResetButton = () => {
     setSearchQuery('');
-    searchInputField.value = '';
+    searchInputFieldRef.current.value = '';
   };
 
   return (
@@ -71,7 +71,7 @@ function SearchBar (): JSX.Element {
           <svg className="form-search__icon" width="16" height="16" aria-hidden="true">
             <use xlinkHref="#icon-lens"></use>
           </svg>
-          <input id="search" data-testid='search-input-test' className="form-search__input" value={searchQuery} onFocus={() => setFocused(true)} onChange={(evt)=> setSearchQuery(evt.target.value)} type="text" autoComplete="off" placeholder="Поиск по сайту"/>
+          <input ref={searchInputFieldRef} id="search" data-testid='search-input-test' className="form-search__input" value={searchQuery} onFocus={() => setFocused(true)} onChange={(evt)=> setSearchQuery(evt.target.value)} type="text" autoComplete="off" placeholder="Поиск по сайту"/>
         </label>
         {filteredProducts.length !== 0
           ? <FormSearchList onLinkPass={() => handleSearchResetButton()} searchProducts = {filteredProducts}/>

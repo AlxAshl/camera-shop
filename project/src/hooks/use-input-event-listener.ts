@@ -1,9 +1,9 @@
 import { ActionCreatorWithNonInferrablePayload } from '@reduxjs/toolkit';
-import { useEffect, useState } from 'react';
+import { MutableRefObject, useEffect, useState } from 'react';
 import { useAppDispatch } from './useAppDispatch';
 
 
-export default function useInputEventListener(inputField: HTMLInputElement, action: ActionCreatorWithNonInferrablePayload) {
+export default function useInputEventListener(inputField: MutableRefObject<HTMLInputElement>, action: ActionCreatorWithNonInferrablePayload) {
 
   const [value, setValue] = useState('');
   const isEscapeKey = (evt:KeyboardEvent) => evt.key === 'Escape';
@@ -20,16 +20,16 @@ export default function useInputEventListener(inputField: HTMLInputElement, acti
     };
     const handleEnterKeyPress = (evt: KeyboardEvent) => {
       if(isEnterKey(evt)) {
-        inputField.value !== ''
-          ? setValue(inputField.value)
-          : dispatch(action(inputField.value));
+        inputField.current.value !== ''
+          ? setValue(inputField.current.value)
+          : dispatch(action(inputField.current.value));
         (evt.target as HTMLInputElement)?.blur();
         document.removeEventListener('keydown', handleEscKeyPress);
         document.removeEventListener('keydown', handleEnterKeyPress);
       }
     };
-    inputField?.addEventListener('keydown', handleEscKeyPress);
-    inputField?.addEventListener('keydown', handleEnterKeyPress);
+    inputField.current?.addEventListener('keydown', handleEscKeyPress);
+    inputField.current?.addEventListener('keydown', handleEnterKeyPress);
   },[inputField]);
 
   return value;

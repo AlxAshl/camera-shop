@@ -7,14 +7,14 @@ export const filtersInitialState: FiltersProcess = {
   pageUpdate: false,
   allProducts: [],
   extraFilters: {
-    PriceMin: [] as string[],
-    PriceMax: [] as string[],
-    Sort: [] as string[],
-    Order: [] as string[],
-    Search: [] as string[],
-    Level: [] as string[],
-    Category: [] as string[],
-    Type: [] as string[]
+    minprice: [] as string[],
+    maxprice: [] as string[],
+    sort: [] as string[],
+    order: [] as string[],
+    search: [] as string[],
+    level: [] as string[],
+    category: [] as string[],
+    type: [] as string[]
   }
 };
 
@@ -29,28 +29,28 @@ export const filtersProcess = createSlice({
       state.extraFilters = action.payload as ExtraFilters;
     },
     sortFilterSetter(state, action) {
-      state.extraFilters.Sort = action.payload as string[];
+      state.extraFilters.sort = action.payload as string[];
     },
     orderFilterSetter(state, action) {
-      state.extraFilters.Order = action.payload as string[];
+      state.extraFilters.order = action.payload as string[];
     },
     searchFilterSetter(state, action) {
-      state.extraFilters.Search = action.payload as string[];
+      state.extraFilters.search = action.payload as string[];
     },
     levelFilterSetter(state, action) {
-      state.extraFilters.Level = action.payload as string[];
+      state.extraFilters.level = action.payload as string[];
     },
     categoryFilterSetter(state, action) {
-      state.extraFilters.Category = action.payload as string[];
+      state.extraFilters.category = action.payload as string[];
     },
     typeFilterSetter(state, action) {
-      state.extraFilters.Type = action.payload as string[];
+      state.extraFilters.type = action.payload as string[];
     },
     minPriceFilterSetter(state, action) {
-      state.extraFilters.PriceMin = action.payload as string[];
+      state.extraFilters.minprice = action.payload as string[];
     },
     maxPriceFilterSetter(state, action) {
-      state.extraFilters.PriceMax = action.payload as string[];
+      state.extraFilters.maxprice = action.payload as string[];
     },
   },
 

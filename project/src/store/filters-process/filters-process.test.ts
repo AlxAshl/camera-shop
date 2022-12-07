@@ -16,14 +16,14 @@ describe('Reducer: filtersProcess', () => {
         pageUpdate: false,
         allProducts: [],
         extraFilters: {
-          PriceMin: [] as string[],
-          PriceMax: [] as string[],
-          Sort: [] as string[],
-          Order: [] as string[],
-          Search: [] as string[],
-          Level: [] as string[],
-          Category: [] as string[],
-          Type: [] as string[]
+          minprice: [] as string[],
+          maxprice: [] as string[],
+          sort: [] as string[],
+          order: [] as string[],
+          search: [] as string[],
+          level: [] as string[],
+          category: [] as string[],
+          type: [] as string[]
         }
       });
   });
@@ -33,14 +33,14 @@ describe('Reducer: filtersProcess', () => {
       pageUpdate: false,
       allProducts: [],
       extraFilters: {
-        PriceMin: [] as string[],
-        PriceMax: [] as string[],
-        Sort: [] as string[],
-        Order: [] as string[],
-        Search: [] as string[],
-        Level: [] as string[],
-        Category: [] as string[],
-        Type: [] as string[]
+        minprice: [] as string[],
+        maxprice: [] as string[],
+        sort: [] as string[],
+        order: [] as string[],
+        search: [] as string[],
+        level: [] as string[],
+        category: [] as string[],
+        type: [] as string[]
       }
     };
     expect(reducer(state, {type: fetchAllProductsAction.fulfilled.type, payload: productsMock}))
@@ -48,14 +48,14 @@ describe('Reducer: filtersProcess', () => {
         pageUpdate: false,
         allProducts: productsMock,
         extraFilters: {
-          PriceMin: [] as string[],
-          PriceMax: [] as string[],
-          Sort: [] as string[],
-          Order: [] as string[],
-          Search: [] as string[],
-          Level: [] as string[],
-          Category: [] as string[],
-          Type: [] as string[]
+          minprice: [] as string[],
+          maxprice: [] as string[],
+          sort: [] as string[],
+          order: [] as string[],
+          search: [] as string[],
+          level: [] as string[],
+          category: [] as string[],
+          type: [] as string[]
         }
       });
   });

@@ -60,8 +60,8 @@ export const URLParams = {
   Search: 'name_like',
   Sort: '_sort',
   Order: '_order',
-  PriceMin: 'price_gte',
-  PriceMax: 'price_lte',
+  Minprice: 'price_gte',
+  Maxprice: 'price_lte',
   Category: 'category',
   Level: 'level',
   Type: 'type',
@@ -84,4 +84,3 @@ export const LevelFilter = {
   Amateur: 'Любительский',
   Pro: 'Профессиональный'
 };
-

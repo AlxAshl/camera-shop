@@ -7,15 +7,15 @@ import { handleFilterInputChange } from '../../../utils/handleFilterInputChange'
 
 export function CategoryBlock() {
 
-  const {Category} = useAppSelector(getFilters);
+  const {category} = useAppSelector(getFilters);
 
   return(
     <fieldset className="catalog-filter__block">
       <legend className="title title--h5">Категория</legend>
       <div className="custom-checkbox catalog-filter__item">
         <label>
-          <input data-testid='photocamera-test' type="checkbox" name="photocamera" checked={Category.includes(CategoryFilter.Camera)} onChange={
-            () => handleFilterInputChange(CategoryFilter.Camera, Category, categoryFilterSetter)
+          <input data-testid='photocamera-test' type="checkbox" name="photocamera" checked={category.includes(CategoryFilter.Camera)} onChange={
+            () => handleFilterInputChange(CategoryFilter.Camera, category, categoryFilterSetter)
           }
           />
           <span className="custom-checkbox__icon"></span>
@@ -24,8 +24,8 @@ export function CategoryBlock() {
       </div>
       <div className="custom-checkbox catalog-filter__item">
         <label>
-          <input data-testid='videocamera-test' type="checkbox" name="videocamera" checked={Category.includes(CategoryFilter.Video)} onChange={
-            () => handleFilterInputChange(CategoryFilter.Video, Category, categoryFilterSetter)
+          <input data-testid='videocamera-test' type="checkbox" name="videocamera" checked={category.includes(CategoryFilter.Video)} onChange={
+            () => handleFilterInputChange(CategoryFilter.Video, category, categoryFilterSetter)
           }
           />
           <span className="custom-checkbox__icon"></span>

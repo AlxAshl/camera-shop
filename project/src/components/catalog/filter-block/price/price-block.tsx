@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { useAppSelector } from '../../../../hooks/useAppSelector';
 import { getFilters, getProductsByPrice, getProductsByPriceDesc } from '../../../../store/filters-process/selectors';
 import useInputEventListener from '../../../../hooks/use-input-event-listener';
@@ -14,12 +14,12 @@ export function PriceBlock() {
   const [isInitial, setIsInitial] = useState(true);
   const productsByPriceAsc = useAppSelector(getProductsByPrice);
   const productsByPriceDesc = useAppSelector(getProductsByPriceDesc);
-  const {PriceMax, PriceMin} = useSelector(getFilters);
+  const {maxprice, minprice} = useSelector(getFilters);
   const dispatch = useAppDispatch();
-  const minPriceFiled = document.querySelector('#minPrice');
-  const maxPriceFiled = document.querySelector('#maxPrice');
-  const returnMinInput = useInputEventListener(minPriceFiled as HTMLInputElement, minPriceFilterSetter);
-  const returnMaxInput = useInputEventListener(maxPriceFiled as HTMLInputElement, maxPriceFilterSetter);
+  const minPriceFiledRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const maxPriceFiledRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const returnMinInput = useInputEventListener(minPriceFiledRef, minPriceFilterSetter);
+  const returnMaxInput = useInputEventListener(maxPriceFiledRef, maxPriceFilterSetter);
 
   useEffect(
     () => {
@@ -39,14 +39,14 @@ export function PriceBlock() {
   );
 
   useEffect(()=> {
-    if(PriceMax) {
-      setInputValue((prev) => ({...prev, max: String(PriceMax)}));
+    if(maxprice) {
+      setInputValue((prev) => ({...prev, max: String(maxprice)}));
     }
-    if(PriceMin) {
-      setInputValue((prev) => ({...prev, min: String(PriceMin)}));
+    if(minprice) {
+      setInputValue((prev) => ({...prev, min: String(minprice)}));
     }
     setIsInitial(false);
-  },[isInitial, PriceMax, PriceMin]);
+  },[isInitial, maxprice, minprice]);
 
   return(
     <fieldset className="catalog-filter__block">
@@ -54,12 +54,12 @@ export function PriceBlock() {
       <div className="catalog-filter__price-range">
         <div className="custom-input">
           <label>
-            <input type="number" data-testid='minPrice-test' id='minPrice' value={inputValue.min} name="price" placeholder={productsByPriceAsc[0] ? productsByPriceAsc[0].price?.toString() : 'от'} onChange={(evt) => setInputValue((prev) => ({...prev, min: evt.target.value}))}/>
+            <input ref={minPriceFiledRef} type="number" data-testid='minPrice-test' id='minPrice' value={inputValue.min} name="price" placeholder={productsByPriceAsc[0] ? productsByPriceAsc[0].price?.toString() : 'от'} onChange={(evt) => setInputValue((prev) => ({...prev, min: evt.target.value}))}/>
           </label>
         </div>
         <div className="custom-input">
           <label>
-            <input type="number" data-testid='maxPrice-test' id='maxPrice' value={inputValue.max} name="priceUp" placeholder={productsByPriceAsc[0] ? productsByPriceAsc[productsByPriceAsc.length - 1].price?.toString() : 'до'} onChange={(evt) => setInputValue((prev) => ({...prev, max: evt.target.value}))}/>
+            <input ref={maxPriceFiledRef} type="number" data-testid='maxPrice-test' id='maxPrice' value={inputValue.max} name="priceUp" placeholder={productsByPriceAsc[0] ? productsByPriceAsc[productsByPriceAsc.length - 1].price?.toString() : 'до'} onChange={(evt) => setInputValue((prev) => ({...prev, max: evt.target.value}))}/>
           </label>
         </div>
       </div>

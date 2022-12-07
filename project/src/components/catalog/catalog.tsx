@@ -34,7 +34,7 @@ function Catalog(): JSX.Element {
     if(initialLoad) {
       Object.entries(URLParams).forEach(([key, value]) => {
         if (searchParams.has(value)) {
-          setFilters((prevState) => ({...prevState, [key]: searchParams.getAll(value)}));
+          setFilters((prevState) => ({...prevState, [key.toLowerCase()]: searchParams.getAll(value)}));
         }
       });
       setInitialLoad(false);
@@ -50,11 +50,11 @@ function Catalog(): JSX.Element {
     Object.entries(allFilters).forEach((key, value) => {
       const [paramsName, [paramsValue]] = key;
       if(paramsValue !== undefined && key[1].length < 2) {
-        newParams.append(URLParams[paramsName as keyof typeof URLParams] , paramsValue);
+        newParams.append(URLParams[(paramsName.charAt(0).toUpperCase() + paramsName.slice(1)) as keyof typeof URLParams] , paramsValue);
       }
       if(paramsValue !== undefined && key[1].length >= 2) {
         key[1].forEach((paramsValueEntry)=> {
-          newParams.append(URLParams[paramsName as keyof typeof URLParams] , paramsValueEntry);
+          newParams.append(URLParams[(paramsName.charAt(0).toUpperCase() + paramsName.slice(1)) as keyof typeof URLParams] , paramsValueEntry);
         });
       }
     });

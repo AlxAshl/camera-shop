@@ -5,20 +5,19 @@ import { CategoryBlock } from './category/category-block';
 import { LevelBlock } from './level/level-block';
 import { PriceBlock } from './price/price-block';
 
+const extraFilters = {
+  minprice: [] as string[],
+  maxprice: [] as string[],
+  sort: [] as string[],
+  order: [] as string[],
+  search: [] as string[],
+  level: [] as string[],
+  category: [] as string[],
+  type: [] as string[]
+};
+
 function FilterBlock(): JSX.Element {
   const dispatch = useAppDispatch();
-
-  const extraFilters = {
-    PriceMin: [] as string[],
-    PriceMax: [] as string[],
-    Sort: [] as string[],
-    Order: [] as string[],
-    Search: [] as string[],
-    Level: [] as string[],
-    Category: [] as string[],
-    Type: [] as string[]
-  };
-
   const handleFilterReset = () => {
     dispatch(filtersSetter(extraFilters));
   };

@@ -7,15 +7,15 @@ import { handleFilterInputChange } from '../../../utils/handleFilterInputChange'
 
 export function LevelBlock() {
 
-  const {Level} = useAppSelector(getFilters);
+  const {level} = useAppSelector(getFilters);
 
   return(
     <fieldset className="catalog-filter__block">
       <legend className="title title--h5">Уровень</legend>
       <div className="custom-checkbox catalog-filter__item">
         <label>
-          <input data-testid='level-zero-test' type="checkbox" name="zero" checked={Level.includes(LevelFilter.Novice)} onChange={
-            () => handleFilterInputChange(LevelFilter.Novice, Level, levelFilterSetter)
+          <input data-testid='level-zero-test' type="checkbox" name="zero" checked={level.includes(LevelFilter.Novice)} onChange={
+            () => handleFilterInputChange(LevelFilter.Novice, level, levelFilterSetter)
           }
           />
           <span className="custom-checkbox__icon"></span>
@@ -24,8 +24,8 @@ export function LevelBlock() {
       </div>
       <div className="custom-checkbox catalog-filter__item">
         <label>
-          <input data-testid='level-amateur-test' type="checkbox" name="non-professional" checked={Level.includes(LevelFilter.Amateur)} onChange={
-            () => handleFilterInputChange(LevelFilter.Amateur, Level, levelFilterSetter)
+          <input data-testid='level-amateur-test' type="checkbox" name="non-professional" checked={level.includes(LevelFilter.Amateur)} onChange={
+            () => handleFilterInputChange(LevelFilter.Amateur, level, levelFilterSetter)
           }
           />
           <span className="custom-checkbox__icon"></span>
@@ -34,8 +34,8 @@ export function LevelBlock() {
       </div>
       <div className="custom-checkbox catalog-filter__item">
         <label>
-          <input data-testid='level-pro-test' type="checkbox" name="professional" checked={Level.includes(LevelFilter.Pro)} onChange={
-            () => handleFilterInputChange(LevelFilter.Pro, Level, levelFilterSetter)
+          <input data-testid='level-pro-test' type="checkbox" name="professional" checked={level.includes(LevelFilter.Pro)} onChange={
+            () => handleFilterInputChange(LevelFilter.Pro, level, levelFilterSetter)
           }
           />
           <span className="custom-checkbox__icon"></span>

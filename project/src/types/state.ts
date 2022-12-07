@@ -25,27 +25,27 @@ export type UtilsProcess = {
 }
 
 export type ExtraFilters = {
-  PriceMin: string[];
-  PriceMax: string[];
-  Sort: string[];
-  Order: string[];
-  Search: string[];
-  Level: string[];
-  Category: string[];
-  Type: string[];
+  minprice: string[];
+  maxprice: string[];
+  sort: string[];
+  order: string[];
+  search: string[];
+  level: string[];
+  category: string[];
+  type: string[];
 };
 export type FiltersProcess = {
   pageUpdate: boolean;
   allProducts: ProductType[];
   extraFilters: {
-    PriceMin: string[];
-    PriceMax: string[];
-    Sort: string[];
-    Order: string[];
-    Search: string[];
-    Level: string[];
-    Category: string[];
-    Type: string[];
+    minprice: string[];
+    maxprice: string[];
+    sort: string[];
+    order: string[];
+    search: string[];
+    level: string[];
+    category: string[];
+    type: string[];
   };
 }
 
