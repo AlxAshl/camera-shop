@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { ExtraFilters, FiltersProcess } from '../../types/state';
-import { fetchAllProductsAction } from '../api-actions';
+import { fetchAllProductsAction, fetchFilteredProductsAction } from '../api-actions';
 
 export const filtersInitialState: FiltersProcess = {
   pageUpdate: false,
   allProducts: [],
+  filteredProducts: [],
   extraFilters: {
     minprice: [] as string[],
     maxprice: [] as string[],
@@ -58,6 +59,9 @@ export const filtersProcess = createSlice({
     builder
       .addCase(fetchAllProductsAction.fulfilled, (state, action) => {
         state.allProducts = action.payload;
+      })
+      .addCase(fetchFilteredProductsAction.fulfilled, (state, action) => {
+        state.filteredProducts = action.payload;
       });
   }
 });

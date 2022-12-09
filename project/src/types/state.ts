@@ -37,15 +37,16 @@ export type ExtraFilters = {
 export type FiltersProcess = {
   pageUpdate: boolean;
   allProducts: ProductType[];
+  filteredProducts: ProductType[];
   extraFilters: {
     minprice: string[];
     maxprice: string[];
-    sort: string[];
-    order: string[];
-    search: string[];
     level: string[];
     category: string[];
     type: string[];
+    sort: string[];
+    order: string[];
+    search: string[];
   };
 }
 

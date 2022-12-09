@@ -8,7 +8,7 @@ type FormSearchListType = {
 function FormSearchList ({searchProducts, onLinkPass}: FormSearchListType): JSX.Element {
 
   return (
-    <ul className="form-search__select-list" >
+    <ul className="form-search__select-list scroller" >
       {searchProducts.map((query) => (
         <Link onClick={() => onLinkPass()} key = {query.name} to={`${AppRoute.Product}/${query.id}`}>
           <li className="form-search__select-item">{query.name}</li>

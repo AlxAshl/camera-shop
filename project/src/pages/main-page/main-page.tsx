@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import Banner from '../../components/banner/banner';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
@@ -25,6 +25,7 @@ function MainPage(): JSX.Element {
   const location = useLocation();
   const currentPage = useAppSelector(getPage);
   const [searchParams] = useSearchParams();
+  const [initialLoad, setInitialLoad] = useState(true);
 
   useEffect(()=>{
     const passedParams = searchParams.toString();
@@ -43,8 +44,10 @@ function MainPage(): JSX.Element {
   },[currentPage, dispatch, navigate, productCount, totalPages, location.pathname]);
 
   useEffect(()=>{
-    dispatch(fetchPromoAction());
-  },[dispatch]);
+    initialLoad
+      ? setInitialLoad(false)
+      : dispatch(fetchPromoAction());
+  },[dispatch, initialLoad]);
 
   return (
     <main>

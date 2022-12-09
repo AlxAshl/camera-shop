@@ -15,6 +15,7 @@ describe('Reducer: filtersProcess', () => {
       .toEqual({
         pageUpdate: false,
         allProducts: [],
+        filteredProducts: [],
         extraFilters: {
           minprice: [] as string[],
           maxprice: [] as string[],
@@ -32,6 +33,7 @@ describe('Reducer: filtersProcess', () => {
     const state = {
       pageUpdate: false,
       allProducts: [],
+      filteredProducts: [],
       extraFilters: {
         minprice: [] as string[],
         maxprice: [] as string[],
@@ -47,6 +49,7 @@ describe('Reducer: filtersProcess', () => {
       .toEqual({
         pageUpdate: false,
         allProducts: productsMock,
+        filteredProducts: [],
         extraFilters: {
           minprice: [] as string[],
           maxprice: [] as string[],

@@ -1,6 +1,6 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { useAppSelector } from '../../../../hooks/useAppSelector';
-import { getFilters, getProductsByPrice, getProductsByPriceDesc } from '../../../../store/filters-process/selectors';
+import { getFilters, getProductsByPriceAsc, getProductsByPriceDesc } from '../../../../store/filters-process/selectors';
 import useInputEventListener from '../../../../hooks/use-input-event-listener';
 import { maxPriceFilterSetter, minPriceFilterSetter } from '../../../../store/filters-process/filters-process';
 import { useSelector } from 'react-redux';
@@ -12,7 +12,7 @@ export function PriceBlock() {
 
   const [inputValue, setInputValue] = useState({ min: '', max: ''});
   const [isInitial, setIsInitial] = useState(true);
-  const productsByPriceAsc = useAppSelector(getProductsByPrice);
+  const productsByPriceAsc = useAppSelector(getProductsByPriceAsc);
   const productsByPriceDesc = useAppSelector(getProductsByPriceDesc);
   const {maxprice, minprice} = useSelector(getFilters);
   const dispatch = useAppDispatch();
@@ -37,6 +37,15 @@ export function PriceBlock() {
     },
     [returnMaxInput]
   );
+
+  useEffect(()=>{
+    if((Number(inputValue.min) < productsByPriceAsc[0]?.price) && inputValue.min !== '' && productsByPriceAsc.length > 0) {
+      dispatch(minPriceFilterSetter([String(productsByPriceAsc[0].price)]));
+    }
+    if((Number(inputValue.max) > productsByPriceAsc[productsByPriceAsc.length - 1]?.price) && inputValue.max !== '' && productsByPriceDesc.length > 0) {
+      dispatch(maxPriceFilterSetter([String(productsByPriceAsc[productsByPriceAsc.length - 1].price)]));
+    }
+  },[productsByPriceAsc, productsByPriceDesc]);
 
   useEffect(()=> {
     if(maxprice) {

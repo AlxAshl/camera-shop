@@ -14,20 +14,28 @@ export default function useInputEventListener(inputField: MutableRefObject<HTMLI
     const handleEscKeyPress = (evt: KeyboardEvent) => {
       if(isEscapeKey(evt)) {
         (evt.target as HTMLInputElement)?.blur();
-        document.removeEventListener('keydown', handleEscKeyPress);
-        document.removeEventListener('keydown', handleEnterKeyPress);
       }
     };
+
     const handleEnterKeyPress = (evt: KeyboardEvent) => {
       if(isEnterKey(evt)) {
         inputField.current.value !== ''
           ? setValue(inputField.current.value)
           : dispatch(action(inputField.current.value));
         (evt.target as HTMLInputElement)?.blur();
-        document.removeEventListener('keydown', handleEscKeyPress);
-        document.removeEventListener('keydown', handleEnterKeyPress);
       }
     };
+
+    const handleBlurEvent = () => {
+      inputField.current.value !== ''
+        ? setValue(inputField.current.value)
+        : dispatch(action(inputField.current.value));
+      document.removeEventListener('blur', handleBlurEvent);
+      document.removeEventListener('keydown', handleEscKeyPress);
+      document.removeEventListener('keydown', handleEnterKeyPress);
+    };
+
+    inputField.current?.addEventListener('blur', handleBlurEvent);
     inputField.current?.addEventListener('keydown', handleEscKeyPress);
     inputField.current?.addEventListener('keydown', handleEnterKeyPress);
   },[inputField]);

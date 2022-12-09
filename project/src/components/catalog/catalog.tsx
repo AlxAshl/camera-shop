@@ -6,7 +6,7 @@ import PaginationList from './pagination-list/pagination-list';
 import Preloader from '../preloader/preloader';
 import SortBar from './sort-bar/sort-bar';
 import { useEffect, useState } from 'react';
-import { fetchAllProductsAction, fetchProductsAction } from '../../store/api-actions';
+import { fetchAllProductsAction, fetchFilteredProductsAction, fetchProductsAction } from '../../store/api-actions';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { getNumeric } from '../utils/pages';
 import { pageSetter } from '../../store/utils-process/utils-process';
@@ -14,7 +14,7 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 import { getPage } from '../../store/utils-process/selectors';
 import { getFilters, getPageUpdateStatus } from '../../store/filters-process/selectors';
 import { filtersSetter, pageUpdateSetter } from '../../store/filters-process/filters-process';
-import { URLParams } from '../../const';
+import { CategoryFilter, TypeFilter, URLParams } from '../../const';
 
 
 function Catalog(): JSX.Element {
@@ -50,11 +50,21 @@ function Catalog(): JSX.Element {
     Object.entries(allFilters).forEach((key, value) => {
       const [paramsName, [paramsValue]] = key;
       if(paramsValue !== undefined && key[1].length < 2) {
-        newParams.append(URLParams[(paramsName.charAt(0).toUpperCase() + paramsName.slice(1)) as keyof typeof URLParams] , paramsValue);
+        if((allFilters.category.includes(CategoryFilter.Video) && !allFilters.category.includes(CategoryFilter.Camera)) && (paramsValue === TypeFilter.Film || paramsValue === TypeFilter.Instant)){
+          return newParams;
+        }
+        else {
+          newParams.append(URLParams[(paramsName.charAt(0).toUpperCase() + paramsName.slice(1)) as keyof typeof URLParams] , paramsValue);
+        }
       }
       if(paramsValue !== undefined && key[1].length >= 2) {
         key[1].forEach((paramsValueEntry)=> {
-          newParams.append(URLParams[(paramsName.charAt(0).toUpperCase() + paramsName.slice(1)) as keyof typeof URLParams] , paramsValueEntry);
+          if((paramsValueEntry === TypeFilter.Film || paramsValueEntry === TypeFilter.Instant) && (allFilters.category.includes(CategoryFilter.Video) && !allFilters.category.includes(CategoryFilter.Camera))) {
+            return newParams;
+          }
+          else {
+            newParams.append(URLParams[(paramsName.charAt(0).toUpperCase() + paramsName.slice(1)) as keyof typeof URLParams] , paramsValueEntry);
+          }
         });
       }
     });
@@ -72,6 +82,7 @@ function Catalog(): JSX.Element {
     const params = {currentPage, urlParams};
     if(!initialLoad && !pageUpdate) {
       dispatch(fetchProductsAction(params));
+      dispatch(fetchFilteredProductsAction(params.urlParams));
     }
     dispatch(pageUpdateSetter(false));
   },[initialLoad, searchParams, setSearchParams]);
