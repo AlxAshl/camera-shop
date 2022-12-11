@@ -3,7 +3,7 @@ import { MutableRefObject, useEffect, useState } from 'react';
 import { useAppDispatch } from './useAppDispatch';
 
 
-export default function useInputEventListener(inputField: MutableRefObject<HTMLInputElement>, action: ActionCreatorWithNonInferrablePayload) {
+export default function usePriceInputEventListener(inputField: MutableRefObject<HTMLInputElement>, action: ActionCreatorWithNonInferrablePayload) {
 
   const [value, setValue] = useState('');
   const isEscapeKey = (evt:KeyboardEvent) => evt.key === 'Escape';

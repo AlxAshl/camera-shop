@@ -7,7 +7,7 @@ import {AppRoute, DEFAULT_PAGE_NUMBER} from '../../../const';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { getProductsAlphabetic } from '../../../store/filters-process/selectors';
 import { searchFilterSetter } from '../../../store/filters-process/filters-process';
-import useInputEventListener from '../../../hooks/use-input-event-listener';
+import useSearchInputEventListener from '../../../hooks/use-search-input-event-listener';
 
 
 function SearchBar (): JSX.Element {
@@ -20,7 +20,9 @@ function SearchBar (): JSX.Element {
   const [focused, setFocused] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [initial, setInitial] = useState(true);
-  const returnedSearchInput = useInputEventListener(searchInputFieldRef, searchFilterSetter);
+  const returnedSearchInput = useSearchInputEventListener(searchInputFieldRef, searchFilterSetter);
+  const isEscapeKey = (evt:KeyboardEvent) => evt.key === 'Escape';
+
 
   useEffect(()=> {
     if(location.pathname.includes(AppRoute.Catalog) && !initial) {
@@ -41,12 +43,25 @@ function SearchBar (): JSX.Element {
       setFocused(false);
     }
   };
+  const handleEscKeyPress = (evt: KeyboardEvent) => {
+    if(isEscapeKey(evt)) {
+      (evt.target as HTMLInputElement).blur();
+      setFocused(false);
+      document.removeEventListener('keydown', handleEscKeyPress);
+    }
+  };
+  const handleSearchResetButton = () => {
+    setSearchQuery('');
+    searchInputFieldRef.current.value = '';
+  };
 
   useEffect(()=> {
     if(focused) {
       document.addEventListener('click', handleMouseClickOff);
+      document.addEventListener('keydown', handleEscKeyPress);
       return () => {
         document.removeEventListener('click', handleMouseClickOff);
+        document.removeEventListener('keydown', handleEscKeyPress);
       };
     }
   },[focused]);
@@ -55,11 +70,6 @@ function SearchBar (): JSX.Element {
   if (searchQuery.length > 1 && products.length > 0) {
     filteredProducts = products.filter((product) => product.name.toLowerCase().includes(searchQuery.toLowerCase()));
   }
-
-  const handleSearchResetButton = () => {
-    setSearchQuery('');
-    searchInputFieldRef.current.value = '';
-  };
 
   return (
     <div id='search-form' data-testid='search-form-test' className={searchQuery !== '' && focused

@@ -1,7 +1,7 @@
 import { MutableRefObject, useEffect, useRef, useState } from 'react';
 import { useAppSelector } from '../../../../hooks/useAppSelector';
 import { getFilters, getProductsByPriceAsc, getProductsByPriceDesc } from '../../../../store/filters-process/selectors';
-import useInputEventListener from '../../../../hooks/use-input-event-listener';
+import usePriceInputEventListener from '../../../../hooks/use-price-input-event-listener';
 import { maxPriceFilterSetter, minPriceFilterSetter } from '../../../../store/filters-process/filters-process';
 import { useSelector } from 'react-redux';
 import { setMaxInput, setMinInput } from '../../../utils/processPriceInput';
@@ -18,8 +18,8 @@ export function PriceBlock() {
   const dispatch = useAppDispatch();
   const minPriceFiledRef = useRef() as MutableRefObject<HTMLInputElement>;
   const maxPriceFiledRef = useRef() as MutableRefObject<HTMLInputElement>;
-  const returnMinInput = useInputEventListener(minPriceFiledRef, minPriceFilterSetter);
-  const returnMaxInput = useInputEventListener(maxPriceFiledRef, maxPriceFilterSetter);
+  const returnMinInput = usePriceInputEventListener(minPriceFiledRef, minPriceFilterSetter);
+  const returnMaxInput = usePriceInputEventListener(maxPriceFiledRef, maxPriceFilterSetter);
 
   useEffect(
     () => {

@@ -3,7 +3,7 @@ import { renderWithProviders } from '../../../../test/utils/render-with-redux';
 import { AppRoute } from '../../../../const';
 import { PriceBlock } from './price-block';
 import { productsMock } from '../../../../test/test-mocks';
-import {} from '../../../../hooks/use-input-event-listener';
+import {} from '../../../../hooks/use-price-input-event-listener';
 
 describe('Price component', () => {
   test('renders price inputs with no values and with placeholders', () => {
