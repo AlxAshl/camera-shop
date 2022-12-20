@@ -17,10 +17,11 @@ exports[`Render BasketSummary 1`] = `
         class="basket-form"
       >
         <form
-          action="#"
+          method="post"
         >
           <div
-            class="custom-input"
+            class="custom-input "
+            data-testid="input-class-test"
           >
             <label>
               <span
@@ -29,6 +30,7 @@ exports[`Render BasketSummary 1`] = `
                 Промокод
               </span>
               <input
+                data-testid="coupon-field-test"
                 name="promo"
                 placeholder="Введите промокод"
                 type="text"
@@ -47,6 +49,7 @@ exports[`Render BasketSummary 1`] = `
           </div>
           <button
             class="btn"
+            data-testid="send-coupon-test"
             type="submit"
           >
             Применить
@@ -67,8 +70,9 @@ exports[`Render BasketSummary 1`] = `
         </span>
         <span
           class="basket__summary-value"
+          data-testid="sum-test"
         >
-          111 390 ₽
+          0 ₽
         </span>
       </p>
       <p
@@ -80,7 +84,8 @@ exports[`Render BasketSummary 1`] = `
           Скидка:
         </span>
         <span
-          class="basket__summary-value basket__summary-value--bonus"
+          class="basket__summary-value"
+          data-testid="discount-test"
         >
           0 ₽
         </span>
@@ -95,8 +100,9 @@ exports[`Render BasketSummary 1`] = `
         </span>
         <span
           class="basket__summary-value basket__summary-value--total"
+          data-testid="sumdiscounted-test"
         >
-          111 390 ₽
+          0 ₽
         </span>
       </p>
       <button

@@ -5,7 +5,7 @@ import {configureMockStore} from '@jedmao/redux-mock-store';
 import { State } from '../types/state';
 import { productMock, productsMock, reviewMock, reviewsMock } from '../test/test-mocks';
 import { APIRoute } from '../const';
-import { fetchProductAction, fetchProductsAction, fetchPromoAction, fetchReviewsAction, fetchSimilarProductsAction, postReviewAction } from './api-actions';
+import { fetchProductAction, fetchProductsAction, fetchPromoAction, fetchReviewsAction, fetchSimilarProductsAction, postOrderAction, postReviewAction } from './api-actions';
 import { api } from './store';
 
 
@@ -263,5 +263,34 @@ describe('async actions', () => {
     },1000);
   });
 
+  test('should return error for postOrder when POST /orders adress is incorrect', async () => {
+    const orderData = {
+      camerasIds: [1],
+      coupon: 'cameras-333'
+    };
+    mockAPI
+      .onPost('/ordrs')
+      .reply(404);
+    const store = mockStore();
+    await store.dispatch(postOrderAction(orderData));
+    setTimeout(()=>{
+      expect(mockError).toBeCalled();
+    },1000);
+  });
+
+  test('should return error for postOrder when POST /orders call experience network error', async () => {
+    const orderData = {
+      camerasIds: [1],
+      coupon: 'cameras-333'
+    };
+    mockAPI
+      .onPost('/orders')
+      .reply(408);
+    const store = mockStore();
+    await store.dispatch(postOrderAction(orderData));
+    setTimeout(()=>{
+      expect(mockError).toBeCalled();
+    },1000);
+  });
 });
 

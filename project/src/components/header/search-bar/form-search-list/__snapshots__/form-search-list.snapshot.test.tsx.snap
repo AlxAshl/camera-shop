@@ -3,7 +3,7 @@
 exports[`Render Formsearchlist 1`] = `
 <DocumentFragment>
   <ul
-    class="form-search__select-list"
+    class="form-search__select-list scroller"
   >
     <a
       href="/cameras/1"

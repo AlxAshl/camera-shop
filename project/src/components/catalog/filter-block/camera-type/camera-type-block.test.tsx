@@ -7,7 +7,7 @@ import { CameraTypeBlock } from './camera-type-block';
 
 describe('Cameratypeblock component', () => {
   test('renders unchecked camtype checkboxes on initial', () => {
-    renderWithProviders(<CameraTypeBlock/>,{initialState: { FILTERS: { allProducts: productsMock, extraFilters:{Type: [''], Category:[]}}} , route: AppRoute.Catalog});
+    renderWithProviders(<CameraTypeBlock/>,{initialState: { FILTERS: { allProducts: productsMock, extraFilters:{type: [''], category:[]}}} , route: AppRoute.Catalog});
     const digitalCheckbox = screen.getByTestId('digital-test');
     const filmCheckbox = screen.getByTestId('film-test');
     const snapshotCheckbox = screen.getByTestId('snapshot-test');
@@ -20,7 +20,7 @@ describe('Cameratypeblock component', () => {
 
   });
   test('renders checked camtype checkboxes from store', () => {
-    renderWithProviders(<CameraTypeBlock/>,{initialState: { FILTERS: { allProducts: productsMock, extraFilters:{Type: [TypeFilter.Collectible], Category:[]}}}});
+    renderWithProviders(<CameraTypeBlock/>,{initialState: { FILTERS: { allProducts: productsMock, extraFilters:{type: [TypeFilter.Collectible], category:[]}}}});
     const digitalCheckbox = screen.getByTestId('digital-test');
     const collectionCheckbox = screen.getByTestId('collection-test');
     expect(digitalCheckbox).not.toBeChecked();

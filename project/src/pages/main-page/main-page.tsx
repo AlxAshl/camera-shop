@@ -2,11 +2,14 @@ import { useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import Banner from '../../components/banner/banner';
 import Breadcrumbs from '../../components/breadcrumbs/breadcrumbs';
+import ModalAddToCart from '../../components/modal/modal-add-to-cart/modal-add-to-cart';
+import ModalAddToCartSuccess from '../../components/modal/modal-success/modal-add-to-cart-success/modal-add-to-cart-success';
 import { getPagesCount } from '../../components/utils/pages';
 import { AppRoute, DEFAULT_PAGE_NUMBER } from '../../const';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchPromoAction } from '../../store/api-actions';
+import { getModalCartStatus, getModalCartSuccessStatus } from '../../store/basket-process/selectors';
 import { getLoadedPromoStatus, getPromo } from '../../store/complementary-process/selectors';
 import { pageUpdateSetter } from '../../store/filters-process/filters-process';
 import { getProductCount } from '../../store/product-process/selectors';
@@ -26,6 +29,8 @@ function MainPage(): JSX.Element {
   const currentPage = useAppSelector(getPage);
   const [searchParams] = useSearchParams();
   const [initialLoad, setInitialLoad] = useState(true);
+  const isSuccessActive = useAppSelector(getModalCartSuccessStatus);
+  const isCartActive = useAppSelector(getModalCartStatus);
 
   useEffect(()=>{
     const passedParams = searchParams.toString();
@@ -50,13 +55,22 @@ function MainPage(): JSX.Element {
   },[dispatch, initialLoad]);
 
   return (
-    <main>
+    <main {...isCartActive || isSuccessActive
+      ? { style:{paddingRight: '17px'}}
+      : ''}
+    >
       {bannerLoaded
         ? <Banner promo={bannerData}/>
         : ''}
       <div className="page-content">
         <Breadcrumbs />
         <Outlet />
+        {isCartActive
+          ? <ModalAddToCart/>
+          : ''}
+        {isSuccessActive
+          ? <ModalAddToCartSuccess/>
+          : ''}
       </div>
     </main>
   );

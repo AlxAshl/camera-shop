@@ -125,25 +125,6 @@ exports[`Header renders correctly 1`] = `
             </span>
           </button>
         </div>
-        <button
-          class="form-search__reset"
-          type="reset"
-        >
-          <svg
-            aria-hidden="true"
-            height="10"
-            width="10"
-          >
-            <use
-              xlink:href="#icon-close"
-            />
-          </svg>
-          <span
-            class="visually-hidden"
-          >
-            Сбросить поиск
-          </span>
-        </button>
       </div>
       <a
         class="header__basket-link"

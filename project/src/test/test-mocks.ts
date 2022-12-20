@@ -42,6 +42,61 @@ export const productMock = {
   vendorCode: 'LD2000'
 };
 
+export const basketProductMock = {
+  category: 'Фотоаппарат',
+  description: 'Среднеформатная 40-мегапиксельная камера',
+  id: 17,
+  level: 'Любительский',
+  name: 'Look Identify',
+  previewImg: 'img/content/look-identify.jpg',
+  previewImg2x: 'img/content/look-identify@2x.jpg',
+  previewImgWebp: 'img/content/look-identify.webp',
+  previewImgWebp2x: 'img/content/look-identify@2x.webp',
+  price: 126000,
+  rating: 5,
+  reviewCount: 18,
+  type: 'Коллекционная',
+  vendorCode: 'LD2000',
+  quantity: 1
+};
+
+export const basketProductsMock = [
+  {
+    category: 'Фотоаппарат',
+    description: 'Среднеформатная 40-мегапиксельная камера',
+    id: 1,
+    level: 'Нулевой',
+    name: 'Look Identify1',
+    previewImg: 'img/content/look-identify.jpg',
+    previewImg2x: 'img/content/look-identify@2x.jpg',
+    previewImgWebp: 'img/content/look-identify.webp',
+    previewImgWebp2x: 'img/content/look-identify@2x.webp',
+    price: 126000,
+    rating: 5,
+    reviewCount: 18,
+    type: 'Коллекционная',
+    vendorCode: 'LD2352000',
+    quantity: 1
+  },
+  {
+    category: 'Фотоаппарат',
+    description: 'Среднеформатная 41-мегапиксельная камера',
+    id: 2,
+    level: 'Любительский',
+    name: 'Look Identify2',
+    previewImg: 'img/content/look-identify.jpg',
+    previewImg2x: 'img/content/look-identify@2x.jpg',
+    previewImgWebp: 'img/content/look-identify.webp',
+    previewImgWebp2x: 'img/content/look-identify@2x.webp',
+    price: 16000,
+    rating: 4,
+    reviewCount: 18,
+    type: 'Коллекционная',
+    vendorCode: 'LD2352000',
+    quantity: 2
+  },
+];
+
 export const productsMock = [
   {
     category: 'Фотоаппарат',

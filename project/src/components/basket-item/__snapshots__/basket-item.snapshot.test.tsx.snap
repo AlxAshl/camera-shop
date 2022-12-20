@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render BasketItem 1`] = `
+<DocumentFragment>
+  <div
+    class="basket-item basket-item--short"
+  >
+    <div
+      class="basket-item__img"
+    >
+      <picture>
+        <source
+          srcset="img/content/look-identify.webp, img/content/look-identify@2x.webp"
+          type="image/webp"
+        />
+        <img
+          alt="Фотоаппарат «Орлёнок»"
+          height="120"
+          src="img/content/look-identify.jpg"
+          srcset="img/content/look-identify@2x.jpg"
+          width="140"
+        />
+      </picture>
+    </div>
+    <div
+      class="basket-item__description"
+    >
+      <p
+        class="basket-item__title"
+      >
+        Look Identify
+      </p>
+      <ul
+        class="basket-item__list"
+      >
+        <li
+          class="basket-item__list-item"
+        >
+          <span
+            class="basket-item__article"
+          >
+            Артикул:
+          </span>
+           
+          <span
+            class="basket-item__number"
+          >
+            LD2000
+          </span>
+        </li>
+        <li
+          class="basket-item__list-item"
+        >
+          Фотоаппарат
+        </li>
+        <li
+          class="basket-item__list-item"
+        >
+          Любительский уровень
+        </li>
+      </ul>
+      <p
+        class="basket-item__price"
+      >
+        <span
+          class="visually-hidden"
+        >
+          Цена:
+        </span>
+        126 000 ₽
+      </p>
+    </div>
+  </div>
+</DocumentFragment>
+`;

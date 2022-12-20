@@ -31,7 +31,8 @@ export enum NameSpace {
   Review = 'REVIEW',
   Complementary = 'COMPLEMENTARY',
   Utils = 'UTILS',
-  Filters = 'FILTERS'
+  Filters = 'FILTERS',
+  Basket = 'BASKET',
 }
 
 export enum APIRoute {
@@ -84,3 +85,5 @@ export const LevelFilter = {
   Amateur: 'Любительский',
   Pro: 'Профессиональный'
 };
+
+export const ValidCoupons = ['camera-333','camera-444','camera-555'];

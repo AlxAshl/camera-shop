@@ -6,7 +6,7 @@ import { CategoryBlock } from './category-block';
 
 describe('CategoryBlock component', () => {
   test('renders unchecked camtype checkboxes on initial', () => {
-    renderWithProviders(<CategoryBlock/>,{initialState: { FILTERS: { extraFilters:{Category: []}}} , route: AppRoute.Catalog});
+    renderWithProviders(<CategoryBlock/>,{initialState: { FILTERS: { extraFilters:{category: []}}} , route: AppRoute.Catalog});
     const photoCamCheckBox = screen.getByTestId('photocamera-test');
     const videoCamCheckbox = screen.getByTestId('videocamera-test');
 
@@ -15,7 +15,7 @@ describe('CategoryBlock component', () => {
 
   });
   test('renders checked camtype checkboxes from store', () => {
-    renderWithProviders(<CategoryBlock/>,{initialState: { FILTERS: { extraFilters:{Category: [CategoryFilter.Camera]}}}});
+    renderWithProviders(<CategoryBlock/>,{initialState: { FILTERS: { extraFilters:{category: [CategoryFilter.Camera]}}}});
     const photoCamCheckBox = screen.getByTestId('photocamera-test');
     const videoCamCheckbox = screen.getByTestId('videocamera-test');
     expect(videoCamCheckbox).not.toBeChecked();

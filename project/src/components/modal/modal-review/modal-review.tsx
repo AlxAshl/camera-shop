@@ -4,9 +4,9 @@ import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { useEventListener } from '../../../hooks/useEventListener';
 import { fetchReviewsAction, postReviewAction } from '../../../store/api-actions';
+import { reviewToggler, succesReviewToggler } from '../../../store/review-process/review-process';
 import { getPostReviewStatus } from '../../../store/review-process/selectors';
 import { getMessageContent, getMessageVisibilityStatus } from '../../../store/utils-process/selectors';
-import {reviewToggler, succesToggler} from '../../../store/utils-process/utils-process';
 import { InputType } from '../../../types/review';
 import Message from '../../ui/message';
 
@@ -62,7 +62,7 @@ function ModalReview({ id}: ModalProps): JSX.Element {
         (response) => {
           if (response.meta.requestStatus === 'fulfilled') {
             handleToggleModalClick();
-            dispatch(succesToggler());
+            dispatch(succesReviewToggler());
             dispatch(fetchReviewsAction(id));
           }
         }

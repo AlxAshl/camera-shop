@@ -27,14 +27,14 @@ exports[`Render ModalAddToCart 1`] = `
           >
             <picture>
               <source
-                srcset="img/content/img9.webp, img/content/img9@2x.webp 2x"
+                srcset="img/content/look-identify.webp, img/content/look-identify@2x.webp"
                 type="image/webp"
               />
               <img
                 alt="Фотоаппарат «Орлёнок»"
                 height="120"
-                src="img/content/img9.jpg"
-                srcset="img/content/img9@2x.jpg 2x"
+                src="img/content/look-identify.jpg"
+                srcset="img/content/look-identify@2x.jpg"
                 width="140"
               />
             </picture>
@@ -45,7 +45,7 @@ exports[`Render ModalAddToCart 1`] = `
             <p
               class="basket-item__title"
             >
-              Фотоаппарат «Орлёнок»
+              Look Identify1
             </p>
             <ul
               class="basket-item__list"
@@ -62,18 +62,18 @@ exports[`Render ModalAddToCart 1`] = `
                 <span
                   class="basket-item__number"
                 >
-                  O78DFGSD832
+                  LD2352000
                 </span>
               </li>
               <li
                 class="basket-item__list-item"
               >
-                Плёночная фотокамера
+                Фотоаппарат
               </li>
               <li
                 class="basket-item__list-item"
               >
-                Любительский уровень
+                Нулевой уровень
               </li>
             </ul>
             <p
@@ -84,7 +84,7 @@ exports[`Render ModalAddToCart 1`] = `
               >
                 Цена:
               </span>
-              18 970 ₽
+              126 000 ₽
             </p>
           </div>
         </div>
@@ -94,6 +94,7 @@ exports[`Render ModalAddToCart 1`] = `
           <button
             class="btn btn--purple modal__btn modal__btn--fit-width"
             data-testid="cart-button-test"
+            id="add-to-cart"
             type="button"
           >
             <svg

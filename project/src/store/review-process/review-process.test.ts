@@ -16,6 +16,8 @@ describe('Reducer: reviewProcess', () => {
         isReviewsDataLoaded: false,
         isReviewPosted: true,
         reviews: [],
+        showReview: false,
+        showReviewSuccess: false,
       });
   });
 
@@ -24,12 +26,16 @@ describe('Reducer: reviewProcess', () => {
       isReviewsDataLoaded: false,
       isReviewPosted: true,
       reviews: [],
+      showReview: false,
+      showReviewSuccess: false,
     };
     expect(reducer(state, {type: fetchReviewsAction.fulfilled.type, payload: reviewsMock}))
       .toEqual({
         isReviewsDataLoaded: true,
         isReviewPosted: true,
         reviews: reviewsMock,
+        showReview: false,
+        showReviewSuccess: false,
       });
   });
   test('should update state after posting review', () => {
@@ -37,12 +43,16 @@ describe('Reducer: reviewProcess', () => {
       isReviewsDataLoaded: false,
       isReviewPosted: true,
       reviews: [],
+      showReview: false,
+      showReviewSuccess: false,
     };
     expect(reducer(state, {type: postReviewAction.pending.type}))
       .toEqual({
         isReviewsDataLoaded: false,
         isReviewPosted: false,
         reviews: [],
+        showReview: false,
+        showReviewSuccess: false,
       });
   });
 });

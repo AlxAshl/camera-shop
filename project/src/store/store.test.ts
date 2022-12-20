@@ -4,6 +4,7 @@ import { productInitialState } from './product-process/product-process';
 import { reviewInitialState } from './review-process/review-process';
 import { complementaryInitiastate } from './complementary-process/complementary-process';
 import { filtersInitialState } from './filters-process/filters-process';
+import { basketInitialState } from './basket-process/basket-process';
 
 
 describe('store test', ()=> {
@@ -14,7 +15,8 @@ describe('store test', ()=> {
       UTILS: utilsInitialState,
       REVIEW: reviewInitialState,
       COMPLEMENTARY: complementaryInitiastate,
-      FILTERS: filtersInitialState
+      FILTERS: filtersInitialState,
+      BASKET: basketInitialState
     });
   });
 });

@@ -12,10 +12,7 @@ describe('Reducer: utilsProcess', () => {
   test('without additional parameters should return initial state', () => {
     expect(reducer(void 0, {type: 'UNKNOWN_ACTION'}))
       .toEqual({
-        showMessage: false,
-        showReview: false,
-        showSuccess: false,
-        showCart: false,
+        showErrorMessage: false,
         message: {} as MessageType,
         currentPage: 0,
       });
@@ -23,20 +20,13 @@ describe('Reducer: utilsProcess', () => {
 
   test('should get message content after network error', () => {
     const state = {
-      showMessage: false,
-      showReview: false,
-      showSuccess: false,
-      showCart: false,
+      showErrorMessage: false,
       message: {} as MessageType,
       currentPage: 1,
-
     };
     expect(reducer(state, {type: errorMessageCompiler, payload: messageMock}))
       .toEqual({
-        showMessage: false,
-        showReview: false,
-        showSuccess: false,
-        showCart: false,
+        showErrorMessage: false,
         message: messageMock as MessageType,
         currentPage: 1,
       });

@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { fetchReviewsAction } from '../../store/api-actions';
+import { reviewToggler } from '../../store/review-process/review-process';
 import { getLoadedReviewsStatus, getReviews } from '../../store/review-process/selectors';
-import { reviewToggler } from '../../store/utils-process/utils-process';
 import ReviewCard from './review-card/review-card';
 
 type ReviewListProps = {
@@ -35,14 +35,6 @@ function ReviewsList({id}: ReviewListProps): JSX.Element {
     return () => {window.removeEventListener('scroll', loadMoreReviews);};
   },[sliceLimit, initialRender]);
 
-  const handlePostReviewButtonClick = () => {
-    dispatch(reviewToggler());
-  };
-
-  const handleShowMoreButton = () => {
-    setSliceLimit(sliceLimit + 3);
-  };
-
   useEffect(()=> {
     dispatch(fetchReviewsAction(Number(id)));
     setSliceLimit(3);
@@ -51,6 +43,13 @@ function ReviewsList({id}: ReviewListProps): JSX.Element {
   useEffect(()=> {
     reviews.slice(0, sliceLimit);
   },[sliceLimit, reviews]);
+  const handlePostReviewButtonClick = () => {
+    dispatch(reviewToggler());
+  };
+
+  const handleShowMoreButton = () => {
+    setSliceLimit(sliceLimit + 3);
+  };
 
   return (
     <div className="page-content__section">

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { APIRoute, PAGE_LIMIT } from '../const';
+import { CouponType, OrderData } from '../types/order';
 import { ProductType, PromoType } from '../types/product';
 import { ReviewPostType, ReviewType } from '../types/review';
 import { AppDispatch, State } from '../types/state';
@@ -113,4 +114,28 @@ const postReviewAction = createAsyncThunk<unknown, ReviewPostType, {
   }
 );
 
-export {fetchSimilarProductsAction, fetchProductAction, fetchPromoAction, fetchReviewsAction, postReviewAction, };
+const postCouponAction = createAsyncThunk<unknown, CouponType, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'basket/postCoupon',
+  async (coupon, {extra: api}) => {
+    const response = await api.post<CouponType>('/coupons', coupon);
+    return response.data;
+  }
+);
+
+const postOrderAction = createAsyncThunk<unknown, OrderData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'basket/postOrder',
+  async (orderData, {extra: api}) => {
+    const response = await api.post<OrderData>('/orders', orderData);
+    return response.data;
+  }
+);
+
+export {fetchSimilarProductsAction, fetchProductAction, fetchPromoAction, fetchReviewsAction, postReviewAction, postCouponAction, postOrderAction};

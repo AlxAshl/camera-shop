@@ -1,5 +1,6 @@
 import { ActionCreatorWithoutPayload } from '@reduxjs/toolkit';
 import { useEffect } from 'react';
+
 import { useAppDispatch } from './useAppDispatch';
 
 
@@ -22,3 +23,4 @@ export const useEventListener = (action: ActionCreatorWithoutPayload<string>) =>
   },[dispatch, action]);
 
 };
+

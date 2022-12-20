@@ -2,15 +2,15 @@ import { ProductType } from '../../../types/product';
 import {useState} from 'react';
 import { seperatePrice } from '../../utils/seperate-price';
 import Rating from '../../rating/rating';
-import { cartToggler } from '../../../store/utils-process/utils-process';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { cartToggler, productSelector } from '../../../store/basket-process/basket-process';
 
 type SelectedProductProps = {
   camera: ProductType;
 }
 
 function SelectedProduct({camera}: SelectedProductProps): JSX.Element {
-  const {name, id, rating, price, reviewCount, level, type, category, vendorCode, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = camera;
+  const {name, id, rating, price, reviewCount, level, type, category, vendorCode, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x, description} = camera;
   const [tabsToggle, setTabsToggle] = useState(true);
   const dispatch = useAppDispatch();
 
@@ -18,6 +18,7 @@ function SelectedProduct({camera}: SelectedProductProps): JSX.Element {
     setTabsToggle((current) => !current);
   };
   const handleAddToCartButtonClick = () => {
+    dispatch(productSelector(String(id)));
     dispatch(cartToggler());
   };
 
@@ -82,8 +83,7 @@ function SelectedProduct({camera}: SelectedProductProps): JSX.Element {
                   : 'tabs__element'}
                 >
                   <div className="product__tabs-text">
-                    <p>Немецкий концерн BRW разработал видеокамеру Das Auge IV в&nbsp;начале 80-х годов, однако она до&nbsp;сих пор пользуется популярностью среди коллекционеров и&nbsp;яростных почитателей старинной техники.</p>
-                    <p>Вы&nbsp;тоже можете прикоснуться к&nbsp;волшебству аналоговой съёмки, заказав этот чудо-аппарат. Кто знает, может с&nbsp;Das Auge IV&nbsp;начнётся ваш путь к&nbsp;наградам всех престижных кинофестивалей.</p>
+                    {description}
                   </div>
                 </div>
               </div>

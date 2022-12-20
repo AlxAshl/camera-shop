@@ -1,22 +1,20 @@
+import { useAppDispatch } from '../../../../hooks/useAppDispatch';
+import { useEventListener } from '../../../../hooks/useEventListener';
+import { succesReviewToggler } from '../../../../store/review-process/review-process';
 
-import { useAppDispatch } from '../../../hooks/useAppDispatch';
-import { useEventListener } from '../../../hooks/useEventListener';
-import { succesToggler } from '../../../store/utils-process/utils-process';
 
-
-function ModalSuccess (): JSX.Element {
-
+function ModalReviewSuccess (): JSX.Element {
   const dispatch = useAppDispatch();
-  const handleReturnToPurchacesButtonClick = () => {
-    dispatch(succesToggler());
-  };
+  useEventListener(succesReviewToggler);
 
-  useEventListener(succesToggler);
+  const handleReturnToPurchacesButtonClick = () => {
+    dispatch(succesReviewToggler());
+  };
 
   return (
     <div className="modal is-active modal--narrow">
       <div className="modal__wrapper">
-        <div className="modal__overlay"></div>
+        <div className="modal__overlay" onClick={handleReturnToPurchacesButtonClick}></div>
         <div className="modal__content">
           <p className="title title--h4">Спасибо за отзыв</p>
           <svg className="modal__icon" width="80" height="78" aria-hidden="true">
@@ -37,4 +35,4 @@ function ModalSuccess (): JSX.Element {
   );
 }
 
-export default ModalSuccess;
+export default ModalReviewSuccess;

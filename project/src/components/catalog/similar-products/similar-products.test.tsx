@@ -15,7 +15,7 @@ describe('Similar component', () => {
     renderWithProviders(<SimilarProducts camera={productMock}/>, {initialState: {PRODUCT: {
       products: productsMock
     }}});
-    expect(spySelect).toHaveBeenCalledTimes(2);
+    expect(spySelect).toHaveBeenCalledTimes(8);
   });
   test('Renders correct number of cards', () => {
     renderWithProviders(<SimilarProducts camera={productMock}/>, {initialState: {PRODUCT: {

@@ -1,6 +1,6 @@
 import { store } from '../store/store';
 import { MessageType } from './message';
-import { ProductType, PromoType } from './product';
+import { BasketProductType, ProductType, PromoType } from './product';
 import { ReviewType } from './review';
 
 export type ProductProcess = {
@@ -16,12 +16,20 @@ export type ComplementaryProcess = {
   promo: PromoType;
 }
 export type UtilsProcess = {
-  showMessage: boolean;
-  showReview: boolean;
-  showSuccess: boolean;
-  showCart: boolean;
+  showErrorMessage: boolean;
   message: MessageType;
   currentPage: number;
+}
+
+export type BasketProcess = {
+  showCart: boolean;
+  showCartSuccess: boolean;
+  showRemoveProduct: boolean;
+  showBasketSuccess: boolean;
+  productId: string;
+  basketProducts: BasketProductType[];
+  totalQuantity: number;
+  couponDiscount: number;
 }
 
 export type ExtraFilters = {
@@ -54,6 +62,8 @@ export type ReviewProcess = {
   isReviewsDataLoaded: boolean;
   reviews: ReviewType[];
   isReviewPosted: boolean;
+  showReview: boolean;
+  showReviewSuccess: boolean;
 };
 
 export type State = ReturnType<typeof store.getState>;

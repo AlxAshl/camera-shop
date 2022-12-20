@@ -6,13 +6,22 @@ import { fetchReviewsAction, postReviewAction } from '../api-actions';
 export const reviewInitialState: ReviewProcess = {
   isReviewsDataLoaded: false,
   isReviewPosted: true,
+  showReview: false,
+  showReviewSuccess: false,
   reviews: [],
 };
 
 export const reviewProcess = createSlice({
   name: NameSpace.Review,
   initialState: reviewInitialState,
-  reducers: {},
+  reducers: {
+    reviewToggler(state) {
+      state.showReview = !state.showReview;
+    },
+    succesReviewToggler(state) {
+      state.showReviewSuccess = !state.showReviewSuccess;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchReviewsAction.pending, (state) => {
@@ -37,4 +46,5 @@ export const reviewProcess = createSlice({
   }
 });
 
+export const { reviewToggler, succesReviewToggler} = reviewProcess.actions;
 export default reviewProcess.reducer;

@@ -5,10 +5,7 @@ import { UtilsProcess } from '../../types/state';
 
 
 export const utilsInitialState: UtilsProcess = {
-  showMessage: false,
-  showReview: false,
-  showSuccess: false,
-  showCart: false,
+  showErrorMessage: false,
   message: {} as MessageType,
   currentPage: 0,
 };
@@ -23,20 +20,11 @@ export const utilsProcess = createSlice({
     errorMessageCompiler(state, action) {
       state.message = action.payload as MessageType;
     },
-    reviewToggler(state) {
-      state.showReview = !state.showReview;
-    },
     messageToggler(state) {
-      state.showMessage = !state.showMessage;
-    },
-    succesToggler(state) {
-      state.showSuccess = !state.showSuccess;
-    },
-    cartToggler(state) {
-      state.showCart = !state.showCart;
+      state.showErrorMessage = !state.showErrorMessage;
     },
   },
 });
 
-export const { pageSetter, errorMessageCompiler, messageToggler, reviewToggler, succesToggler, cartToggler} = utilsProcess.actions;
+export const { pageSetter, errorMessageCompiler, messageToggler,} = utilsProcess.actions;
 export default utilsProcess.reducer;

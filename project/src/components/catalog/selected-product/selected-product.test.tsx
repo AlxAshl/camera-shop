@@ -16,6 +16,6 @@ describe('Selected-product component', () => {
     fireEvent.click(screen.getByTestId('characteristics-button-test'));
     expect(screen.getByText('Описание')).toHaveClass('tabs__control');
     expect(screen.getByText('Характеристики')).toHaveClass('tabs__control is-active');
-
   });
+
 });

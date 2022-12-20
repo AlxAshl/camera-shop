@@ -1,5 +1,10 @@
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../const';
+import useProductBasketStatus from '../../hooks/use-product-basket-status';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { cartToggler, productSelector } from '../../store/basket-process/basket-process';
+import { getBasketProducts } from '../../store/basket-process/selectors';
 import { ProductType } from '../../types/product';
 import Rating from '../rating/rating';
 import { seperatePrice } from '../utils/seperate-price';
@@ -11,6 +16,15 @@ type ProductCardProps = {
 
 function ProductCard({product, isSimilar}: ProductCardProps): JSX.Element {
   const {rating, reviewCount, name, price, id, previewImg, previewImg2x, previewImgWebp, previewImgWebp2x} = product;
+  const dispatch = useAppDispatch();
+  const basketProducts = useAppSelector(getBasketProducts);
+  const inBasket = useProductBasketStatus(basketProducts, id);
+
+  const handleBuyButtonClick = () => {
+    dispatch(productSelector(String(id)));
+    dispatch(cartToggler());
+  };
+
   return (
     <div data-testid='product-card-test' className={isSimilar
       ? 'product-card is-active'
@@ -33,8 +47,14 @@ function ProductCard({product, isSimilar}: ProductCardProps): JSX.Element {
         </p>
       </div>
       <div className="product-card__buttons">
-        <button className="btn btn--purple product-card__btn" type="button">Купить
-        </button>
+        {inBasket
+          ?
+          <Link to={AppRoute.Basket} className="btn btn--purple-border product-card__btn product-card__btn--in-cart">
+            <svg width="16" height="16" aria-hidden="true">
+              <use xlinkHref="#icon-basket"></use>
+            </svg>В корзине
+          </Link>
+          : <button className="btn btn--purple product-card__btn" type="button" onClick={handleBuyButtonClick}>Купить</button>}
         <Link data-testid='link-test' to={`${AppRoute.Product}/${id}`} className="btn btn--transparent">Подробнее
         </Link>
       </div>
