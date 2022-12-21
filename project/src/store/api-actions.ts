@@ -1,10 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 import { APIRoute, PAGE_LIMIT } from '../const';
+import { useAppDispatch } from '../hooks/useAppDispatch';
 import { CouponType, OrderData } from '../types/order';
 import { ProductType, PromoType } from '../types/product';
 import { ReviewPostType, ReviewType } from '../types/review';
 import { AppDispatch, State } from '../types/state';
+import { basketProductsCleaner, succesBasketToggler } from './basket-process/basket-process';
 
 
 const fetchSimilarProductsAction = createAsyncThunk<ProductType[], number, {
@@ -132,10 +134,13 @@ const postOrderAction = createAsyncThunk<unknown, OrderData, {
   extra: AxiosInstance;
 }>(
   'basket/postOrder',
-  async (orderData, {extra: api}) => {
+  async (orderData, {extra: api, dispatch = useAppDispatch()}) => {
     const response = await api.post<OrderData>('/orders', orderData);
-    return response.data;
+    dispatch(basketProductsCleaner());
+    dispatch(succesBasketToggler());
+    return response.status;
   }
 );
 
 export {fetchSimilarProductsAction, fetchProductAction, fetchPromoAction, fetchReviewsAction, postReviewAction, postCouponAction, postOrderAction};
+

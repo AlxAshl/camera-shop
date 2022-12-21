@@ -4,7 +4,6 @@ import { useCountSum } from '../../hooks/use-count-sum';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { postCouponAction, postOrderAction } from '../../store/api-actions';
-import { basketProductsCleaner, succesBasketToggler } from '../../store/basket-process/basket-process';
 import { getBasketProducts, getDiscount } from '../../store/basket-process/selectors';
 import { seperatePrice } from '../utils/seperate-price';
 
@@ -55,14 +54,7 @@ function BasketSummary(): JSX.Element {
   };
 
   const handleFormSubmitClick = () => {
-    dispatch(postOrderAction(orderData)).then(
-      (response) => {
-        if (response.meta.requestStatus === 'fulfilled') {
-          dispatch(basketProductsCleaner());
-          dispatch(succesBasketToggler());
-        }
-      }
-    );
+    dispatch(postOrderAction(orderData));
   };
 
   return (
