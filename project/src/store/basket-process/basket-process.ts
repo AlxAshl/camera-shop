@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { BasketProductType } from '../../types/product';
 import { BasketProcess } from '../../types/state';
-import { postCouponAction } from '../api-actions';
+import { postCouponAction, postOrderAction } from '../api-actions';
 
 
 export const basketInitialState: BasketProcess = {
@@ -45,9 +45,6 @@ export const basketProcess = createSlice({
         existingProduct.quantity = existingProduct.quantity + newProduct.quantity;
       }
     },
-    basketProductsCleaner(state){
-      state.basketProducts = state.basketProducts.filter((product) => product.id === null);
-    },
     basketProductRemover(state, action) {
       const id = action.payload as number;
       state.basketProducts = state.basketProducts.filter((product) => product.id !== id);
@@ -65,8 +62,13 @@ export const basketProcess = createSlice({
       .addCase(postCouponAction.fulfilled, (state, action) => {
         state.couponDiscount = action.payload as number;
       });
+    builder
+      .addCase(postOrderAction.fulfilled, (state) => {
+        state.basketProducts = state.basketProducts.filter((product) => product.id === null);
+        state.showBasketSuccess = !state.showBasketSuccess;
+      });
   }
 });
-export const { cartToggler, succesCartToggler, removeProductToggler, productSelector, basketProductCounter, basketProductRemover, basketProductSetter, basketProductsCleaner, succesBasketToggler} = basketProcess.actions;
+export const { cartToggler, succesCartToggler, removeProductToggler, productSelector, basketProductCounter, basketProductRemover, basketProductSetter, succesBasketToggler} = basketProcess.actions;
 export default basketProcess.reducer;
 
